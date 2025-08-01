@@ -1,6 +1,6 @@
 import json
 import locale
-import pickle
+#import pickle
 from dataclasses import dataclass
 from datetime import datetime
 from pprint import pprint
@@ -13,7 +13,7 @@ from jinja2 import Environment, PackageLoader, select_autoescape
 locale.setlocale(locale.LC_ALL, "da_DK.utf8")
 
 env = Environment(
-    loader=PackageLoader("odense-musik"),
+    loader=PackageLoader("odense-koncerter"),
     autoescape=select_autoescape()
 )
 
@@ -70,15 +70,15 @@ def pd_fetch_page(url, page_no):
 def pd_fetch_pages(url):
     """Hent alle "sider" fra posten eller dexter."""
     # For første side!
-    j = pd_fetch_page(url, 1)
+    p = pd_fetch_page(url, 1)
     # Antal sider
     page_count = p["data"]["total_pages"]
     # Htmlen som skal behandles
-    pages = [j["data"]["html"]]
+    pages = [p["data"]["html"]]
     # Hent de andre sider
     for i in range(2, page_count+1):
-        j = pd_fetch_page(url, i)
-        page = j["data"]["html"]
+        p = pd_fetch_page(url, i)
+        page = p["data"]["html"]
         pages.append(page)
     return pages
 
@@ -215,8 +215,8 @@ def main():
     now = datetime.now()
     with open("index.html", "w") as f:
         f.write(template.render(concerts=concerts, now=now))
-    with open("cache.pickle", "w") as f:
-        pickle.dump(concerts, f)
+    #with open("cache.pickle", "wb") as f:
+    #    pickle.dump(concerts, f)
     print("Færdig")
 
 
