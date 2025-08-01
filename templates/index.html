@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="da">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="light dark">
+
+    <title>Koncerter i Odense!</title>
+
+    <style>
+      .concertList {
+        display: flex;
+        flex-wrap: wrap;
+        column-gap: 20px;
+      }
+
+      .concert {
+        flex: 1 1 320px;
+      }
+
+      .concert img {
+        width: 100%;
+        height: 160px;
+        object-fit: cover;
+        margin-bottom: 12px;
+      }
+    </style>
+    <!-- Måske normalize.css og selvlavet CSS i stedet for pico -->
+    <link rel="stylesheet" href="pico.indigo.min.css">
+
+    <script src="hideOldConcerts.js" defer></script>
+  </head>
+  <body>
+    <main class="container">
+      <h1>Koncerter i Odense!</h1>
+      <p>Denne hjemmeside prøver at samle de koncerter der afholdes i Odense.</p>
+      <p>Den samler koncerter fra Posten, Dexter, Kulturmaskinen, Live Culture og Storms Pakhus.</p>
+      <p>Sidst opdateret: <time datetime="{{ now.isoformat() }}">{{ now.strftime("%d. %B %Y") }}</time>
+      <div class="concertList">
+      {% for concert in concerts %}
+        <article class="concert">
+          <a href="{{ concert.url }}">
+            <img src="{{ concert.img_src }}"/>
+            <h2>{{ concert.title }}</h2>
+          </a>
+          <p>
+            {{ concert.venue }}<br>
+            <time datetime="{{ concert.date.isoformat() }}">{{ concert.date.strftime("%d. %B %Y") }}</time><br>
+            Pris: {{ concert.price }}
+          </p>
+        </article>
+      {% endfor %}
+      </div>
+    </main>
+  </body>
+</html>
