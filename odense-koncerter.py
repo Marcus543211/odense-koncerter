@@ -1,5 +1,5 @@
-import json
 import locale
+import re
 #import pickle
 from dataclasses import dataclass
 from datetime import datetime
@@ -8,6 +8,13 @@ from pprint import pprint
 import requests
 from bs4 import BeautifulSoup
 from jinja2 import Environment, PackageLoader, select_autoescape
+
+
+# TODO
+# - Genrer ville være fedt
+# - Mindre billeder... Firefox siger 250 MB for at vise siden!
+# - Black-list til alt som ikke er koncerter (som systemet ikke fanger selv)
+# - Tilføjelsesliste så koncerter udefra kan tilføjes
 
 
 locale.setlocale(locale.LC_ALL, "da_DK.utf8")
@@ -164,7 +171,7 @@ def kulturmaskinen() -> list[Concert]:
 
 
 def liveculture() -> list[Concert]:
-    """Hent alle koncerter fra live culture."""
+    """Hent koncerter fra Live Culture (undtaget Magasinet og Odeon)."""
     r = requests.get("https://liveculture.dk/")
     soup = BeautifulSoup(r.text, features="lxml")
     sis = soup.select(".searchItem")
@@ -179,7 +186,16 @@ def liveculture() -> list[Concert]:
         first_date = date_str.split(" - ")[0]
         date = datetime.strptime(first_date, "%d.%m.%y")
         venue = event.select_one(".heroLabels__single--venue").string
+        # Fjern koncerter fra magasinet; de bliver også hentet fra kulturmaskinen.
+        if venue == "Magasinet":
+            continue
+        # Koncerter fra Odeon hentes seperat.
+        if venue == "ODEON":
+            continue
         price = event.select(".ticketButton__time")[0].string
+        # Nogle koncerter skal man vælge tidspunkt. For dem findes prisen andensteds.
+        if ":" in price:
+            price = event.select_one(".boxtitle__pricing__amount").string
         desc = event.select_one(".singleBoxCity").string
         img_src = event.select_one("a > .cover")["data-src"]
         url = event.a["href"]
@@ -193,23 +209,53 @@ def liveculture() -> list[Concert]:
     return concerts
 
 
-def all_concerts() -> list[Concert]:
-    """Hent alle koncerter og returner i sorteret kronologisk rækkefølge."""
+def odeon() -> list[Concert]:
+    """Hent alle koncerter fra Odeon."""
+    r = requests.get("https://odeonodense.dk/kalender")
+    soup = BeautifulSoup(r.text, features="lxml")
+    # Her vælger jeg allerede kun koncerter.
+    events = soup.find_all("a", {"data-js-filter-item": re.compile(r"koncert")})
     concerts = []
+    for event in events:
+        title = event.h2.string
+        last_date_str = event.select(".text-link")[-1].string.split(" - ")[-1]
+        date = datetime.strptime(last_date_str, "%A %d. %b %Y")
+        venue = "ODEON"
+        price = "???"
+        # Lidt ligegyldig info om hvilken sal i Odeon.
+        desc = event.select_one(".mt-6 > span")
+        img_src = "https://odeonodense.dk" + event.img["src"]
+        url = "https://odeonodense.dk" + event["href"]
+        concert = Concert(title, venue, date, price, desc, img_src, url)
+        concerts.append(concert)
+    return concerts
+
+
+def all_concerts() -> list[Concert]:
+    """Hent alle koncerterne og returner i kronologisk rækkefølge."""
+    print("Henter koncerter")
+    concerts = []
+    print("... fra Storms")
     concerts.extend(storms())
+    print("... fra Posten")
     concerts.extend(posten())
+    print("... fra Dexter")
     concerts.extend(dexter())
+    print("... fra Kulturmaskinen")
     concerts.extend(kulturmaskinen())
+    print("... fra Live Culture")
     concerts.extend(liveculture())
-    concerts.sort(key=lambda c: c.date)
+    print("... fra Odeon")
+    concerts.extend(odeon())
+    print("Alle koncerter er hentet")
+    concerts.sort(key=lambda c: (c.date, c.venue, c.title))
     return concerts
 
 
 def main():
-    print("Downloader")
     concerts = all_concerts()
-    print("Færdig!")
-    
+
+    print()
     print("Udskriver siden")
     template = env.get_template("index.html")
     now = datetime.now()
@@ -217,7 +263,7 @@ def main():
         f.write(template.render(concerts=concerts, now=now))
     #with open("cache.pickle", "wb") as f:
     #    pickle.dump(concerts, f)
-    print("Færdig")
+    print("Færdig! Siden er udskrevet til index.html")
 
 
 if __name__ == "__main__":
