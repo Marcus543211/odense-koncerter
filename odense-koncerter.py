@@ -20,15 +20,6 @@ from jinja2 import Environment, PackageLoader, select_autoescape
 
 locale.setlocale(locale.LC_ALL, "da_DK.utf8")
 
-env = Environment(
-    loader=PackageLoader("odense-koncerter"),
-    autoescape=select_autoescape()
-)
-
-month_to_no = {"januar": 1, "februar": 2, "marts": 3, "april": 4,
-               "maj": 5, "juni": 6, "juli": 7, "august": 8,
-               "september": 9, "oktober": 10, "november": 11, "december": 12}
-
 
 @dataclass
 class Concert:
@@ -62,6 +53,7 @@ def storms() -> list[Concert]:
             continue
         date_str = event.find(
             class_="fl-post-grid-event-calendar-date").span.string
+        # Året tilføjes til datoen så den kan parses korrekt.
         date = datetime.strptime(f"{current_year};{date_str}",
                                  "%Y;%B %d @ %H:%M")
         venue = "Storms"
@@ -240,7 +232,7 @@ def odeon() -> list[Concert]:
     return concerts
 
 
-def extras() -> list[Concert]:
+def extra() -> list[Concert]:
     """Indlæser de ekstra manuelt indstastede koncerter."""
     try:
         with open("extra.json", "r") as f:
@@ -268,7 +260,7 @@ def all_concerts() -> list[Concert]:
     print("... fra Odeon")
     concerts.extend(odeon())
     print("... fra ekstralisten")
-    concerts.extend(extras())
+    concerts.extend(extra())
     print("Alle koncerter er hentet")
     concerts.sort(key=lambda c: (c.date, c.venue, c.title))
     return concerts
@@ -277,6 +269,10 @@ def all_concerts() -> list[Concert]:
 def generate_html(out_path, concerts: list[Concert]):
     """Generer en side med de givne koncerter og gem ved stien."""
     print("Udskriver siden...")
+    env = Environment(
+        loader=PackageLoader("odense-koncerter"),
+        autoescape=select_autoescape()
+    )
     template = env.get_template("index.html")
     now = datetime.now()
     with open(out_path, "w") as f:
@@ -294,7 +290,7 @@ def save_as_json(out_path, concerts: list[Concert]):
 
 
 def main():
-    concerts = all_concerts()
+    concerts = extra()
     print()
     generate_html("index.html", concerts)
     print()
