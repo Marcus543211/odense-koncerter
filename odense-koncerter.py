@@ -1,7 +1,7 @@
 import locale
 import re
-#import pickle
-from dataclasses import dataclass
+import json
+from dataclasses import dataclass, asdict
 from datetime import datetime
 from pprint import pprint
 
@@ -11,10 +11,11 @@ from jinja2 import Environment, PackageLoader, select_autoescape
 
 
 # TODO
+# - Skal udsolgte koncerter fjernes?
+# - ODEONs koncerter mangler pris
 # - Genrer ville være fedt
 # - Mindre billeder... Firefox siger 250 MB for at vise siden!
 # - Black-list til alt som ikke er koncerter (som systemet ikke fanger selv)
-# - Tilføjelsesliste så koncerter udefra kan tilføjes
 
 
 locale.setlocale(locale.LC_ALL, "da_DK.utf8")
@@ -38,6 +39,14 @@ class Concert:
     desc: str  # Beskrivelse hvis den eksisterer
     img_src: str
     url: str
+
+    @classmethod
+    def from_json(cls, json: dict):
+        concert = json | {"date": datetime.fromisoformat(json["date"])}
+        return cls(**concert)
+
+    def as_json(self) -> dict:
+        return asdict(self) | {"date": self.date.isoformat()}
 
 
 def storms() -> list[Concert]:
@@ -231,6 +240,17 @@ def odeon() -> list[Concert]:
     return concerts
 
 
+def extras() -> list[Concert]:
+    """Indlæser de ekstra manuelt indstastede koncerter."""
+    try:
+        with open("extra.json", "r") as f:
+            concerts_json = json.load(f)
+        concerts = [Concert.from_json(c) for c in concerts_json]        
+        return concerts
+    except FileNotFoundError:
+        return []
+
+
 def all_concerts() -> list[Concert]:
     """Hent alle koncerterne og returner i kronologisk rækkefølge."""
     print("Henter koncerter")
@@ -247,23 +267,38 @@ def all_concerts() -> list[Concert]:
     concerts.extend(liveculture())
     print("... fra Odeon")
     concerts.extend(odeon())
+    print("... fra ekstralisten")
+    concerts.extend(extras())
     print("Alle koncerter er hentet")
     concerts.sort(key=lambda c: (c.date, c.venue, c.title))
     return concerts
 
 
-def main():
-    concerts = all_concerts()
-
-    print()
-    print("Udskriver siden")
+def generate_html(out_path, concerts: list[Concert]):
+    """Generer en side med de givne koncerter og gem ved stien."""
+    print("Udskriver siden...")
     template = env.get_template("index.html")
     now = datetime.now()
-    with open("index.html", "w") as f:
+    with open(out_path, "w") as f:
         f.write(template.render(concerts=concerts, now=now))
-    #with open("cache.pickle", "wb") as f:
-    #    pickle.dump(concerts, f)
-    print("Færdig! Siden er udskrevet til index.html")
+    print("Færdig! Siden er udskrevet til", out_path)
+
+
+def save_as_json(out_path, concerts: list[Concert]):
+    """Gem koncerterne som JSON ved stien."""
+    print("Gemmer som JSON...")
+    concerts_json = [concert.as_json() for concert in concerts]
+    with open(out_path, "w") as f:
+        json.dump(concerts_json, f)
+    print("Færdig! Koncerterne er gemt")
+
+
+def main():
+    concerts = all_concerts()
+    print()
+    generate_html("index.html", concerts)
+    print()
+    save_as_json("concerts.json", concerts)
 
 
 if __name__ == "__main__":
