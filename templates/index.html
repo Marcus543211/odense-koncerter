@@ -34,7 +34,8 @@
     <main class="container">
       <h1>Koncerter i Odense!</h1>
       <p>Denne hjemmeside prøver at samle de koncerter der afholdes i Odense.</p>
-      <p>Den samler koncerter fra Posten, Dexter, Kulturmaskinen, Live Culture og Storms Pakhus.</p>
+      <p>Den samler koncerter fra Posten, Dexter, Kulturmaskinen, Live Culture, Storms Pakhus, Odeon og andre.</p>
+      <p>OBS! De viste priser er oftest for forsalg. De egentlige priser kan være anderledes og medlemsrabatter mm. kan måske bruges.</p>
       <p>Sidst opdateret: <time datetime="{{ now.isoformat() }}">{{ now.strftime("%d. %B %Y") }}</time>
       <div class="concertList">
       {% for concert in concerts %}
