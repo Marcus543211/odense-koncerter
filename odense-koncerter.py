@@ -224,7 +224,7 @@ def odeon() -> list[Concert]:
         venue = "ODEON"
         price = "???"
         # Lidt ligegyldig info om hvilken sal i Odeon.
-        desc = event.select_one(".mt-6 > span")
+        desc = event.select_one(".mt-6 > span").string
         img_src = "https://odeonodense.dk" + event.img["src"]
         url = "https://odeonodense.dk" + event["href"]
         concert = Concert(title, venue, date, price, desc, img_src, url)
