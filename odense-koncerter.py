@@ -11,7 +11,6 @@ from jinja2 import Environment, PackageLoader, select_autoescape
 
 
 # TODO
-# - Skal udsolgte koncerter fjernes?
 # - ODEONs koncerter mangler pris
 # - Genrer ville være fedt
 # - Mindre billeder... Firefox siger 250 MB for at vise siden!
@@ -51,6 +50,7 @@ def storms() -> list[Concert]:
         title = event.find(class_="fl-post-feed-title").a["title"]
         if "koncert" not in title.lower():
             continue
+        title = title.removesuffix(" // Gratis Koncert")
         date_str = event.find(
             class_="fl-post-grid-event-calendar-date").span.string
         # Året tilføjes til datoen så den kan parses korrekt.
@@ -261,7 +261,7 @@ def all_concerts() -> list[Concert]:
     concerts.extend(odeon())
     print("... fra ekstralisten")
     concerts.extend(extra())
-    print("Alle koncerter er hentet")
+    print(f"Alle koncerter er hentet ({len(concerts)})")
     concerts.sort(key=lambda c: (c.date, c.venue, c.title))
     return concerts
 
@@ -290,7 +290,7 @@ def save_as_json(out_path, concerts: list[Concert]):
 
 
 def main():
-    concerts = extra()
+    concerts = all_concerts()
     print()
     generate_html("index.html", concerts)
     print()
