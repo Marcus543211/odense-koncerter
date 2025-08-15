@@ -41,7 +41,7 @@
       {% for concert in concerts %}
         <article class="concert">
           <a href="{{ concert.url }}">
-            <img src="{{ concert.img_src }}"/>
+            <img loading="lazy" src="{{ concert.img_src }}"/>
             <h2>{{ concert.title }}</h2>
           </a>
           <p>
