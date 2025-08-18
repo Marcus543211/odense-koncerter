@@ -20,6 +20,7 @@ from PIL import Image
 # - Genrer ville være fedt
 # - Black-list til alt som ikke er koncerter (som systemet ikke fanger selv)
 # - Gør så man kan køre programmet fra andre mapper end den filen er i
+# - Brug tråde til at lave miniaturer (thumbnails)
 
 
 locale.setlocale(locale.LC_ALL, "da_DK.utf8")
@@ -301,7 +302,7 @@ def all_concerts() -> list[Concert]:
 
 
 def make_thumbnail(concert: Concert) -> str:
-    """Hent koncertens billede og gem optimeret version. Returner ny URL."""
+    """Hent koncertens billede og gem optimeret miniature. Returner ny URL."""
     # Quote escaped name
     name = f"{concert.date.date()} - {concert.venue} - {concert.title}.webp"
     # Fjern alle tegn der ikke må være i filnavne
@@ -319,11 +320,11 @@ def make_thumbnail(concert: Concert) -> str:
             print(f"WARN: Portrait image, {name}")
         img.thumbnail((768, 768))
         img.save(path, "WebP", lossless=False, quality=80)
-    return f"/{path}"
+    return str(path)
 
 
 def make_thumbnails(concerts: list[Concert]):
-    """Lav thumbnails til koncerterne og opdater billede-URL'erne."""
+    """Lav miniature til koncerterne og opdater billede-URL'erne."""
     print("Laver thumbnails...")
     for concert in concerts:
         url = make_thumbnail(concert)
