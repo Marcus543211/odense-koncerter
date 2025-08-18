@@ -1,19 +1,25 @@
+import io
+import json
 import locale
 import re
-import json
 from dataclasses import dataclass, asdict
 from datetime import datetime
+from pathlib import Path
 from pprint import pprint
 
 import requests
 from bs4 import BeautifulSoup
 from jinja2 import Environment, PackageLoader, select_autoescape
+from PIL import Image
+
+
+# MUST BE RUN IN SAME DIRECTORY AS THIS FILE
 
 
 # TODO
 # - Genrer ville være fedt
-# - Mindre billeder... Firefox siger 250 MB for at vise siden!
 # - Black-list til alt som ikke er koncerter (som systemet ikke fanger selv)
+# - Gør så man kan køre programmet fra andre mapper end den filen er i
 
 
 locale.setlocale(locale.LC_ALL, "da_DK.utf8")
@@ -38,6 +44,32 @@ class Concert:
         return asdict(self) | {"date": self.date.isoformat()}
 
 
+def load_json_file(path):
+    """Indlæs koncerter fra JSON fil."""
+    with open("extra.json", "r") as f:
+        concerts_json = json.load(f)
+    concerts = [Concert.from_json(c) for c in concerts_json]
+    return concerts
+
+
+re_srcset = re.compile(r"(\S+) (\d+)w")
+
+
+def best_from_srcset(srcset: str) -> str:
+    """Returner URL til det bedste billede i srcset."""
+    matches = re_srcset.findall(srcset)
+    (_, url) = max((int(width), url) for (url, width) in matches)
+    return url
+
+
+def best_from_img(img) -> str:
+    """Returner URL til det bedste billede fra <img>."""
+    assert img.name == "img"
+    if not img.has_attr("srcset"):
+        return img["src"]
+    return best_from_srcset(img["srcset"])
+
+
 def storms() -> list[Concert]:
     """Hent koncerter fra storms pakhus."""
     r = requests.get("https://stormspakhus.dk/events/")
@@ -58,7 +90,7 @@ def storms() -> list[Concert]:
         venue = "Storms"
         price = "Gratis"
         desc = event.find(class_="fl-post-feed-content").p.string
-        img_src = event.find(class_="fl-post-feed-image").a.img["src"]
+        img_src = best_from_img(event.find(class_="fl-post-feed-image").a.img)
         url = event.find(class_="fl-post-feed-title").a["href"]
         concert = Concert(title, venue, date, price, desc, img_src, url)
         concerts.append(concert)
@@ -94,22 +126,24 @@ def posten() -> list[Concert]:
     """Hent alle koncerter fra posten."""
     pages = pd_fetch_pages("postenlive.dk")
     # Hiv koncerterne ud
-    concerts = []
+    events = []
     for page in pages:
         soup = BeautifulSoup(page, features="lxml")
-        events = soup.select(".event-box")
-        for event in events:
-            goop = event.select_one("div > div > div")
-            title = goop.select_one(".bde-heading").string.strip()
-            date_str = goop.select_one("div div:nth-of-type(3) div").string.strip()
-            date = datetime.strptime(date_str.strip(), "%d. %B %Y")
-            venue = "Posten"
-            price = goop.select_one("div div:nth-of-type(4) span").string.strip()
-            desc = goop.select_one("div div:nth-of-type(2)").string.strip()
-            img_src = event.find(class_="breakdance-image-object")["src"]
-            url = event.div.a["href"]
-            concert = Concert(title, venue, date, price, desc, img_src, url)
-            concerts.append(concert)
+        page_events = soup.select(".event-box")
+        events.extend(page_events)
+    concerts = []
+    for event in events:
+        goop = event.select_one("div > div > div")
+        title = goop.select_one(".bde-heading").string.strip()
+        date_str = goop.select_one("div div:nth-of-type(3) div").string.strip()
+        date = datetime.strptime(date_str.strip(), "%d. %B %Y")
+        venue = "Posten"
+        price = goop.select_one("div div:nth-of-type(4) span").string.strip()
+        desc = goop.select_one("div div:nth-of-type(2)").string.strip()
+        img_src = best_from_img(event.find(class_="breakdance-image-object"))
+        url = event.div.a["href"]
+        concert = Concert(title, venue, date, price, desc, img_src, url)
+        concerts.append(concert)
     return concerts
 
 
@@ -117,22 +151,24 @@ def dexter() -> list[Concert]:
     """Hent alle koncerter fra dexter."""
     pages = pd_fetch_pages("dexter.dk")
     # Hiv koncerterne ud
-    concerts = []
+    events = []
     for page in pages:
         soup = BeautifulSoup(page, features="lxml")
-        events = soup.select(".event-box")
-        for event in events:
-            goop = event.select_one("div > div > div")
-            title = goop.select_one(".bde-heading").string.strip()
-            date_str = goop.select_one("div div:nth-of-type(2) div").string.strip()
-            date = datetime.strptime(date_str.strip(), "%d. %B %Y")
-            venue = "Dexter"
-            price = goop.select_one("div div:nth-of-type(3) span").string.strip()
-            desc = goop.select_one("div div:nth-of-type(1)").string.strip()
-            img_src = event.find(class_="breakdance-image-object")["src"]
-            url = event.div.a["href"]
-            concert = Concert(title, venue, date, price, desc, img_src, url)
-            concerts.append(concert)
+        page_events = soup.select(".event-box")
+        events.extend(page_events)
+    concerts = []
+    for event in events:
+        goop = event.select_one("div > div > div")
+        title = goop.select_one(".bde-heading").string.strip()
+        date_str = goop.select_one("div div:nth-of-type(2) div").string.strip()
+        date = datetime.strptime(date_str.strip(), "%d. %B %Y")
+        venue = "Dexter"
+        price = goop.select_one("div div:nth-of-type(3) span").string.strip()
+        desc = goop.select_one("div div:nth-of-type(1)").string.strip()
+        img_src = best_from_img(event.find(class_="breakdance-image-object"))
+        url = event.div.a["href"]
+        concert = Concert(title, venue, date, price, desc, img_src, url)
+        concerts.append(concert)
     return concerts
 
 
@@ -154,10 +190,9 @@ def kulturmaskinen() -> list[Concert]:
         # Frasorter alle events der ikke er musik.
         if event["properties"]["category_value"] != "MUSIK":
             continue
-        #if len(event["properties"]["billetten_data"]["shows"]) != 1:
-        #    print("Oh no")
-        #    pprint(event)
         title = event["properties"]["event_name"]
+        if len(event["properties"]["billetten_data"]["shows"]) != 1:
+            print(f"WARN: {title} har flere shows")
         date_str = event["properties"]["billetten_data"]["shows"][0]["show_time"]
         date = datetime.fromisoformat(date_str)
         venue = event["properties"]["promoter"]["nodeName"]
@@ -197,7 +232,7 @@ def liveculture() -> list[Concert]:
         if ":" in price:
             price = event.select_one(".boxtitle__pricing__amount").string
         desc = event.select_one(".singleBoxCity").string
-        img_src = event.select_one("a > .cover")["data-src"]
+        img_src = best_from_srcset(event.select_one("a > .cover")["data-srcset"])
         url = event.a["href"]
         concert = Concert(title, venue, date, price, desc, img_src, url)
         for si in sis:
@@ -223,7 +258,7 @@ def odeon() -> list[Concert]:
         venue = "ODEON"
         # Lidt ligegyldig info om hvilken sal i Odeon.
         desc = event.select_one(".mt-6 > span").string
-        img_src = "https://odeonodense.dk" + event.img["src"]
+        img_src = "https://odeonodense.dk" + best_from_srcset(event.source["data-srcset"])
         url = "https://odeonodense.dk" + event["href"]
         # Hent koncertsiden for at finde prisen
         pr = requests.get(url)
@@ -237,10 +272,7 @@ def odeon() -> list[Concert]:
 def extra() -> list[Concert]:
     """Indlæser de ekstra manuelt indstastede koncerter."""
     try:
-        with open("extra.json", "r") as f:
-            concerts_json = json.load(f)
-        concerts = [Concert.from_json(c) for c in concerts_json]        
-        return concerts
+        return load_json_file("extra.json")
     except FileNotFoundError:
         return []
 
@@ -268,8 +300,39 @@ def all_concerts() -> list[Concert]:
     return concerts
 
 
-def generate_html(out_path, concerts: list[Concert]):
-    """Generer en side med de givne koncerter og gem ved stien."""
+def make_thumbnail(concert: Concert) -> str:
+    """Hent koncertens billede og gem optimeret version. Returner ny URL."""
+    # Quote escaped name
+    name = f"{concert.date.date()} - {concert.venue} - {concert.title}.webp"
+    # Fjern alle tegn der ikke må være i filnavne
+    escaped_name = name.translate(str.maketrans("", "", "<>:\"/\\|?*"))
+    path = Path("images") / escaped_name
+    if not path.exists():
+        format = concert.img_src.split(".")[-1]
+        format = {"jpg": "jpeg"}.get(format, format)
+        r = requests.get(concert.img_src, stream=True)
+        f = io.BytesIO(r.content)
+        img = Image.open(f, formats=[format])
+        if img.width < 768:
+            print(f"WARN: Image < 768px, {name}")
+        if img.width < img.height:
+            print(f"WARN: Portrait image, {name}")
+        img.thumbnail((768, 768))
+        img.save(path, "WebP", lossless=False, quality=80)
+    return f"/{path}"
+
+
+def make_thumbnails(concerts: list[Concert]):
+    """Lav thumbnails til koncerterne og opdater billede-URL'erne."""
+    print("Laver thumbnails...")
+    for concert in concerts:
+        url = make_thumbnail(concert)
+        concert.img_src = url
+    print("Færdig med thumbnails!")
+
+
+def make_html(out_path, concerts: list[Concert]):
+    """Lav en side med de givne koncerter og gem ved stien."""
     print("Udskriver siden...")
     env = Environment(
         loader=PackageLoader("odense-koncerter"),
@@ -278,7 +341,7 @@ def generate_html(out_path, concerts: list[Concert]):
     template = env.get_template("index.html")
     now = datetime.now()
     with open(out_path, "w") as f:
-        f.write(template.render(concerts=concerts, now=now))
+        f.write(template.render(now=now, concerts=concerts))
     print("Færdig! Siden er udskrevet til", out_path)
 
 
@@ -294,9 +357,12 @@ def save_as_json(out_path, concerts: list[Concert]):
 def main():
     concerts = all_concerts()
     print()
-    generate_html("index.html", concerts)
-    print()
+    # Gemmer før thumbnails for at gemme de oprindelige URL'er til billederne.
     save_as_json("concerts.json", concerts)
+    print()
+    make_thumbnails(concerts)
+    print()
+    make_html("index.html", concerts)
 
 
 if __name__ == "__main__":
