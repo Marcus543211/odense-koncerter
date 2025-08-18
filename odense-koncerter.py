@@ -11,7 +11,6 @@ from jinja2 import Environment, PackageLoader, select_autoescape
 
 
 # TODO
-# - ODEONs koncerter mangler pris
 # - Genrer ville være fedt
 # - Mindre billeder... Firefox siger 250 MB for at vise siden!
 # - Black-list til alt som ikke er koncerter (som systemet ikke fanger selv)
@@ -222,11 +221,14 @@ def odeon() -> list[Concert]:
         last_date_str = event.select(".text-link")[-1].string.split(" - ")[-1]
         date = datetime.strptime(last_date_str, "%A %d. %b %Y")
         venue = "ODEON"
-        price = "???"
         # Lidt ligegyldig info om hvilken sal i Odeon.
         desc = event.select_one(".mt-6 > span").string
         img_src = "https://odeonodense.dk" + event.img["src"]
         url = "https://odeonodense.dk" + event["href"]
+        # Hent koncertsiden for at finde prisen
+        pr = requests.get(url)
+        psoup = BeautifulSoup(pr.text, features="lxml")
+        price = next(psoup.select_one(".mt-8").strings).strip()
         concert = Concert(title, venue, date, price, desc, img_src, url)
         concerts.append(concert)
     return concerts
