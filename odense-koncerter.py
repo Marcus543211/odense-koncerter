@@ -2,6 +2,7 @@ import io
 import json
 import locale
 import re
+import urllib.parse
 from dataclasses import dataclass, asdict
 from datetime import datetime
 from pathlib import Path
@@ -303,6 +304,37 @@ def grandhotel() -> list[Concert]:
     return concerts
 
 
+def tcbunderground() -> list[Concert]:
+    """Hent alle koncerter fra TCB Underground."""
+    r = requests.get("https://tcbunderground.com/arrangementer")
+    r.encoding = "utf-8"
+    soup = BeautifulSoup(r.text, features="lxml")
+    events = soup.select("tbody tr")
+    concerts = []
+    for event in events:
+        title = event.select("td")[1].string
+        venue = "TCB Underground"
+        # Prisen og billedet er kun på billetsiden
+        # Billetsiden kræver dog JS så jeg henter dataen direkte
+        url = event.a["href"]
+        name = url.split("/")[-2]
+        info_url = f"https://checkoutapi.ticketbutler.io/api/events/title/{name}/"
+        er = requests.get(info_url,
+                          headers={"Origin": "https://tcbunderground.ticketbutler.io",
+                                   "Referer": "https://tcbunderground.ticketbutler.io/"})
+        info = er.json()
+        date_str = info["start_date"]
+        date = datetime.fromisoformat(date_str)
+        # Jeg kunne godt gemme beskrivelsen men jeg bruger det ikke...
+        desc = ""
+        img_src = info["images"][0]["image"]
+        # Hent koncertsiden for at finde prisen
+        price = info["ticket_types"][0]["price"]
+        concert = Concert(title, venue, date, price, desc, img_src, url)
+        concerts.append(concert)
+    return concerts
+
+
 def extra() -> list[Concert]:
     """Indlæser de ekstra manuelt indstastede koncerter."""
     try:
@@ -336,17 +368,14 @@ def all_concerts() -> list[Concert]:
 
 def make_thumbnail(concert: Concert) -> str:
     """Hent koncertens billede og gem optimeret miniature. Returner ny URL."""
-    # Quote escaped name
     name = f"{concert.date.date()} - {concert.venue} - {concert.title}.webp"
     # Fjern alle tegn der ikke må være i filnavne
     escaped_name = name.translate(str.maketrans("", "", "<>:\"/\\|?*"))
     path = Path("images") / escaped_name
     if not path.exists():
-        format = concert.img_src.split(".")[-1].split("?")[0]
-        format = {"jpg": "jpeg"}.get(format, format)
         r = requests.get(concert.img_src, stream=True)
         f = io.BytesIO(r.content)
-        img = Image.open(f, formats=[format])
+        img = Image.open(f)
         if img.width < 768:
             print(f"WARN: Image < 768px, {name}")
         if img.width < img.height:
