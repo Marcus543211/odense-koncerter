@@ -292,8 +292,7 @@ def grandhotel() -> list[Concert]:
         desc = event.select("p")[1].string
         # En enkelt event havde en video i stedet for et billede...
         if event.img is None:
-            print("WARN: No image for", title)
-            print("Add manually if necessary")
+            print("WARN: No image for", title, "it will not be added")
             continue
         img_src = best_from_img(event.img)
         url = "https://grandodense.dk" + event.a["href"]
@@ -324,7 +323,7 @@ def tcbunderground() -> list[Concert]:
                                    "Referer": "https://tcbunderground.ticketbutler.io/"})
         info = er.json()
         date_str = info["start_date"]
-        date = datetime.fromisoformat(date_str)
+        date = datetime.fromisoformat(date_str).replace(tzinfo=None)
         # Jeg kunne godt gemme beskrivelsen men jeg bruger det ikke...
         desc = ""
         img_src = info["images"][0]["image"]
@@ -359,6 +358,10 @@ def all_concerts() -> list[Concert]:
     concerts.extend(liveculture())
     print("... fra Odeon")
     concerts.extend(odeon())
+    print("... fra Grand Hotel")
+    concerts.extend(grandhotel())
+    print("... fra TCB Underground")
+    concerts.extend(tcbunderground())
     print("... fra ekstralisten")
     concerts.extend(extra())
     print(f"Alle koncerter er hentet ({len(concerts)})")
