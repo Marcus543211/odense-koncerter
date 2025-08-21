@@ -278,26 +278,28 @@ def grandhotel() -> list[Concert]:
     soup = BeautifulSoup(r.text, features="lxml")
     events = soup.select(".Preview_block__16Zmu .Preview_block__16Zmu")
     concerts = []
+    re_date = re.compile(r"(\d+. \w+ \d+)")
+    re_price = re.compile(r"\d+,-")
     for event in events:
         # Fjern begivenheder fra resturanten
         if not event.a["href"].startswith("/event-koncert/"):
             continue
         title = event.h1.string
-        date_str = event.select("p span")[0].string
+        date_str = event.find(string=re_date).string
         # Tag kun (første) datoen ignorer alt andet
-        date_str = re.search(r"(\d+. \w+ \d+)", date_str)[0]
+        date_str = re_date.search(date_str)[0]
         date = datetime.strptime(date_str, "%d. %B %Y")
         venue = "Grand Hotel"
-        # Lidt ligegyldig info om hvilken sal i Odeon.
-        desc = event.select("p")[1].string
+        desc = ""
         # En enkelt event havde en video i stedet for et billede...
+        # Meeeen det var ikke en koncert
         if event.img is None:
             print("WARN: No image for", title, "it will not be added")
             continue
         img_src = best_from_img(event.img)
         url = "https://grandodense.dk" + event.a["href"]
         # Hent koncertsiden for at finde prisen
-        price = event.select("p span")[2].string
+        price = event.find(string=re_price)
         concert = Concert(title, venue, date, price, desc, img_src, url)
         concerts.append(concert)
     return concerts
