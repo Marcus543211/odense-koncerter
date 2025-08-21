@@ -53,13 +53,13 @@ def load_json_file(path):
     return concerts
 
 
-re_srcset = re.compile(r"(\S+) (\d+)w")
+re_srcset = re.compile(r"([^ ,]+)(?: (\d+)[wx])?")
 
 
 def best_from_srcset(srcset: str) -> str:
     """Returner URL til det bedste billede i srcset."""
     matches = re_srcset.findall(srcset)
-    (_, url) = max((int(width), url) for (url, width) in matches)
+    (_, url) = max((int(width or 1), url) for (url, width) in matches)
     return url
 
 
@@ -270,6 +270,39 @@ def odeon() -> list[Concert]:
     return concerts
 
 
+def grandhotel() -> list[Concert]:
+    """Hent alle koncerter fra Grand Hotel."""
+    r = requests.get("https://www.grandodense.dk/event-koncert/")
+    r.encoding = "utf-8"
+    soup = BeautifulSoup(r.text, features="lxml")
+    events = soup.select(".Preview_block__16Zmu .Preview_block__16Zmu")
+    concerts = []
+    for event in events:
+        # Fjern begivenheder fra resturanten
+        if not event.a["href"].startswith("/event-koncert/"):
+            continue
+        title = event.h1.string
+        date_str = event.select("p span")[0].string
+        # Tag kun (første) datoen ignorer alt andet
+        date_str = re.search(r"(\d+. \w+ \d+)", date_str)[0]
+        date = datetime.strptime(date_str, "%d. %B %Y")
+        venue = "Grand Hotel"
+        # Lidt ligegyldig info om hvilken sal i Odeon.
+        desc = event.select("p")[1].string
+        # En enkelt event havde en video i stedet for et billede...
+        if event.img is None:
+            print("WARN: No image for", title)
+            print("Add manually if necessary")
+            continue
+        img_src = best_from_img(event.img)
+        url = "https://grandodense.dk" + event.a["href"]
+        # Hent koncertsiden for at finde prisen
+        price = event.select("p span")[2].string
+        concert = Concert(title, venue, date, price, desc, img_src, url)
+        concerts.append(concert)
+    return concerts
+
+
 def extra() -> list[Concert]:
     """Indlæser de ekstra manuelt indstastede koncerter."""
     try:
@@ -309,7 +342,7 @@ def make_thumbnail(concert: Concert) -> str:
     escaped_name = name.translate(str.maketrans("", "", "<>:\"/\\|?*"))
     path = Path("images") / escaped_name
     if not path.exists():
-        format = concert.img_src.split(".")[-1]
+        format = concert.img_src.split(".")[-1].split("?")[0]
         format = {"jpg": "jpeg"}.get(format, format)
         r = requests.get(concert.img_src, stream=True)
         f = io.BytesIO(r.content)
