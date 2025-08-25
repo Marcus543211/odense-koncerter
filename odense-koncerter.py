@@ -344,8 +344,12 @@ def tcbunderground() -> list[Concert]:
 def extra() -> list[Concert]:
     """Indlæser de ekstra manuelt indstastede koncerter."""
     try:
+        now = datetime.now()
         with open("extra.json", "r") as file:
-            return load_concerts(file)
+            concerts = load_concerts(file)
+        # Fjern gamle koncerter
+        upcoming = [c for c in concerts if c.date >= now]
+        return upcoming
     except FileNotFoundError:
         return []
 
