@@ -34,24 +34,31 @@ class Concert:
     date: datetime
     price: str  # Eller int?
     desc: str  # Beskrivelse hvis den eksisterer
-    img_src: str
+    img_url: str
     url: str
 
     @classmethod
     def from_json(cls, json: dict):
+        # Behold alt men parse datoen til en datetime
         concert = json | {"date": datetime.fromisoformat(json["date"])}
         return cls(**concert)
 
     def as_json(self) -> dict:
+        # JSONen kan ikke indeholde en datetime så erstat med streng
         return asdict(self) | {"date": self.date.isoformat()}
 
 
-def load_json_file(path):
-    """Indlæs koncerter fra JSON fil."""
-    with open("extra.json", "r") as f:
-        concerts_json = json.load(f)
+def load_concerts(file):
+    """Læs koncerter fra JSON fil."""
+    concerts_json = json.load(file)
     concerts = [Concert.from_json(c) for c in concerts_json]
     return concerts
+
+
+def dump_concerts(concerts: list[Concert], file):
+    """Skriv koncerter til JSON fil."""
+    concerts_json = [concert.as_json() for concert in concerts]
+    json.dump(concerts_json, file)
 
 
 re_srcset = re.compile(r"([^ ,]+)(?: (\d+)[wx])?")
@@ -60,6 +67,7 @@ re_srcset = re.compile(r"([^ ,]+)(?: (\d+)[wx])?")
 def best_from_srcset(srcset: str) -> str:
     """Returner URL til det bedste billede i srcset."""
     matches = re_srcset.findall(srcset)
+    # If no width is given it is 1x.
     (_, url) = max((int(width or 1), url) for (url, width) in matches)
     return url
 
@@ -92,9 +100,9 @@ def storms() -> list[Concert]:
         venue = "Storms"
         price = "Gratis"
         desc = event.find(class_="fl-post-feed-content").p.string
-        img_src = best_from_img(event.find(class_="fl-post-feed-image").a.img)
+        img_url = best_from_img(event.find(class_="fl-post-feed-image").a.img)
         url = event.find(class_="fl-post-feed-title").a["href"]
-        concert = Concert(title, venue, date, price, desc, img_src, url)
+        concert = Concert(title, venue, date, price, desc, img_url, url)
         concerts.append(concert)
     return concerts
 
@@ -110,17 +118,14 @@ def pd_fetch_page(url, page_no):
 
 def pd_fetch_pages(url):
     """Hent alle "sider" fra posten eller dexter."""
-    # For første side!
-    p = pd_fetch_page(url, 1)
-    # Antal sider
-    page_count = p["data"]["total_pages"]
-    # Htmlen som skal behandles
-    pages = [p["data"]["html"]]
+    first_page = pd_fetch_page(url, 1)
+    page_count = first_page["data"]["total_pages"]
+    pages = [first_page["data"]["html"]]
     # Hent de andre sider
     for i in range(2, page_count+1):
-        p = pd_fetch_page(url, i)
-        page = p["data"]["html"]
-        pages.append(page)
+        page = pd_fetch_page(url, i)
+        page_html = page["data"]["html"]
+        pages.append(page_html)
     return pages
 
 
@@ -138,13 +143,13 @@ def posten() -> list[Concert]:
         goop = event.select_one("div > div > div")
         title = goop.select_one(".bde-heading").string.strip()
         date_str = goop.select_one("div div:nth-of-type(3) div").string.strip()
-        date = datetime.strptime(date_str.strip(), "%d. %B %Y")
+        date = datetime.strptime(date_str, "%d. %B %Y")
         venue = "Posten"
         price = goop.select_one("div div:nth-of-type(4) span").string.strip()
         desc = goop.select_one("div div:nth-of-type(2)").string.strip()
-        img_src = best_from_img(event.find(class_="breakdance-image-object"))
+        img_url = best_from_img(event.find(class_="breakdance-image-object"))
         url = event.div.a["href"]
-        concert = Concert(title, venue, date, price, desc, img_src, url)
+        concert = Concert(title, venue, date, price, desc, img_url, url)
         concerts.append(concert)
     return concerts
 
@@ -163,13 +168,13 @@ def dexter() -> list[Concert]:
         goop = event.select_one("div > div > div")
         title = goop.select_one(".bde-heading").string.strip()
         date_str = goop.select_one("div div:nth-of-type(2) div").string.strip()
-        date = datetime.strptime(date_str.strip(), "%d. %B %Y")
+        date = datetime.strptime(date_str, "%d. %B %Y")
         venue = "Dexter"
         price = goop.select_one("div div:nth-of-type(3) span").string.strip()
         desc = goop.select_one("div div:nth-of-type(1)").string.strip()
-        img_src = best_from_img(event.find(class_="breakdance-image-object"))
+        img_url = best_from_img(event.find(class_="breakdance-image-object"))
         url = event.div.a["href"]
-        concert = Concert(title, venue, date, price, desc, img_src, url)
+        concert = Concert(title, venue, date, price, desc, img_url, url)
         concerts.append(concert)
     return concerts
 
@@ -200,9 +205,9 @@ def kulturmaskinen() -> list[Concert]:
         venue = event["properties"]["promoter"]["nodeName"]
         price = event["properties"]["billetten_data"]["shows"][0]["prices"][0]["min_price"]
         desc = event["properties"]["billetten_data"]["event_notes"]
-        img_src = event["properties"]["billetten_data"]["event_images"]["large"]
+        img_url = event["properties"]["billetten_data"]["event_images"]["large"]
         url = "https://kulturmaskinen.dk/events/" + event["urlSegment"]
-        concert = Concert(title, venue, date, price, desc, img_src, url)
+        concert = Concert(title, venue, date, price, desc, img_url, url)
         concerts.append(concert)
     return concerts
 
@@ -234,9 +239,9 @@ def liveculture() -> list[Concert]:
         if ":" in price:
             price = event.select_one(".boxtitle__pricing__amount").string
         desc = event.select_one(".singleBoxCity").string
-        img_src = best_from_srcset(event.select_one("a > .cover")["data-srcset"])
+        img_url = best_from_srcset(event.select_one("a > .cover")["data-srcset"])
         url = event.a["href"]
-        concert = Concert(title, venue, date, price, desc, img_src, url)
+        concert = Concert(title, venue, date, price, desc, img_url, url)
         for si in sis:
             if si.div.div.string.strip() == title:
                 # Frasorter alt der er comedy
@@ -260,13 +265,13 @@ def odeon() -> list[Concert]:
         venue = "ODEON"
         # Lidt ligegyldig info om hvilken sal i Odeon.
         desc = event.select_one(".mt-6 > span").string
-        img_src = "https://odeonodense.dk" + best_from_srcset(event.source["data-srcset"])
+        img_url = "https://odeonodense.dk" + best_from_srcset(event.source["data-srcset"])
         url = "https://odeonodense.dk" + event["href"]
         # Hent koncertsiden for at finde prisen
         pr = requests.get(url)
         psoup = BeautifulSoup(pr.text, features="lxml")
         price = next(psoup.select_one(".mt-8").strings).strip()
-        concert = Concert(title, venue, date, price, desc, img_src, url)
+        concert = Concert(title, venue, date, price, desc, img_url, url)
         concerts.append(concert)
     return concerts
 
@@ -296,11 +301,11 @@ def grandhotel() -> list[Concert]:
         if event.img is None:
             print("WARN: No image for", title, "it will not be added")
             continue
-        img_src = best_from_img(event.img)
+        img_url = best_from_img(event.img)
         url = "https://grandodense.dk" + event.a["href"]
         # Hent koncertsiden for at finde prisen
         price = event.find(string=re_price)
-        concert = Concert(title, venue, date, price, desc, img_src, url)
+        concert = Concert(title, venue, date, price, desc, img_url, url)
         concerts.append(concert)
     return concerts
 
@@ -313,25 +318,25 @@ def tcbunderground() -> list[Concert]:
     events = soup.select("tbody tr")
     concerts = []
     for event in events:
-        title = event.select("td")[1].string
-        venue = "TCB Underground"
         # Prisen og billedet er kun på billetsiden
         # Billetsiden kræver dog JS så jeg henter dataen direkte
         url = event.a["href"]
         name = url.split("/")[-2]
         info_url = f"https://checkoutapi.ticketbutler.io/api/events/title/{name}/"
-        er = requests.get(info_url,
-                          headers={"Origin": "https://tcbunderground.ticketbutler.io",
-                                   "Referer": "https://tcbunderground.ticketbutler.io/"})
+        headers = {"Origin": "https://tcbunderground.ticketbutler.io",
+                   "Referer": "https://tcbunderground.ticketbutler.io/"}
+        er = requests.get(info_url, headers=headers)
         info = er.json()
+        title = info["title"]
+        venue = "TCB Underground"
         date_str = info["start_date"]
         date = datetime.fromisoformat(date_str).replace(tzinfo=None)
         # Jeg kunne godt gemme beskrivelsen men jeg bruger det ikke...
         desc = ""
-        img_src = info["images"][0]["image"]
+        img_url = info["images"][0]["image"]
         # Hent koncertsiden for at finde prisen
         price = info["ticket_types"][0]["price"]
-        concert = Concert(title, venue, date, price, desc, img_src, url)
+        concert = Concert(title, venue, date, price, desc, img_url, url)
         concerts.append(concert)
     return concerts
 
@@ -339,7 +344,8 @@ def tcbunderground() -> list[Concert]:
 def extra() -> list[Concert]:
     """Indlæser de ekstra manuelt indstastede koncerter."""
     try:
-        return load_json_file("extra.json")
+        with open("extra.json", "r") as file:
+            return load_concerts(file)
     except FileNotFoundError:
         return []
 
@@ -371,6 +377,13 @@ def all_concerts() -> list[Concert]:
     return concerts
 
 
+def get_image(url) -> Image:
+    """Hent billede fra URL."""
+    r = requests.get(url, stream=True)
+    f = io.BytesIO(r.content)
+    return Image.open(f)
+
+
 def make_thumbnail(concert: Concert) -> str:
     """Hent koncertens billede og gem optimeret miniature. Returner ny URL."""
     name = f"{concert.date.date()} - {concert.venue} - {concert.title}.webp"
@@ -378,9 +391,7 @@ def make_thumbnail(concert: Concert) -> str:
     escaped_name = name.translate(str.maketrans("", "", "<>:\"/\\|?*"))
     path = Path("images") / escaped_name
     if not path.exists():
-        r = requests.get(concert.img_src, stream=True)
-        f = io.BytesIO(r.content)
-        img = Image.open(f)
+        img = get_image(concert.img_url)
         if img.width < 768:
             print(f"WARN: Image < 768px, {name}")
         if img.width < img.height:
@@ -394,8 +405,8 @@ def make_thumbnails(concerts: list[Concert]):
     """Lav miniature til koncerterne og opdater billede-URL'erne."""
     print("Laver thumbnails...")
     for concert in concerts:
-        url = make_thumbnail(concert)
-        concert.img_src = url
+        img_url = make_thumbnail(concert)
+        concert.img_url = img_url
     print("Færdig med thumbnails!")
 
 
@@ -408,17 +419,16 @@ def make_html(out_path, concerts: list[Concert]):
     )
     template = env.get_template("index.html")
     now = datetime.now()
-    with open(out_path, "w") as f:
-        f.write(template.render(now=now, concerts=concerts))
+    with open(out_path, "w") as file:
+        file.write(template.render(now=now, concerts=concerts))
     print("Færdig! Siden er udskrevet til", out_path)
 
 
-def save_as_json(out_path, concerts: list[Concert]):
+def save_concerts(out_path, concerts: list[Concert]):
     """Gem koncerterne som JSON ved stien."""
     print("Gemmer som JSON...")
-    concerts_json = [concert.as_json() for concert in concerts]
-    with open(out_path, "w") as f:
-        json.dump(concerts_json, f)
+    with open(out_path, "w") as file:
+        dump_concerts(concerts, file)
     print("Færdig! Koncerterne er gemt")
 
 
@@ -426,7 +436,7 @@ def main():
     concerts = all_concerts()
     print()
     # Gemmer før thumbnails for at gemme de oprindelige URL'er til billederne.
-    save_as_json("concerts.json", concerts)
+    save_concerts("concerts.json", concerts)
     print()
     make_thumbnails(concerts)
     print()

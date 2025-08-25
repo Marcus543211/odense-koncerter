@@ -5,7 +5,7 @@
         "date": "2025-08-15T19:00:00",
         "price": "Gratis",
         "desc": "",
-        "img_src": "https://stormspakhus.dk/wp-content/uploads/2025/07/77786_image_528221670_1153770083452099_7085043642824150628_n.jpg",
+        "img_url": "https://stormspakhus.dk/wp-content/uploads/2025/07/77786_image_528221670_1153770083452099_7085043642824150628_n.jpg",
         "url": "https://stormspakhus.dk/event/caper-clowns-spygenius-slow-motion-film/"
     },
     {
@@ -14,7 +14,7 @@
         "date": "2025-08-15T21:00:00",
         "price": "150 kr.",
         "desc": "",
-        "img_src": "https://www.hcafestivals.dk/media/pvgpmtir/ord-lyd-laura-ziani.png",
+        "img_url": "https://www.hcafestivals.dk/media/pvgpmtir/ord-lyd-laura-ziani.png",
         "url": "https://www.hcafestivals.dk/program/ord-lyd-laura-ziani-plus-poetisk-support-4063/"
     },
     {
@@ -23,7 +23,7 @@
         "date": "2025-08-16T20:00:00",
         "price": "150 kr.",
         "desc": "",
-        "img_src": "https://www.hcafestivals.dk/media/z5dl5wnz/ord-lyd-asbjoern-credit-sebastian-thorsted-2.jpg",
+        "img_url": "https://www.hcafestivals.dk/media/z5dl5wnz/ord-lyd-asbjoern-credit-sebastian-thorsted-2.jpg",
         "url": "https://www.hcafestivals.dk/program/ord-lyd-asbjoern-solo-plus-poetisk-support-4071/"
     },
     {
@@ -32,7 +32,7 @@
         "date": "2025-08-20T17:00:00",
         "price": "Gratis",
         "desc": "",
-        "img_src": "https://www.hcafestivals.dk/media/iwyjnfeq/image0.jpeg",
+        "img_url": "https://www.hcafestivals.dk/media/iwyjnfeq/image0.jpeg",
         "url": "https://www.hcafestivals.dk/program/renay-3892/"
     },
     {
@@ -41,7 +41,7 @@
         "date": "2025-08-20T19:00:00",
         "price": "Gratis",
         "desc": "",
-        "img_src": "https://www.hcafestivals.dk/media/iszpwpc4/sofie1998_september2024_dsc8505.jpg",
+        "img_url": "https://www.hcafestivals.dk/media/iszpwpc4/sofie1998_september2024_dsc8505.jpg",
         "url": "https://www.hcafestivals.dk/program/sofie1998-3622/"
     },
     {
@@ -50,7 +50,7 @@
         "date": "2025-08-20T21:00:00",
         "price": "Gratis",
         "desc": "",
-        "img_src": "https://www.hcafestivals.dk/media/xu4hg5sc/frejakirk_booking.jpg",
+        "img_url": "https://www.hcafestivals.dk/media/xu4hg5sc/frejakirk_booking.jpg",
         "url": "https://www.hcafestivals.dk/program/freja-kirk-3625/"
     },
     {
@@ -59,7 +59,7 @@
         "date": "2025-08-21T17:30:00",
         "price": "Gratis",
         "desc": "",
-        "img_src": "https://www.hcafestivals.dk/media/5jhfedv2/anette_bojsen_2025-1.png",
+        "img_url": "https://www.hcafestivals.dk/media/5jhfedv2/anette_bojsen_2025-1.png",
         "url": "https://www.hcafestivals.dk/program/anette-bojsen-3898/"
     },
     {
@@ -68,7 +68,7 @@
         "date": "2025-08-21T21:00:00",
         "price": "Gratis",
         "desc": "",
-        "img_src": "https://www.hcafestivals.dk/media/lakkousm/petersommer_pressefoto_cred-soeren-lynggaard.jpg",
+        "img_url": "https://www.hcafestivals.dk/media/lakkousm/petersommer_pressefoto_cred-soeren-lynggaard.jpg",
         "url": "https://www.hcafestivals.dk/program/peter-sommer-palle-hjorth-3675/"
     },
     {
@@ -77,7 +77,7 @@
         "date": "2025-08-22T17:00:00",
         "price": "Gratis",
         "desc": "",
-        "img_src": "https://www.hcafestivals.dk/media/r2pmdlwu/jumpin-jacks-pressebillede-01.png",
+        "img_url": "https://www.hcafestivals.dk/media/r2pmdlwu/jumpin-jacks-pressebillede-01.png",
         "url": "https://www.hcafestivals.dk/program/jumpin-jacks-3901/"
     },
     {
@@ -86,7 +86,7 @@
         "date": "2025-08-22T22:15:00",
         "price": "Gratis",
         "desc": "",
-        "img_src": "https://www.hcafestivals.dk/media/kewcbmsv/absurd_a3_pr_hori.jpg",
+        "img_url": "https://www.hcafestivals.dk/media/kewcbmsv/absurd_a3_pr_hori.jpg",
         "url": "https://www.hcafestivals.dk/program/absurd-3631/"
     },
     {
@@ -95,7 +95,7 @@
         "date": "2025-08-23T17:00:00",
         "price": "Gratis",
         "desc": "",
-        "img_src": "https://www.hcafestivals.dk/media/yusmo1xr/photographer-francesca-ludikar-band-godsmack-nashville-tn-vibez-tour-02-27-24-39-1.jpg",
+        "img_url": "https://www.hcafestivals.dk/media/yusmo1xr/photographer-francesca-ludikar-band-godsmack-nashville-tn-vibez-tour-02-27-24-39-1.jpg",
         "url": "https://www.hcafestivals.dk/program/bastian-da-cruz-3910/"
     },
     {
@@ -104,7 +104,7 @@
         "date": "2025-08-23T21:00:00",
         "price": "160 kr.",
         "desc": "",
-        "img_src": "https://www.hcafestivals.dk/media/od0hk2js/kryd_ep_pressebilleder.jpg",
+        "img_url": "https://www.hcafestivals.dk/media/od0hk2js/kryd_ep_pressebilleder.jpg",
         "url": "https://www.hcafestivals.dk/program/ord-lyd-kryd-plus-uden-ord-plus-poetisk-support-4100/"
     },
     {
@@ -113,7 +113,7 @@
         "date": "2025-08-28T19:00:00",
         "price": "Gratis",
         "desc": "",
-        "img_src": "https://tickets.filmfestival.dk/storage/files/TT0Cj2Md8a6Qm3TpqVGCiAAwC3iqWJQ5VO3e57yJ.jpg",
+        "img_url": "https://tickets.filmfestival.dk/storage/files/TT0Cj2Md8a6Qm3TpqVGCiAAwC3iqWJQ5VO3e57yJ.jpg",
         "url": "https://filmfestival.dk/events/odense-jazz-orchestra-signe-juhl-fortolker-beach-boys-ikoniske-album/"
     },
     {
@@ -122,7 +122,7 @@
         "date": "2025-09-27T21:00:00",
         "price": "120 kr.",
         "desc": "",
-        "img_src": "https://www.studenterhus.dk/wp-content/uploads/2025/07/8663_image_518378938_1139681824859490_5294469590078456070_n.jpg",
+        "img_url": "https://www.studenterhus.dk/wp-content/uploads/2025/07/8663_image_518378938_1139681824859490_5294469590078456070_n.jpg",
         "url": "https://www.facebook.com/events/737949185487284"
     },
     {
@@ -131,7 +131,7 @@
         "date": "2025-10-10T21:00:00",
         "price": "180 kr.",
         "desc": "",
-        "img_src": "https://www.studenterhus.dk/wp-content/uploads/2025/07/8486_image_518403118_1139707161523623_7900606877865965401_n.jpg",
+        "img_url": "https://www.studenterhus.dk/wp-content/uploads/2025/07/8486_image_518403118_1139707161523623_7900606877865965401_n.jpg",
         "url": "https://www.facebook.com/events/977383524265010"
     },
     {
@@ -140,7 +140,7 @@
         "date": "2025-10-11T19:30:00",
         "price": "120 kr.",
         "desc": "",
-        "img_src": "https://www.studenterhus.dk/wp-content/uploads/2025/07/8653_image_526791148_1149834060510933_394611256924586014_n.jpg",
+        "img_url": "https://www.studenterhus.dk/wp-content/uploads/2025/07/8653_image_526791148_1149834060510933_394611256924586014_n.jpg",
         "url": "https://www.facebook.com/events/1053405006554814"
     }
 ]
