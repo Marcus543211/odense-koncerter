@@ -341,6 +341,32 @@ def tcbunderground() -> list[Concert]:
     return concerts
 
 
+def vearket() -> list[Concert]:
+    """Hent alle koncerter fra Odense Værket."""
+    r = requests.get("https://odensevaerket.dk/kultur-musikhus/")
+    r.encoding = "utf-8"
+    soup = BeautifulSoup(r.text, features="lxml")
+    events = soup.select(".products > li")
+    concerts = []
+    current_year = datetime.today().year
+    for event in events:
+        title = event.h2.string.removesuffix(" – Entrébillet").split(" – ", 1)[1]
+        date_str = event.h2.string.split(" – ")[0]
+        date_str = re.sub(r"-\d+", ".", date_str)
+        date = datetime.strptime(f"{date_str};{current_year}", "%d. %B;%Y")
+        venue = "Odense Værket"
+        desc = ""
+        img_url = best_from_img(event.img)
+        url = event.select_one(".woocommerce-LoopProduct-link")["href"]
+        if event.select_one(".berocket_better_labels") is not None:
+            price = "Udsolgt"
+        else:
+            price = event.select_one(".price").text
+        concert = Concert(title, venue, date, price, desc, img_url, url)
+        concerts.append(concert)
+    return concerts
+
+
 def extra() -> list[Concert]:
     """Indlæser de ekstra manuelt indstastede koncerter."""
     try:
@@ -374,6 +400,8 @@ def all_concerts() -> list[Concert]:
     concerts.extend(grandhotel())
     print("... fra TCB Underground")
     concerts.extend(tcbunderground())
+    print("... fra Odense Værket")
+    concerts.extend(vearket())
     print("... fra ekstralisten")
     concerts.extend(extra())
     print(f"Alle koncerter er hentet ({len(concerts)})")
