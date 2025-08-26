@@ -22,6 +22,12 @@ from PIL import Image
 # - Black-list til alt som ikke er koncerter (som systemet ikke fanger selv)
 # - Gør så man kan køre programmet fra andre mapper end den filen er i
 # - Brug tråde til at lave miniaturer (thumbnails)
+# - En attribut der fortæller om koncerter er udsolgte?
+# - Nogle steder er der ikke år med i datoen, her antager jeg at det er i år
+#   men det kunne også være at det var næste år...
+# - En side der lister festivaler i Odense?
+# - Links til/En side til de forskellige spillesteder?
+# - Nashville nights??
 
 
 locale.setlocale(locale.LC_ALL, "da_DK.utf8")
@@ -406,6 +412,10 @@ def all_concerts() -> list[Concert]:
     concerts.extend(extra())
     print(f"Alle koncerter er hentet ({len(concerts)})")
     concerts.sort(key=lambda c: (c.date, c.venue, c.title))
+    today = datetime.now().date()
+    for c in concerts:
+        if c.date.date() < today:
+            print(f"WARN: {c.title} is an outdated concert")
     return concerts
 
 
