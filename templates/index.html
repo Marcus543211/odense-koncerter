@@ -31,17 +31,25 @@
     <link rel="stylesheet" href="pico.indigo.min.css">
 
     <script src="hideOldConcerts.js" defer></script>
+    <script src="search.js" defer></script>
   </head>
   <body>
     <main class="container">
+
       <h1>Koncerter i Odense!</h1>
       <p>Denne hjemmeside prøver at samle de koncerter der afholdes i Odense.</p>
       <p>Den samler koncerter fra Posten, Dexter, Kulturmaskinen, Live Culture, Storms Pakhus, Odeon og andre.</p>
       <p>OBS! De viste priser er oftest for forsalg. De egentlige priser kan være anderledes og medlemsrabatter m.m. kan måske bruges.</p>
       <p>Sidst opdateret: <time datetime="{{ now.isoformat() }}">{{ now.strftime("%d. %B %Y") }}</time>
+
+      <form role="search" id="search">
+        <input name="search" type="search" placeholder="Søg" />
+        <input type="submit" value="Søg" />
+      </form>
+
       <div class="concertList">
       {% for concert in concerts %}
-        <article class="concert">
+        <article class="concert" data-title="{{ concert.title.lower() }}">
           <a href="{{ concert.url }}">
             <img loading="lazy" src="{{ concert.img_url }}"/>
             <h2>{{ concert.title }}</h2>
