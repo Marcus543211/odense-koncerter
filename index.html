@@ -31,101 +31,25 @@
     <link rel="stylesheet" href="pico.indigo.min.css">
 
     <script src="hideOldConcerts.js" defer></script>
+    <script src="search.js" defer></script>
   </head>
   <body>
     <main class="container">
+
       <h1>Koncerter i Odense!</h1>
       <p>Denne hjemmeside prøver at samle de koncerter der afholdes i Odense.</p>
       <p>Den samler koncerter fra Posten, Dexter, Kulturmaskinen, Live Culture, Storms Pakhus, Odeon og andre.</p>
       <p>OBS! De viste priser er oftest for forsalg. De egentlige priser kan være anderledes og medlemsrabatter m.m. kan måske bruges.</p>
-      <p>Sidst opdateret: <time datetime="2025-08-29T13:33:54.549287">29. august 2025</time>
+      <p>Sidst opdateret: <time datetime="2025-09-01T12:47:17.564934">01. september 2025</time>
+
+      <form role="search" id="search">
+        <input name="search" type="search" placeholder="Søg" />
+        <input type="submit" value="Søg" />
+      </form>
+
       <div class="concertList">
       
-        <article class="concert">
-          <a href="https://dexter.dk/event/i-think-youre-awesome/">
-            <img loading="lazy" src="images/2025-08-29 - Dexter - I Think You’re Awesome.webp"/>
-            <h2>I Think You’re Awesome</h2>
-          </a>
-          <p>
-            Dexter<br>
-            <time datetime="2025-08-29T00:00:00">29. august 2025</time><br>
-            Pris: Forsalg 180 kr.
-          </p>
-        </article>
-      
-        <article class="concert">
-          <a href="https://liveculture.dk/landsbyen/qm-ttds-2025">
-            <img loading="lazy" src="images/2025-08-29 - Landsbyen Odense - Queen Machine og A Tribute To Dire Straits.webp"/>
-            <h2>Queen Machine og A Tribute To Dire Straits</h2>
-          </a>
-          <p>
-            Landsbyen Odense<br>
-            <time datetime="2025-08-29T00:00:00">29. august 2025</time><br>
-            Pris: 450,-
-          </p>
-        </article>
-      
-        <article class="concert">
-          <a href="https://postenlive.dk/event/vansind/">
-            <img loading="lazy" src="images/2025-08-29 - Posten - Vansind.webp"/>
-            <h2>Vansind</h2>
-          </a>
-          <p>
-            Posten<br>
-            <time datetime="2025-08-29T00:00:00">29. august 2025</time><br>
-            Pris: Forsalg 190 kr.
-          </p>
-        </article>
-      
-        <article class="concert">
-          <a href="https://stormspakhus.dk/event/rigmor-fire-gratis-koncerter-paa-en-aften/">
-            <img loading="lazy" src="images/2025-08-29 - Storms - RIGMOR  Fire Gratis Koncerter på én aften!.webp"/>
-            <h2>RIGMOR // Fire Gratis Koncerter på én aften!</h2>
-          </a>
-          <p>
-            Storms<br>
-            <time datetime="2025-08-29T19:00:00">29. august 2025</time><br>
-            Pris: Gratis
-          </p>
-        </article>
-      
-        <article class="concert">
-          <a href="https://dexter.dk/event/sonic-saliva/">
-            <img loading="lazy" src="images/2025-08-30 - Dexter - Sonic Saliva.webp"/>
-            <h2>Sonic Saliva</h2>
-          </a>
-          <p>
-            Dexter<br>
-            <time datetime="2025-08-30T00:00:00">30. august 2025</time><br>
-            Pris: Forsalg 180 kr.
-          </p>
-        </article>
-      
-        <article class="concert">
-          <a href="https://liveculture.dk/landsbyen/aphaca-mumle-kalaset">
-            <img loading="lazy" src="images/2025-08-30 - Landsbyen Odense - APHACA, Mumle &amp; KALASET.webp"/>
-            <h2>APHACA, Mumle &amp; KALASET</h2>
-          </a>
-          <p>
-            Landsbyen Odense<br>
-            <time datetime="2025-08-30T00:00:00">30. august 2025</time><br>
-            Pris: 350,-
-          </p>
-        </article>
-      
-        <article class="concert">
-          <a href="https://postenlive.dk/event/vi-slaar-ring-stoettekoncert-for-faellesskab-og-retfaerdighed/">
-            <img loading="lazy" src="images/2025-08-30 - Posten - Vi Slår Ring – Støttekoncert for fællesskab og retfærdighed.webp"/>
-            <h2>Vi Slår Ring – Støttekoncert for fællesskab og retfærdighed</h2>
-          </a>
-          <p>
-            Posten<br>
-            <time datetime="2025-08-30T00:00:00">30. august 2025</time><br>
-            Pris: Forsalg 100 kr.
-          </p>
-        </article>
-      
-        <article class="concert">
+        <article class="concert" data-title="jazz jam – vært: johannes mogensen">
           <a href="https://dexter.dk/event/jazz-jam-vaert-johannes-mogensen-sep1/">
             <img loading="lazy" src="images/2025-09-01 - Dexter - Jazz Jam – Vært Johannes Mogensen.webp"/>
             <h2>Jazz Jam – Vært: Johannes Mogensen</h2>
@@ -137,7 +61,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="morten haxholm ”aether”">
           <a href="https://dexter.dk/event/morten-haxholm-aether/">
             <img loading="lazy" src="images/2025-09-03 - Dexter - Morten Haxholm ”AETHER”.webp"/>
             <h2>Morten Haxholm ”AETHER”</h2>
@@ -149,7 +73,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="dressed for roxette, bryan adams tribute &amp; george michael xperience">
           <a href="https://liveculture.dk/landsbyen/dressed-for-roxette-bryan-adams-tribute-george-michael-xperience">
             <img loading="lazy" src="images/2025-09-04 - Landsbyen Odense - Dressed for Roxette, Bryan Adams Tribute &amp; George Michael Xperience.webp"/>
             <h2>Dressed for Roxette, Bryan Adams Tribute &amp; George Michael Xperience</h2>
@@ -161,7 +85,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="south of savoy (est/fin)">
           <a href="https://postenlive.dk/event/south-of-savoy/">
             <img loading="lazy" src="images/2025-09-04 - Posten - South of Savoy (ESTFIN).webp"/>
             <h2>South of Savoy (EST/FIN)</h2>
@@ -173,7 +97,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="tuva bergenheim (se)">
           <a href="https://dexter.dk/event/tuva-bergenheim/">
             <img loading="lazy" src="images/2025-09-05 - Dexter - Tuva Bergenheim (SE).webp"/>
             <h2>Tuva Bergenheim (SE)</h2>
@@ -185,7 +109,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="jonah blacksmith &amp; hjalmer">
           <a href="https://liveculture.dk/landsbyen/jonah-blacksmith-hjalmer">
             <img loading="lazy" src="images/2025-09-05 - Landsbyen Odense - Jonah Blacksmith &amp; Hjalmer.webp"/>
             <h2>Jonah Blacksmith &amp; Hjalmer</h2>
@@ -197,7 +121,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="malk de koijn">
           <a href="https://postenlive.dk/event/malk-de-koijn-3/">
             <img loading="lazy" src="images/2025-09-05 - Posten - Malk de Koijn.webp"/>
             <h2>Malk de Koijn</h2>
@@ -209,7 +133,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="die herren">
           <a href="https://stormspakhus.dk/event/die-herren-gratis-koncert/">
             <img loading="lazy" src="images/2025-09-05 - Storms - DIE HERREN.webp"/>
             <h2>DIE HERREN</h2>
@@ -221,7 +145,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="bubbling well &amp; josie &amp; diet loop // røde himmel">
           <a href="https://kulturmaskinen.dk/events/bubbling-well-josie-diet-loop-rode-himmel-1">
             <img loading="lazy" src="images/2025-09-05 - Frølageret - Bubbling Well &amp; Josie &amp; Diet Loop  Røde Himmel.webp"/>
             <h2>Bubbling Well &amp; Josie &amp; Diet Loop // Røde Himmel</h2>
@@ -233,7 +157,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="glory days">
           <a href="https://dexter.dk/event/glory-days/">
             <img loading="lazy" src="images/2025-09-06 - Dexter - Glory Days.webp"/>
             <h2>Glory Days</h2>
@@ -245,7 +169,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="øllets dag lever videre">
           <a href="https://dexter.dk/event/oellets-dag-lever-videre/">
             <img loading="lazy" src="images/2025-09-06 - Dexter - Øllets Dag Lever Videre.webp"/>
             <h2>Øllets Dag Lever Videre</h2>
@@ -257,7 +181,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="svea s &amp; jung">
           <a href="https://liveculture.dk/landsbyen/svea-s-jung">
             <img loading="lazy" src="images/2025-09-06 - Landsbyen Odense - Svea S &amp; jung.webp"/>
             <h2>Svea S &amp; jung</h2>
@@ -269,7 +193,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="chopper">
           <a href="https://postenlive.dk/event/chopper/">
             <img loading="lazy" src="images/2025-09-06 - Posten - Chopper.webp"/>
             <h2>Chopper</h2>
@@ -281,7 +205,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="shubberne">
           <a href="https://stormspakhus.dk/event/shubberne-gratis-koncert/">
             <img loading="lazy" src="images/2025-09-06 - Storms - SHUBBERNE.webp"/>
             <h2>SHUBBERNE</h2>
@@ -293,7 +217,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="blue monday blues jam feat. tamra rosanes &amp; søren bøje">
           <a href="https://dexter.dk/event/blue-monday-blues-jam-maj25/">
             <img loading="lazy" src="images/2025-09-08 - Dexter - Blue Monday Blues Jam feat. Tamra Rosanes &amp; Søren Bøje.webp"/>
             <h2>Blue Monday Blues Jam feat. Tamra Rosanes &amp; Søren Bøje</h2>
@@ -305,7 +229,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="songwriters circle // april cushman (us) + open stage">
           <a href="https://dexter.dk/event/songwriters-circle-april-cushman-us-open-stage/">
             <img loading="lazy" src="images/2025-09-09 - Dexter - Songwriters Circle  April Cushman (US) + Open stage.webp"/>
             <h2>Songwriters Circle // April Cushman (US) + Open stage</h2>
@@ -317,7 +241,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="caktus">
           <a href="https://dexter.dk/event/caktus/">
             <img loading="lazy" src="images/2025-09-10 - Dexter - Caktus.webp"/>
             <h2>Caktus</h2>
@@ -329,7 +253,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="veronika rud">
           <a href="https://dexter.dk/event/veronika-rud/">
             <img loading="lazy" src="images/2025-09-11 - Dexter - Veronika Rud.webp"/>
             <h2>Veronika Rud</h2>
@@ -341,7 +265,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="news &amp; tøsedrenge tur">
           <a href="https://liveculture.dk/landsbyen/news-tosedrenge-tur">
             <img loading="lazy" src="images/2025-09-11 - Landsbyen Odense - NEWS &amp; Tøsedrenge Tur.webp"/>
             <h2>NEWS &amp; Tøsedrenge Tur</h2>
@@ -353,7 +277,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="nashville nights festival 2025">
           <a href="https://odensevaerket.dk/product/11-14-september-nashville-nights-festival-2025-entrebillet/">
             <img loading="lazy" src="images/2025-09-11 - Odense Værket - Nashville Nights Festival 2025.webp"/>
             <h2>Nashville Nights Festival 2025</h2>
@@ -365,10 +289,10 @@
           </p>
         </article>
       
-        <article class="concert">
-          <a href="https://postenlive.dk/event/nashville-nights-festival-2025/">
-            <img loading="lazy" src="images/2025-09-11 - Posten - Nashville Nights Festival 2025.webp"/>
-            <h2>Nashville Nights Festival 2025</h2>
+        <article class="concert" data-title="official opening show">
+          <a href="https://postenlive.dk/event/official-opening-show-sep11/">
+            <img loading="lazy" src="images/2025-09-11 - Posten - Official Opening Show.webp"/>
+            <h2>Official Opening Show</h2>
           </a>
           <p>
             Posten<br>
@@ -377,7 +301,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="nashville nights 2025">
           <a href="https://kulturmaskinen.dk/events/nashville-nights-2025">
             <img loading="lazy" src="images/2025-09-11 - Kulturmaskinen - Nashville Nights 2025.webp"/>
             <h2>Nashville Nights 2025</h2>
@@ -389,7 +313,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="nashville nights festival 2025">
           <a href="https://dexter.dk/event/nashville-nights-international-songwriters-festival/">
             <img loading="lazy" src="images/2025-09-12 - Dexter - Nashville Nights Festival 2025.webp"/>
             <h2>Nashville Nights Festival 2025</h2>
@@ -401,7 +325,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="tv-2 &amp; en lille pose støj">
           <a href="https://liveculture.dk/landsbyen/tv-2-en-lille-pose-stoj">
             <img loading="lazy" src="images/2025-09-12 - Landsbyen Odense - TV-2 &amp; En Lille Pose Støj.webp"/>
             <h2>TV-2 &amp; En Lille Pose Støj</h2>
@@ -413,10 +337,10 @@
           </p>
         </article>
       
-        <article class="concert">
-          <a href="https://postenlive.dk/event/nashville-nights-festival-sep12/">
-            <img loading="lazy" src="images/2025-09-12 - Posten - Nashville Nights Festival 2025.webp"/>
-            <h2>Nashville Nights Festival 2025</h2>
+        <article class="concert" data-title="dan &amp; the danes">
+          <a href="https://postenlive.dk/event/nashville-nights-festival-dan/">
+            <img loading="lazy" src="images/2025-09-12 - Posten - Dan &amp; The Danes.webp"/>
+            <h2>Dan &amp; The Danes</h2>
           </a>
           <p>
             Posten<br>
@@ -425,7 +349,31 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="foreign affairs">
+          <a href="https://postenlive.dk/event/nashville-nights-festival-foreign-affairs/">
+            <img loading="lazy" src="images/2025-09-12 - Posten - Foreign Affairs.webp"/>
+            <h2>Foreign Affairs</h2>
+          </a>
+          <p>
+            Posten<br>
+            <time datetime="2025-09-12T00:00:00">12. september 2025</time><br>
+            Pris: Forsalg 720 kr.
+          </p>
+        </article>
+      
+        <article class="concert" data-title="kylie sackley / rachel thibodeau / shelly fairchild">
+          <a href="https://postenlive.dk/event/nashville-nights-festival-kylie/">
+            <img loading="lazy" src="images/2025-09-12 - Posten - Kylie Sackley  Rachel Thibodeau  Shelly Fairchild.webp"/>
+            <h2>Kylie Sackley / Rachel Thibodeau / Shelly Fairchild</h2>
+          </a>
+          <p>
+            Posten<br>
+            <time datetime="2025-09-12T00:00:00">12. september 2025</time><br>
+            Pris: Forsalg 720 kr.
+          </p>
+        </article>
+      
+        <article class="concert" data-title="simona abdallah">
           <a href="https://kulturmaskinen.dk/events/simona-abdallah-1-1">
             <img loading="lazy" src="images/2025-09-12 - Kulturmaskinen - Simona Abdallah.webp"/>
             <h2>Simona Abdallah</h2>
@@ -437,7 +385,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="nashville nights festival 2025">
           <a href="https://dexter.dk/event/nashville-nights-international-songwriters-festival-2/">
             <img loading="lazy" src="images/2025-09-13 - Dexter - Nashville Nights Festival 2025.webp"/>
             <h2>Nashville Nights Festival 2025</h2>
@@ -449,10 +397,10 @@
           </p>
         </article>
       
-        <article class="concert">
-          <a href="https://postenlive.dk/event/nashville-nights-festival-sep13/">
-            <img loading="lazy" src="images/2025-09-13 - Posten - Nashville Nights Festival 2025.webp"/>
-            <h2>Nashville Nights Festival 2025</h2>
+        <article class="concert" data-title="a star is born (movie soundtrack live)">
+          <a href="https://postenlive.dk/event/nashville-nights-festival-a-star/">
+            <img loading="lazy" src="images/2025-09-13 - Posten - A Star Is Born (Movie soundtrack live).webp"/>
+            <h2>A Star Is Born (Movie soundtrack live)</h2>
           </a>
           <p>
             Posten<br>
@@ -461,7 +409,43 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="fancy hagood">
+          <a href="https://postenlive.dk/event/fancy-hagood/">
+            <img loading="lazy" src="images/2025-09-13 - Posten - Fancy Hagood.webp"/>
+            <h2>Fancy Hagood</h2>
+          </a>
+          <p>
+            Posten<br>
+            <time datetime="2025-09-13T00:00:00">13. september 2025</time><br>
+            Pris: Forsalg 970 kr.
+          </p>
+        </article>
+      
+        <article class="concert" data-title="nashville tonight – award &amp; tribute show">
+          <a href="https://postenlive.dk/event/nashville-nights-festival-tonight/">
+            <img loading="lazy" src="images/2025-09-13 - Posten - Nashville Tonight – Award &amp; Tribute Show.webp"/>
+            <h2>Nashville Tonight – Award &amp; Tribute Show</h2>
+          </a>
+          <p>
+            Posten<br>
+            <time datetime="2025-09-13T00:00:00">13. september 2025</time><br>
+            Pris: Forsalg 970 kr.
+          </p>
+        </article>
+      
+        <article class="concert" data-title="the brummies">
+          <a href="https://postenlive.dk/event/nashville-nights-festival-brummies/">
+            <img loading="lazy" src="images/2025-09-13 - Posten - The Brummies.webp"/>
+            <h2>The Brummies</h2>
+          </a>
+          <p>
+            Posten<br>
+            <time datetime="2025-09-13T00:00:00">13. september 2025</time><br>
+            Pris: Forsalg 970 kr.
+          </p>
+        </article>
+      
+        <article class="concert" data-title="nashville nights festival 2025">
           <a href="https://dexter.dk/event/nashville-nights-international-songwriters-festival-3/">
             <img loading="lazy" src="images/2025-09-14 - Dexter - Nashville Nights Festival 2025.webp"/>
             <h2>Nashville Nights Festival 2025</h2>
@@ -473,10 +457,10 @@
           </p>
         </article>
       
-        <article class="concert">
-          <a href="https://postenlive.dk/event/nashville-nights-festival-sep14/">
-            <img loading="lazy" src="images/2025-09-14 - Posten - Nashville Nights Festival 2025.webp"/>
-            <h2>Nashville Nights Festival 2025</h2>
+        <article class="concert" data-title="closing ceremony">
+          <a href="https://postenlive.dk/event/nashville-nights-festival-closing/">
+            <img loading="lazy" src="images/2025-09-14 - Posten - Closing Ceremony.webp"/>
+            <h2>Closing Ceremony</h2>
           </a>
           <p>
             Posten<br>
@@ -485,7 +469,19 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="jade helliwell">
+          <a href="https://postenlive.dk/event/nashville-nights-festival-jade/">
+            <img loading="lazy" src="images/2025-09-14 - Posten - Jade Helliwell.webp"/>
+            <h2>Jade Helliwell</h2>
+          </a>
+          <p>
+            Posten<br>
+            <time datetime="2025-09-14T00:00:00">14. september 2025</time><br>
+            Pris: Forsalg 620 kr.
+          </p>
+        </article>
+      
+        <article class="concert" data-title="jazz jam – vært: johannes mogensen">
           <a href="https://dexter.dk/event/jazz-jam-vaert-johannes-mogensen-sep15/">
             <img loading="lazy" src="images/2025-09-15 - Dexter - Jazz Jam – Vært Johannes Mogensen.webp"/>
             <h2>Jazz Jam – Vært: Johannes Mogensen</h2>
@@ -497,7 +493,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="kassettebåndsmusikquiz">
           <a href="https://dexter.dk/event/kassettebaandsmusikquiz-sep25/">
             <img loading="lazy" src="images/2025-09-17 - Dexter - Kassettebåndsmusikquiz.webp"/>
             <h2>Kassettebåndsmusikquiz</h2>
@@ -509,7 +505,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="fusk (de/pl/dk)">
           <a href="https://dexter.dk/event/fusk/">
             <img loading="lazy" src="images/2025-09-18 - Dexter - Fusk (DEPLDK).webp"/>
             <h2>Fusk (DE/PL/DK)</h2>
@@ -521,7 +517,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="causa sui">
           <a href="https://postenlive.dk/event/causa-sui-2/">
             <img loading="lazy" src="images/2025-09-18 - Posten - Causa Sui.webp"/>
             <h2>Causa Sui</h2>
@@ -533,7 +529,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="fredagsbar live: chris grey solo">
           <a href="https://dexter.dk/event/fredagsbar-sep19/">
             <img loading="lazy" src="images/2025-09-19 - Dexter - Fredagsbar Live Chris Grey solo.webp"/>
             <h2>Fredagsbar Live: Chris Grey solo</h2>
@@ -545,7 +541,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="tuff enuff">
           <a href="https://dexter.dk/event/tuff-enuff/">
             <img loading="lazy" src="images/2025-09-19 - Dexter - Tuff Enuff.webp"/>
             <h2>Tuff Enuff</h2>
@@ -557,7 +553,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="hotel hunger">
           <a href="https://postenlive.dk/event/hotel-hunger/">
             <img loading="lazy" src="images/2025-09-19 - Posten - Hotel Hunger.webp"/>
             <h2>Hotel Hunger</h2>
@@ -569,7 +565,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="bal med martin strange og rune barslund">
           <a href="https://kulturmaskinen.dk/events/bal-med-martin-strange-og-rune-barslund-1">
             <img loading="lazy" src="images/2025-09-19 - Frølageret - Bal med Martin Strange og Rune Barslund.webp"/>
             <h2>Bal med Martin Strange og Rune Barslund</h2>
@@ -581,7 +577,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="moonjam">
           <a href="https://stormspakhus.dk/event/moonjam-gratis-koncert/">
             <img loading="lazy" src="images/2025-09-19 - Storms - MOONJAM.webp"/>
             <h2>MOONJAM</h2>
@@ -593,7 +589,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="basco">
           <a href="https://dexter.dk/event/basco/">
             <img loading="lazy" src="images/2025-09-20 - Dexter - Basco.webp"/>
             <h2>Basco</h2>
@@ -605,7 +601,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="lørdagsjazz – vært: nathaniel ford">
           <a href="https://dexter.dk/event/loerdagsjazz-sep20/">
             <img loading="lazy" src="images/2025-09-20 - Dexter - Lørdagsjazz – Vært Nathaniel Ford.webp"/>
             <h2>Lørdagsjazz – Vært: Nathaniel Ford</h2>
@@ -617,7 +613,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="livløs">
           <a href="https://postenlive.dk/event/livloes/">
             <img loading="lazy" src="images/2025-09-20 - Posten - Livløs.webp"/>
             <h2>Livløs</h2>
@@ -629,7 +625,19 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="dobbeltkoncert: maja husted + min veninde signe">
+          <a href="https://www.yourticket.dk/arrangementer/52365/dobbeltkoncert-maja-husted-min-veninde-signe-studenterhus-odense/">
+            <img loading="lazy" src="images/2025-09-20 - Studenterhus Odense - Dobbeltkoncert Maja Husted + Min Veninde Signe.webp"/>
+            <h2>Dobbeltkoncert: Maja Husted + Min Veninde Signe</h2>
+          </a>
+          <p>
+            Studenterhus Odense<br>
+            <time datetime="2025-09-20T20:00:00">20. september 2025</time><br>
+            Pris: 50.0
+          </p>
+        </article>
+      
+        <article class="concert" data-title="andrew strong">
           <a href="https://odeonodense.dk/kalender/andrew-strong-2025-09-21">
             <img loading="lazy" src="images/2025-09-21 - ODEON - Andrew Strong.webp"/>
             <h2>Andrew Strong</h2>
@@ -641,7 +649,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="jazz jam – vært: johannes mogensen">
           <a href="https://dexter.dk/event/jazz-jam-vaert-johannes-mogensen-sep22/">
             <img loading="lazy" src="images/2025-09-22 - Dexter - Jazz Jam – Vært Johannes Mogensen.webp"/>
             <h2>Jazz Jam – Vært: Johannes Mogensen</h2>
@@ -653,7 +661,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="om – original music – esben bay group + surface tension">
           <a href="https://dexter.dk/event/om-original-music-sep23/">
             <img loading="lazy" src="images/2025-09-23 - Dexter - OM – Original Music – Esben Bay Group + Surface Tension.webp"/>
             <h2>OM – Original Music – Esben Bay Group + Surface Tension</h2>
@@ -665,7 +673,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="“cover nights” the 3eatles">
           <a href="https://odensevaerket.dk/product/24-september-cover-nights-the-3eatles-entrebillet/">
             <img loading="lazy" src="images/2025-09-24 - Odense Værket - “Cover Nights” The 3eatles.webp"/>
             <h2>“Cover Nights” The 3eatles</h2>
@@ -677,7 +685,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="kom til bal i  odense">
           <a href="https://kulturmaskinen.dk/events/kom-til-bal-i-odense-1">
             <img loading="lazy" src="images/2025-09-24 - Frølageret - Kom til Bal i  Odense.webp"/>
             <h2>Kom til Bal i  Odense</h2>
@@ -689,7 +697,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="dexters musikquiz">
           <a href="https://dexter.dk/event/dexters-musikquiz-sep25/">
             <img loading="lazy" src="images/2025-09-25 - Dexter - DEXTERS Musikquiz.webp"/>
             <h2>DEXTERS Musikquiz</h2>
@@ -701,7 +709,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="julie ellinor">
           <a href="https://postenlive.dk/event/julie-ellinor/">
             <img loading="lazy" src="images/2025-09-25 - Posten - Julie Ellinor.webp"/>
             <h2>Julie Ellinor</h2>
@@ -713,7 +721,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="martin kanstrup – ”en bette show”">
           <a href="https://postenlive.dk/event/martin-kanstrup-en-bette-show/">
             <img loading="lazy" src="images/2025-09-25 - Posten - Martin Kanstrup – ”EN BETTE SHOW”.webp"/>
             <h2>Martin Kanstrup – ”EN BETTE SHOW”</h2>
@@ -725,7 +733,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="lunau&amp;sund">
           <a href="https://kulturmaskinen.dk/events/lunau-sund-1">
             <img loading="lazy" src="images/2025-09-25 - Frølageret - Lunau&amp;Sund.webp"/>
             <h2>Lunau&amp;Sund</h2>
@@ -737,7 +745,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="cody">
           <a href="https://dexter.dk/event/cody/">
             <img loading="lazy" src="images/2025-09-26 - Dexter - CODY.webp"/>
             <h2>CODY</h2>
@@ -749,7 +757,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="fredagsbar live: nikolaj valentin duo">
           <a href="https://dexter.dk/event/fredagsbar-live-sep26/">
             <img loading="lazy" src="images/2025-09-26 - Dexter - Fredagsbar Live Nikolaj Valentin Duo.webp"/>
             <h2>Fredagsbar Live: Nikolaj Valentin Duo</h2>
@@ -761,7 +769,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="anders blichfeldt">
           <a href="https://grandodense.dk/event-koncert/anders-blichfeldt">
             <img loading="lazy" src="images/2025-09-26 - Grand Hotel - Anders Blichfeldt.webp"/>
             <h2>Anders Blichfeldt</h2>
@@ -773,7 +781,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="going for the one">
           <a href="https://tcbunderground.ticketbutler.io/e/going-for-the-one/">
             <img loading="lazy" src="images/2025-09-26 - TCB Underground - GOING FOR THE ONE.webp"/>
             <h2>GOING FOR THE ONE</h2>
@@ -785,7 +793,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="gourmet">
           <a href="https://kulturmaskinen.dk/events/gourmet-1">
             <img loading="lazy" src="images/2025-09-26 - Frølageret - Gourmet.webp"/>
             <h2>Gourmet</h2>
@@ -797,7 +805,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="se venedig og dø">
           <a href="https://kulturmaskinen.dk/events/se-venedig-og-do-1">
             <img loading="lazy" src="images/2025-09-26 - Magasinet - Se Venedig og Dø.webp"/>
             <h2>Se Venedig og Dø</h2>
@@ -809,7 +817,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="jakob sveistrup">
           <a href="https://stormspakhus.dk/event/jakob-sveistrup-gratis-koncert/">
             <img loading="lazy" src="images/2025-09-26 - Storms - JAKOB SVEISTRUP.webp"/>
             <h2>JAKOB SVEISTRUP</h2>
@@ -821,7 +829,19 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="fed &amp; lille philip og 2tiltango">
+          <a href="https://www.yourticket.dk/arrangementer/51943/fed-lille-philip-og-2tiltango/">
+            <img loading="lazy" src="images/2025-09-26 - Studenterhus Odense - Fed &amp; Lille Philip og 2tiltango.webp"/>
+            <h2>Fed &amp; Lille Philip og 2tiltango</h2>
+          </a>
+          <p>
+            Studenterhus Odense<br>
+            <time datetime="2025-09-26T22:00:00">26. september 2025</time><br>
+            Pris: 50.0
+          </p>
+        </article>
+      
+        <article class="concert" data-title="amanda ginsburg quartet (se/dk)">
           <a href="https://dexter.dk/event/amanda-ginsburg-quartet/">
             <img loading="lazy" src="images/2025-09-27 - Dexter - Amanda Ginsburg Quartet (SEDK).webp"/>
             <h2>Amanda Ginsburg Quartet (SE/DK)</h2>
@@ -833,7 +853,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="lørdagsjazz – vært: nathaniel ford">
           <a href="https://dexter.dk/event/lordagsjazz-sep27/">
             <img loading="lazy" src="images/2025-09-27 - Dexter - Lørdagsjazz – Vært Nathaniel Ford.webp"/>
             <h2>Lørdagsjazz – Vært: Nathaniel Ford</h2>
@@ -845,7 +865,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="euphoric season">
           <a href="https://postenlive.dk/event/euphoric-season-2/">
             <img loading="lazy" src="images/2025-09-27 - Posten - Euphoric Season.webp"/>
             <h2>Euphoric Season</h2>
@@ -857,7 +877,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="se venedig og dø">
           <a href="https://kulturmaskinen.dk/events/se-venedig-og-do-1-1">
             <img loading="lazy" src="images/2025-09-27 - Magasinet - Se Venedig og dø.webp"/>
             <h2>Se Venedig og dø</h2>
@@ -869,7 +889,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="se venedig og dø">
           <a href="https://kulturmaskinen.dk/events/se-venedig-og-do-2">
             <img loading="lazy" src="images/2025-09-27 - Magasinet - Se Venedig og dø.webp"/>
             <h2>Se Venedig og dø</h2>
@@ -881,19 +901,19 @@
           </p>
         </article>
       
-        <article class="concert">
-          <a href="https://www.facebook.com/events/737949185487284">
-            <img loading="lazy" src="images/2025-09-27 - Studenterhus Odense - Vincent Wood. SUPPORT Astrid Schick.webp"/>
-            <h2>Vincent Wood. SUPPORT: Astrid Schick</h2>
+        <article class="concert" data-title="vincent wood">
+          <a href="https://www.yourticket.dk/arrangementer/51498/vincent-wood-studenterhus-odense/">
+            <img loading="lazy" src="images/2025-09-27 - Studenterhus Odense - Vincent Wood.webp"/>
+            <h2>Vincent Wood</h2>
           </a>
           <p>
             Studenterhus Odense<br>
             <time datetime="2025-09-27T21:00:00">27. september 2025</time><br>
-            Pris: 120 kr.
+            Pris: 100.0
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="frede fup">
           <a href="https://dexter.dk/event/frede-fup/">
             <img loading="lazy" src="images/2025-09-28 - Dexter - Frede Fup.webp"/>
             <h2>Frede Fup</h2>
@@ -905,7 +925,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="rasmus klump og det magiske spejl">
           <a href="https://postenlive.dk/event/rasmus-klump-og-det-magiske-spejl/">
             <img loading="lazy" src="images/2025-09-28 - Posten - Rasmus Klump og Det Magiske Spejl.webp"/>
             <h2>Rasmus Klump og Det Magiske Spejl</h2>
@@ -917,7 +937,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="dexter jam">
           <a href="https://dexter.dk/event/dexter-jam-sep25/">
             <img loading="lazy" src="images/2025-09-29 - Dexter - Dexter Jam.webp"/>
             <h2>Dexter Jam</h2>
@@ -929,7 +949,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="true loves (us)">
           <a href="https://dexter.dk/event/true-loves-us/">
             <img loading="lazy" src="images/2025-09-30 - Dexter - True Loves (US).webp"/>
             <h2>True Loves (US)</h2>
@@ -941,7 +961,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="cecilie strange">
           <a href="https://dexter.dk/event/cecilie-strange/">
             <img loading="lazy" src="images/2025-10-01 - Dexter - Cecilie Strange.webp"/>
             <h2>Cecilie Strange</h2>
@@ -953,7 +973,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="makiko hirabayashi weavers">
           <a href="https://dexter.dk/event/makiko-hirabayashi-weavers/">
             <img loading="lazy" src="images/2025-10-02 - Dexter - Makiko Hirabayashi Weavers.webp"/>
             <h2>Makiko Hirabayashi Weavers</h2>
@@ -965,7 +985,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="nana jacobi">
           <a href="https://postenlive.dk/event/nana-jacobi/">
             <img loading="lazy" src="images/2025-10-02 - Posten - Nana Jacobi.webp"/>
             <h2>Nana Jacobi</h2>
@@ -977,7 +997,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="aegteskab – mike andersen / michael blicher / eddi jarl">
           <a href="https://dexter.dk/event/aegteskab-mike-andersen-michael-blicher-eddi-jarl-2/">
             <img loading="lazy" src="images/2025-10-03 - Dexter - AEGTESKAB – Mike Andersen  Michael Blicher  Eddi Jarl.webp"/>
             <h2>AEGTESKAB – Mike Andersen / Michael Blicher / Eddi Jarl</h2>
@@ -989,7 +1009,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="kira skov">
           <a href="https://postenlive.dk/event/kira-skov/">
             <img loading="lazy" src="images/2025-10-03 - Posten - Kira Skov.webp"/>
             <h2>Kira Skov</h2>
@@ -1001,7 +1021,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="sira jovina">
           <a href="https://kulturmaskinen.dk/events/sira-jovina-1">
             <img loading="lazy" src="images/2025-10-03 - Frølageret - Sira Jovina.webp"/>
             <h2>Sira Jovina</h2>
@@ -1013,7 +1033,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="dire straits jam">
           <a href="https://dexter.dk/event/dire-straits-jam-5/">
             <img loading="lazy" src="images/2025-10-04 - Dexter - Dire Straits Jam.webp"/>
             <h2>Dire Straits Jam</h2>
@@ -1025,7 +1045,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="lørdagsjazz – vært: nathaniel ford">
           <a href="https://dexter.dk/event/lordagsjazz-okt4/">
             <img loading="lazy" src="images/2025-10-04 - Dexter - Lørdagsjazz – Vært Nathaniel Ford.webp"/>
             <h2>Lørdagsjazz – Vært: Nathaniel Ford</h2>
@@ -1037,7 +1057,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="isam b">
           <a href="https://postenlive.dk/event/isam-b/">
             <img loading="lazy" src="images/2025-10-04 - Posten - Isam B.webp"/>
             <h2>Isam B</h2>
@@ -1049,7 +1069,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="odenses internationale plademesse">
           <a href="https://postenlive.dk/event/odenses-internationale-plademesse-76/">
             <img loading="lazy" src="images/2025-10-04 - Posten - Odenses Internationale Plademesse.webp"/>
             <h2>Odenses Internationale Plademesse</h2>
@@ -1061,7 +1081,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="metal mekka - sceptic, krapyl, lysbærer &amp; pertinax">
           <a href="https://kulturmaskinen.dk/events/metal-mekka-sceptic-krapyl-lysbaerer-pertinax-1">
             <img loading="lazy" src="images/2025-10-04 - Frølageret - Metal Mekka - Sceptic, Krapyl, Lysbærer &amp; Pertinax.webp"/>
             <h2>Metal Mekka - Sceptic, Krapyl, Lysbærer &amp; Pertinax</h2>
@@ -1073,7 +1093,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="falderebet">
           <a href="https://tcbunderground.ticketbutler.io/e/falderebet-1/">
             <img loading="lazy" src="images/2025-10-04 - TCB Underground - FALDEREBET.webp"/>
             <h2>FALDEREBET</h2>
@@ -1085,7 +1105,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="big band 5000 dk feat. paul edis (uk)">
           <a href="https://dexter.dk/event/big-band-5000-dk-feat-paul-edis-uk/">
             <img loading="lazy" src="images/2025-10-05 - Dexter - Big Band 5000 DK feat. Paul Edis (UK).webp"/>
             <h2>Big Band 5000 DK feat. Paul Edis (UK)</h2>
@@ -1097,7 +1117,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="metalvation 2025">
           <a href="https://postenlive.dk/event/metalvation-2025/">
             <img loading="lazy" src="images/2025-10-05 - Posten - Metalvation 2025.webp"/>
             <h2>Metalvation 2025</h2>
@@ -1109,7 +1129,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="jazz jam – vært: johannes mogensen">
           <a href="https://dexter.dk/event/jazz-jam-vaert-johannes-mogensen-okt6/">
             <img loading="lazy" src="images/2025-10-06 - Dexter - Jazz Jam – Vært Johannes Mogensen.webp"/>
             <h2>Jazz Jam – Vært: Johannes Mogensen</h2>
@@ -1121,7 +1141,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="cæcilie norby">
           <a href="https://dexter.dk/event/caecilie-norby/">
             <img loading="lazy" src="images/2025-10-07 - Dexter - Cæcilie Norby.webp"/>
             <h2>Cæcilie Norby</h2>
@@ -1133,7 +1153,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="bye bye brenda">
           <a href="https://dexter.dk/event/bye-bye-brenda/">
             <img loading="lazy" src="images/2025-10-08 - Dexter - Bye Bye Brenda.webp"/>
             <h2>Bye Bye Brenda</h2>
@@ -1145,7 +1165,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="matt schofield (uk)">
           <a href="https://dexter.dk/event/matt-schofield-2025/">
             <img loading="lazy" src="images/2025-10-09 - Dexter - Matt Schofield (UK).webp"/>
             <h2>Matt Schofield (UK)</h2>
@@ -1157,7 +1177,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="mika vandborg – solo uden cykelstyr">
           <a href="https://odensevaerket.dk/product/9-oktober-mika-vandborg-solo-uden-cykelstyr-entrebillet/">
             <img loading="lazy" src="images/2025-10-09 - Odense Værket - Mika Vandborg – Solo uden cykelstyr.webp"/>
             <h2>Mika Vandborg – Solo uden cykelstyr</h2>
@@ -1169,7 +1189,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="una skott">
           <a href="https://dexter.dk/event/una-skott/">
             <img loading="lazy" src="images/2025-10-10 - Dexter - Una Skott.webp"/>
             <h2>Una Skott</h2>
@@ -1181,7 +1201,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="brit floyd">
           <a href="https://odeonodense.dk/kalender/brit-floyd-2025-10-10">
             <img loading="lazy" src="images/2025-10-10 - ODEON - Brit Floyd.webp"/>
             <h2>Brit Floyd</h2>
@@ -1193,7 +1213,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="kedde + ana juél">
           <a href="https://postenlive.dk/event/kedde-ana-juel/">
             <img loading="lazy" src="images/2025-10-10 - Posten - Kedde + Ana Juél.webp"/>
             <h2>Kedde + Ana Juél</h2>
@@ -1205,7 +1225,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="dodo and the dodos">
           <a href="https://kulturmaskinen.dk/events/dodo-and-the-dodos-1">
             <img loading="lazy" src="images/2025-10-10 - Magasinet - Dodo and the Dodos.webp"/>
             <h2>Dodo and the Dodos</h2>
@@ -1217,19 +1237,19 @@
           </p>
         </article>
       
-        <article class="concert">
-          <a href="https://www.facebook.com/events/977383524265010">
+        <article class="concert" data-title="sofie1998">
+          <a href="https://www.yourticket.dk/arrangementer/50127/sofie1998-studenterhus-odense/">
             <img loading="lazy" src="images/2025-10-10 - Studenterhus Odense - SOFIE1998.webp"/>
             <h2>SOFIE1998</h2>
           </a>
           <p>
             Studenterhus Odense<br>
             <time datetime="2025-10-10T21:00:00">10. oktober 2025</time><br>
-            Pris: 180 kr.
+            Pris: 160.0
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="koncertvandring i vissenbjerg bakker">
           <a href="https://dexter.dk/event/koncertvandring-i-vissenbjerg-bakker/">
             <img loading="lazy" src="images/2025-10-11 - Dexter - Koncertvandring i Vissenbjerg Bakker.webp"/>
             <h2>Koncertvandring i Vissenbjerg Bakker</h2>
@@ -1241,7 +1261,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="lørdagsjazz – vært: nathaniel ford">
           <a href="https://dexter.dk/event/lordagsjazz-okt11/">
             <img loading="lazy" src="images/2025-10-11 - Dexter - Lørdagsjazz – Vært Nathaniel Ford.webp"/>
             <h2>Lørdagsjazz – Vært: Nathaniel Ford</h2>
@@ -1253,7 +1273,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="the mukherjee development">
           <a href="https://dexter.dk/event/the-mukherjee-development-2/">
             <img loading="lazy" src="images/2025-10-11 - Dexter - The Mukherjee Development.webp"/>
             <h2>The Mukherjee Development</h2>
@@ -1265,7 +1285,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="caroline henderson">
           <a href="https://odeonodense.dk/kalender/caroline-henderson-2025-10-11">
             <img loading="lazy" src="images/2025-10-11 - ODEON - Caroline Henderson.webp"/>
             <h2>Caroline Henderson</h2>
@@ -1277,7 +1297,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="blue foundation">
           <a href="https://postenlive.dk/event/blue-foundation/">
             <img loading="lazy" src="images/2025-10-11 - Posten - Blue Foundation.webp"/>
             <h2>Blue Foundation</h2>
@@ -1289,7 +1309,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="koncertvandring i vissenbjerg bakker">
           <a href="https://postenlive.dk/event/koncertvandring-i-vissenbjerg-bakker/">
             <img loading="lazy" src="images/2025-10-11 - Posten - Koncertvandring i Vissenbjerg Bakker.webp"/>
             <h2>Koncertvandring i Vissenbjerg Bakker</h2>
@@ -1301,7 +1321,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="dance præsenterer: kayak &amp; karoline funder">
           <a href="https://kulturmaskinen.dk/events/dance-praesenterer-kayak-karoline-funder-1">
             <img loading="lazy" src="images/2025-10-11 - Frølageret - DANCE præsenterer Kayak &amp; Karoline Funder.webp"/>
             <h2>DANCE præsenterer: Kayak &amp; Karoline Funder</h2>
@@ -1313,19 +1333,19 @@
           </p>
         </article>
       
-        <article class="concert">
-          <a href="https://www.facebook.com/events/1053405006554814">
+        <article class="concert" data-title="hardbeat new horizons">
+          <a href="https://www.yourticket.dk/arrangementer/51733/hardbeat-new-horizons-studenterhus-odense/">
             <img loading="lazy" src="images/2025-10-11 - Studenterhus Odense - HardBeat New Horizons.webp"/>
             <h2>HardBeat New Horizons</h2>
           </a>
           <p>
             Studenterhus Odense<br>
             <time datetime="2025-10-11T19:30:00">11. oktober 2025</time><br>
-            Pris: 120 kr.
+            Pris: 100.0
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="sean mcconnell (us)">
           <a href="https://postenlive.dk/event/sean-mcconnell-us/">
             <img loading="lazy" src="images/2025-10-12 - Posten - Sean McConnell (US).webp"/>
             <h2>Sean McConnell (US)</h2>
@@ -1337,7 +1357,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="blue monday blues jam feat. troels skovgaard">
           <a href="https://dexter.dk/event/blue-monday-blues-jam-okt25/">
             <img loading="lazy" src="images/2025-10-13 - Dexter - Blue Monday Blues Jam feat. Troels Skovgaard.webp"/>
             <h2>Blue Monday Blues Jam feat. Troels Skovgaard</h2>
@@ -1349,7 +1369,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="songwriters circle – jonas hammer + åben scene">
           <a href="https://dexter.dk/event/songwriters-circle-chris-grey-aaben-scene/">
             <img loading="lazy" src="images/2025-10-14 - Dexter - Songwriters Circle – Jonas Hammer + Åben Scene.webp"/>
             <h2>Songwriters Circle – Jonas Hammer + Åben Scene</h2>
@@ -1361,7 +1381,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="kassettebåndsmusikquiz">
           <a href="https://dexter.dk/event/kassettebaandsmusikquiz-okt15/">
             <img loading="lazy" src="images/2025-10-15 - Dexter - Kassettebåndsmusikquiz.webp"/>
             <h2>Kassettebåndsmusikquiz</h2>
@@ -1373,7 +1393,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="ida laurberg">
           <a href="https://postenlive.dk/event/ida-laurberg/">
             <img loading="lazy" src="images/2025-10-15 - Posten - Ida Laurberg.webp"/>
             <h2>Ida Laurberg</h2>
@@ -1385,7 +1405,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="nanna larsen &amp; ivan pedersen">
           <a href="https://dexter.dk/event/nanna-larsen-ivan-pedersen-2/">
             <img loading="lazy" src="images/2025-10-16 - Dexter - Nanna Larsen &amp; Ivan Pedersen.webp"/>
             <h2>Nanna Larsen &amp; Ivan Pedersen</h2>
@@ -1397,7 +1417,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="pauline">
           <a href="https://postenlive.dk/event/pauline-2/">
             <img loading="lazy" src="images/2025-10-16 - Posten - Pauline.webp"/>
             <h2>Pauline</h2>
@@ -1409,7 +1429,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="vilma">
           <a href="https://dexter.dk/event/vilma/">
             <img loading="lazy" src="images/2025-10-17 - Dexter - VILMA.webp"/>
             <h2>VILMA</h2>
@@ -1421,7 +1441,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="trine therkelsen">
           <a href="https://odeonodense.dk/kalender/trine-therkelsen-2025-10-17">
             <img loading="lazy" src="images/2025-10-17 - ODEON - Trine Therkelsen.webp"/>
             <h2>Trine Therkelsen</h2>
@@ -1433,7 +1453,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="ki!">
           <a href="https://postenlive.dk/event/ki-2/">
             <img loading="lazy" src="images/2025-10-17 - Posten - Ki!.webp"/>
             <h2>Ki!</h2>
@@ -1445,7 +1465,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="østkyst hustlers">
           <a href="https://kulturmaskinen.dk/events/ostkyst-hustlers-1">
             <img loading="lazy" src="images/2025-10-17 - Magasinet - Østkyst Hustlers.webp"/>
             <h2>Østkyst Hustlers</h2>
@@ -1457,7 +1477,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="baby did a bad thing">
           <a href="https://dexter.dk/event/baby-did-a-bad-thing/">
             <img loading="lazy" src="images/2025-10-18 - Dexter - Baby Did a Bad Thing.webp"/>
             <h2>Baby Did a Bad Thing</h2>
@@ -1469,7 +1489,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="lørdagsjazz – vært: nathaniel ford">
           <a href="https://dexter.dk/event/lordagsjazz-okt18/">
             <img loading="lazy" src="images/2025-10-18 - Dexter - Lørdagsjazz – Vært Nathaniel Ford.webp"/>
             <h2>Lørdagsjazz – Vært: Nathaniel Ford</h2>
@@ -1481,7 +1501,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="univers på vers">
           <a href="https://dexter.dk/event/univers-paa-vers/">
             <img loading="lazy" src="images/2025-10-18 - Dexter - Univers på Vers.webp"/>
             <h2>Univers på Vers</h2>
@@ -1493,7 +1513,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="madsen">
           <a href="https://postenlive.dk/event/madsen/">
             <img loading="lazy" src="images/2025-10-18 - Posten - Madsen.webp"/>
             <h2>Madsen</h2>
@@ -1505,7 +1525,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="clemens - regnskabets time feat.  ataf &amp; yepha">
           <a href="https://kulturmaskinen.dk/events/clemens-regnskabets-time-feat-ataf-yepha-1">
             <img loading="lazy" src="images/2025-10-18 - Magasinet - Clemens - Regnskabets Time feat.  ATAF &amp; YEPHA.webp"/>
             <h2>Clemens - Regnskabets Time feat.  ATAF &amp; YEPHA</h2>
@@ -1517,7 +1537,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="jazz jam – vært: johannes mogensen">
           <a href="https://dexter.dk/event/jazz-jam-vaert-johannes-mogensen-okt20/">
             <img loading="lazy" src="images/2025-10-20 - Dexter - Jazz Jam – Vært Johannes Mogensen.webp"/>
             <h2>Jazz Jam – Vært: Johannes Mogensen</h2>
@@ -1529,7 +1549,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="mona moroni">
           <a href="https://dexter.dk/event/mona-moroni/">
             <img loading="lazy" src="images/2025-10-22 - Dexter - Mona Moroni.webp"/>
             <h2>Mona Moroni</h2>
@@ -1541,7 +1561,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="line kruse (dk/fr), lina nyberg (se) &amp; odense jazz orchestra">
           <a href="https://postenlive.dk/event/line-kruse-dk-fr-lina-nyberg-se-odense-jazz-orchestra/">
             <img loading="lazy" src="images/2025-10-22 - Posten - Line Kruse (DKFR), Lina Nyberg (SE) &amp; Odense Jazz Orchestra.webp"/>
             <h2>Line Kruse (DK/FR), Lina Nyberg (SE) &amp; Odense Jazz Orchestra</h2>
@@ -1553,7 +1573,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="juncker">
           <a href="https://dexter.dk/event/juncker-5/">
             <img loading="lazy" src="images/2025-10-23 - Dexter - Juncker.webp"/>
             <h2>Juncker</h2>
@@ -1565,7 +1585,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="simski + rosa på månen">
           <a href="https://postenlive.dk/event/fundament-4/">
             <img loading="lazy" src="images/2025-10-23 - Posten - SIMSKI + Rosa På Månen.webp"/>
             <h2>SIMSKI + Rosa På Månen</h2>
@@ -1577,7 +1597,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="marie carmen koppel">
           <a href="https://dexter.dk/event/marie-carmen-koppel/">
             <img loading="lazy" src="images/2025-10-24 - Dexter - Marie Carmen Koppel.webp"/>
             <h2>Marie Carmen Koppel</h2>
@@ -1589,7 +1609,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="sanne salomonsen">
           <a href="https://grandodense.dk/event-koncert/sanne-salomonsen">
             <img loading="lazy" src="images/2025-10-24 - Grand Hotel - Sanne Salomonsen.webp"/>
             <h2>Sanne Salomonsen</h2>
@@ -1601,7 +1621,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="anne linnet &amp; danmarks underholdnings­orkester">
           <a href="https://odeonodense.dk/kalender/anne-linnet-danmarks-underholdningsorkester-2025-10-24">
             <img loading="lazy" src="images/2025-10-24 - ODEON - Anne Linnet &amp; Danmarks Underholdnings­orkester.webp"/>
             <h2>Anne Linnet &amp; Danmarks Underholdnings­orkester</h2>
@@ -1613,7 +1633,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="odense metalfest 2025">
           <a href="https://postenlive.dk/event/odense-metalfest-2025/">
             <img loading="lazy" src="images/2025-10-24 - Posten - Odense Metalfest 2025.webp"/>
             <h2>Odense Metalfest 2025</h2>
@@ -1625,7 +1645,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="lørdagsjazz – vært: nathaniel ford">
           <a href="https://dexter.dk/event/lordagsjazz-okt25/">
             <img loading="lazy" src="images/2025-10-25 - Dexter - Lørdagsjazz – Vært Nathaniel Ford.webp"/>
             <h2>Lørdagsjazz – Vært: Nathaniel Ford</h2>
@@ -1637,7 +1657,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="sebastian wolff">
           <a href="https://dexter.dk/event/sebastian-wolff-2/">
             <img loading="lazy" src="images/2025-10-25 - Dexter - Sebastian Wolff.webp"/>
             <h2>Sebastian Wolff</h2>
@@ -1649,7 +1669,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="odense metalfest 2025">
           <a href="https://postenlive.dk/event/odense-metalfest-2025-2/">
             <img loading="lazy" src="images/2025-10-25 - Posten - Odense Metalfest 2025.webp"/>
             <h2>Odense Metalfest 2025</h2>
@@ -1661,7 +1681,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="lykke">
           <a href="https://kulturmaskinen.dk/events/lykke-1">
             <img loading="lazy" src="images/2025-10-25 - Frølageret - Lykke.webp"/>
             <h2>Lykke</h2>
@@ -1673,7 +1693,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="rock´n stones">
           <a href="https://dexter.dk/event/rockn-stones/">
             <img loading="lazy" src="images/2025-10-26 - Dexter - ROCK´N STONES.webp"/>
             <h2>ROCK´N STONES</h2>
@@ -1685,7 +1705,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="popsi og krelle">
           <a href="https://odeonodense.dk/kalender/popsi-og-krelle-2025-10-26">
             <img loading="lazy" src="images/2025-10-26 - ODEON - Popsi og Krelle.webp"/>
             <h2>Popsi og Krelle</h2>
@@ -1697,7 +1717,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="hush i ansgars kirke">
           <a href="https://postenlive.dk/event/hush-i-ansgars-kirke/">
             <img loading="lazy" src="images/2025-10-26 - Posten - Hush i Ansgars Kirke.webp"/>
             <h2>Hush i Ansgars Kirke</h2>
@@ -1709,7 +1729,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="dexter jam">
           <a href="https://dexter.dk/event/dexter-jam-okt2025/">
             <img loading="lazy" src="images/2025-10-27 - Dexter - Dexter Jam.webp"/>
             <h2>Dexter Jam</h2>
@@ -1721,7 +1741,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="rikke thomsen – solo">
           <a href="https://dexter.dk/event/rikke-thomsen-solo-ekstrakoncert/">
             <img loading="lazy" src="images/2025-10-28 - Dexter - Rikke Thomsen – Solo.webp"/>
             <h2>Rikke Thomsen – Solo</h2>
@@ -1733,7 +1753,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="walter trout &amp; friends">
           <a href="https://postenlive.dk/event/walter-trout-friends/">
             <img loading="lazy" src="images/2025-10-28 - Posten - WALTER TROUT &amp; FRIENDS.webp"/>
             <h2>WALTER TROUT &amp; FRIENDS</h2>
@@ -1745,7 +1765,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="rikke thomsen – solo">
           <a href="https://dexter.dk/event/rikke-thomsen-solo/">
             <img loading="lazy" src="images/2025-10-29 - Dexter - Rikke Thomsen – Solo.webp"/>
             <h2>Rikke Thomsen – Solo</h2>
@@ -1757,7 +1777,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="calby">
           <a href="https://postenlive.dk/event/calby-3/">
             <img loading="lazy" src="images/2025-10-29 - Posten - Calby.webp"/>
             <h2>Calby</h2>
@@ -1769,7 +1789,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="kom til bal i odense">
           <a href="https://kulturmaskinen.dk/events/kom-til-bal-i-odense-1">
             <img loading="lazy" src="images/2025-10-29 - Frølageret - Kom til Bal i Odense.webp"/>
             <h2>Kom til Bal i Odense</h2>
@@ -1781,7 +1801,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="dexters musikquiz">
           <a href="https://dexter.dk/event/dexters-musikquiz-okt30/">
             <img loading="lazy" src="images/2025-10-30 - Dexter - DEXTERS Musikquiz.webp"/>
             <h2>DEXTERS Musikquiz</h2>
@@ -1793,7 +1813,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="drømme, længsel og kærlighed">
           <a href="https://odensevaerket.dk/product/30-oktober-droemme-laengsel-og-kaerlighed-entrebillet/">
             <img loading="lazy" src="images/2025-10-30 - Odense Værket - Drømme, Længsel og Kærlighed.webp"/>
             <h2>Drømme, Længsel og Kærlighed</h2>
@@ -1805,7 +1825,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="bænch">
           <a href="https://postenlive.dk/event/baench-2/">
             <img loading="lazy" src="images/2025-10-30 - Posten - BÆNCH.webp"/>
             <h2>BÆNCH</h2>
@@ -1817,7 +1837,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="asger techau">
           <a href="https://kulturmaskinen.dk/events/asger-techau-1">
             <img loading="lazy" src="images/2025-10-30 - Frølageret - Asger Techau.webp"/>
             <h2>Asger Techau</h2>
@@ -1829,7 +1849,19 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="fredagsbar live: anja majbritt duo">
+          <a href="https://dexter.dk/event/fredagsbar-live-maj2/">
+            <img loading="lazy" src="images/2025-10-31 - Dexter - Fredagsbar Live Anja Majbritt duo.webp"/>
+            <h2>Fredagsbar Live: Anja Majbritt duo</h2>
+          </a>
+          <p>
+            Dexter<br>
+            <time datetime="2025-10-31T00:00:00">31. oktober 2025</time><br>
+            Pris: Gratis
+          </p>
+        </article>
+      
+        <article class="concert" data-title="stefan pasborg trio feat. carsten dahl &amp; fredrik lundin">
           <a href="https://dexter.dk/event/stefan-pasborg-trio-feat-carsten-dahl-fredrik-lundin-2/">
             <img loading="lazy" src="images/2025-10-31 - Dexter - Stefan Pasborg Trio feat. Carsten Dahl &amp; Fredrik Lundin.webp"/>
             <h2>Stefan Pasborg Trio feat. Carsten Dahl &amp; Fredrik Lundin</h2>
@@ -1841,7 +1873,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="drømme, længsel og kærlighed">
           <a href="https://odensevaerket.dk/product/31-oktober-droemme-laengsel-og-kaerlighed-entrebillet/">
             <img loading="lazy" src="images/2025-10-31 - Odense Værket - Drømme, Længsel og Kærlighed.webp"/>
             <h2>Drømme, Længsel og Kærlighed</h2>
@@ -1853,7 +1885,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="dj aligator">
           <a href="https://postenlive.dk/event/dj-aligator/">
             <img loading="lazy" src="images/2025-10-31 - Posten - DJ Aligator.webp"/>
             <h2>DJ Aligator</h2>
@@ -1865,7 +1897,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="blaue blume">
           <a href="https://kulturmaskinen.dk/events/blaue-blume-1">
             <img loading="lazy" src="images/2025-10-31 - Magasinet - Blaue Blume.webp"/>
             <h2>Blaue Blume</h2>
@@ -1877,7 +1909,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="rasmus walter – akustisk 2025">
           <a href="https://dexter.dk/event/rasmus-walter-akustisk-2025-2/">
             <img loading="lazy" src="images/2025-11-01 - Dexter - Rasmus Walter – Akustisk 2025.webp"/>
             <h2>Rasmus Walter – Akustisk 2025</h2>
@@ -1889,7 +1921,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="rasmus walter – akustisk 2025">
           <a href="https://dexter.dk/event/rasmus-walter-akustisk-2025/">
             <img loading="lazy" src="images/2025-11-01 - Dexter - Rasmus Walter – Akustisk 2025.webp"/>
             <h2>Rasmus Walter – Akustisk 2025</h2>
@@ -1901,7 +1933,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="pede b">
           <a href="https://postenlive.dk/event/pede-b/">
             <img loading="lazy" src="images/2025-11-01 - Posten - Pede B.webp"/>
             <h2>Pede B</h2>
@@ -1913,7 +1945,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="amy winehouse tribute">
           <a href="https://dexter.dk/event/amy-winehouse-tribute-nov2/">
             <img loading="lazy" src="images/2025-11-02 - Dexter - Amy Winehouse Tribute.webp"/>
             <h2>Amy Winehouse Tribute</h2>
@@ -1925,7 +1957,19 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="jazz jam – vært: johannes mogensen">
+          <a href="https://dexter.dk/event/jazz-jam-nov3/">
+            <img loading="lazy" src="images/2025-11-03 - Dexter - Jazz Jam – Vært Johannes Mogensen.webp"/>
+            <h2>Jazz Jam – Vært: Johannes Mogensen</h2>
+          </a>
+          <p>
+            Dexter<br>
+            <time datetime="2025-11-03T00:00:00">03. november 2025</time><br>
+            Pris: Gratis
+          </p>
+        </article>
+      
+        <article class="concert" data-title="vincentz / downes / christensen / rochford">
           <a href="https://dexter.dk/event/vincentz-downes-christensen-rochford/">
             <img loading="lazy" src="images/2025-11-04 - Dexter - Vincentz  Downes  Christensen  Rochford.webp"/>
             <h2>Vincentz / Downes / Christensen / Rochford</h2>
@@ -1937,7 +1981,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="mille">
           <a href="https://postenlive.dk/event/mille/">
             <img loading="lazy" src="images/2025-11-05 - Posten - Mille.webp"/>
             <h2>Mille</h2>
@@ -1949,7 +1993,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="resonator festival 2025">
           <a href="https://dexter.dk/event/resonator-festival-2025/">
             <img loading="lazy" src="images/2025-11-06 - Dexter - Resonator Festival 2025.webp"/>
             <h2>Resonator Festival 2025</h2>
@@ -1961,7 +2005,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="“ekstra koncert” den danske mafia">
           <a href="https://odensevaerket.dk/product/6-november-ekstra-koncert-den-danske-mafia-entrebillet/">
             <img loading="lazy" src="images/2025-11-06 - Odense Værket - “ekstra koncert” Den Danske Mafia.webp"/>
             <h2>“ekstra koncert” Den Danske Mafia</h2>
@@ -1973,7 +2017,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="resonator festival 2025">
           <a href="https://postenlive.dk/event/resonator-festival-2025/">
             <img loading="lazy" src="images/2025-11-06 - Posten - Resonator Festival 2025.webp"/>
             <h2>Resonator Festival 2025</h2>
@@ -1985,7 +2029,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="resonator festival 2025">
           <a href="https://kulturmaskinen.dk/events/resonator-festival-2025-1">
             <img loading="lazy" src="images/2025-11-06 - Kulturmaskinen - Resonator Festival 2025.webp"/>
             <h2>Resonator Festival 2025</h2>
@@ -1997,7 +2041,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="den danske mafia">
           <a href="https://odensevaerket.dk/product/7-november-den-danske-mafia-entrebillet-2/">
             <img loading="lazy" src="images/2025-11-07 - Odense Værket - Den Danske Mafia.webp"/>
             <h2>Den Danske Mafia</h2>
@@ -2009,7 +2053,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="den danske mafia – vip billet (6 personer)">
           <a href="https://odensevaerket.dk/product/7-november-den-danske-mafia-vip-billet-6-stk/">
             <img loading="lazy" src="images/2025-11-07 - Odense Værket - Den Danske Mafia – VIP billet (6 personer).webp"/>
             <h2>Den Danske Mafia – VIP billet (6 personer)</h2>
@@ -2021,7 +2065,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="mads langer">
           <a href="https://odeonodense.dk/kalender/mads-langer-2025-11-08">
             <img loading="lazy" src="images/2025-11-08 - ODEON - Mads Langer.webp"/>
             <h2>Mads Langer</h2>
@@ -2033,7 +2077,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="odense postorkester">
           <a href="https://odeonodense.dk/kalender/odense-postorkester-2025-11-09">
             <img loading="lazy" src="images/2025-11-09 - ODEON - Odense Postorkester.webp"/>
             <h2>Odense Postorkester</h2>
@@ -2045,7 +2089,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="blue monday blues jam feat. michael vestbo">
           <a href="https://dexter.dk/event/blue-monday-blues-jam-nov25/">
             <img loading="lazy" src="images/2025-11-10 - Dexter - Blue Monday Blues Jam feat. Michael Vestbo.webp"/>
             <h2>Blue Monday Blues Jam feat. Michael Vestbo</h2>
@@ -2057,7 +2101,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="om – original music">
           <a href="https://dexter.dk/event/om-original-music-nov11/">
             <img loading="lazy" src="images/2025-11-11 - Dexter - OM – Original Music.webp"/>
             <h2>OM – Original Music</h2>
@@ -2069,7 +2113,19 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="kassettebåndsmusikquiz">
+          <a href="https://dexter.dk/event/kassettebaandsmusikquiz-nov25/">
+            <img loading="lazy" src="images/2025-11-12 - Dexter - Kassettebåndsmusikquiz.webp"/>
+            <h2>Kassettebåndsmusikquiz</h2>
+          </a>
+          <p>
+            Dexter<br>
+            <time datetime="2025-11-12T00:00:00">12. november 2025</time><br>
+            Pris: Gratis
+          </p>
+        </article>
+      
+        <article class="concert" data-title="jacob aksglæde">
           <a href="https://dexter.dk/event/jacob-aksglaede/">
             <img loading="lazy" src="images/2025-11-13 - Dexter - Jacob Aksglæde.webp"/>
             <h2>Jacob Aksglæde</h2>
@@ -2081,7 +2137,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="lord siva">
           <a href="https://postenlive.dk/event/lord-siva-2/">
             <img loading="lazy" src="images/2025-11-13 - Posten - Lord Siva.webp"/>
             <h2>Lord Siva</h2>
@@ -2093,7 +2149,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="birgitte soojin">
           <a href="https://dexter.dk/event/birgitte-soojin/">
             <img loading="lazy" src="images/2025-11-14 - Dexter - Birgitte Soojin.webp"/>
             <h2>Birgitte Soojin</h2>
@@ -2105,7 +2161,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="anders agger – kærlighed &amp; død">
           <a href="https://odeonodense.dk/kalender/anders-agger-kaerlighed-doed-2025-11-14">
             <img loading="lazy" src="images/2025-11-14 - ODEON - Anders Agger – Kærlighed &amp; Død.webp"/>
             <h2>Anders Agger – Kærlighed &amp; Død</h2>
@@ -2117,7 +2173,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="peter sommer">
           <a href="https://postenlive.dk/event/peter-sommer/">
             <img loading="lazy" src="images/2025-11-14 - Posten - Peter Sommer.webp"/>
             <h2>Peter Sommer</h2>
@@ -2129,7 +2185,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="krog &amp; uglerne">
           <a href="https://dexter.dk/event/krog-uglerne/">
             <img loading="lazy" src="images/2025-11-15 - Dexter - Krog &amp; Uglerne.webp"/>
             <h2>Krog &amp; Uglerne</h2>
@@ -2141,7 +2197,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="kære larsen">
           <a href="https://odeonodense.dk/kalender/kaere-larsen-2025-11-15">
             <img loading="lazy" src="images/2025-11-15 - ODEON - Kære Larsen.webp"/>
             <h2>Kære Larsen</h2>
@@ -2153,7 +2209,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="branco">
           <a href="https://postenlive.dk/event/branco/">
             <img loading="lazy" src="images/2025-11-15 - Posten - Branco.webp"/>
             <h2>Branco</h2>
@@ -2165,7 +2221,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="patina">
           <a href="https://kulturmaskinen.dk/events/patina-1">
             <img loading="lazy" src="images/2025-11-15 - Magasinet - Patina.webp"/>
             <h2>Patina</h2>
@@ -2177,7 +2233,19 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="jazz jam – vært: johannes mogensen">
+          <a href="https://dexter.dk/event/jazz-jam-nov17/">
+            <img loading="lazy" src="images/2025-11-17 - Dexter - Jazz Jam – Vært Johannes Mogensen.webp"/>
+            <h2>Jazz Jam – Vært: Johannes Mogensen</h2>
+          </a>
+          <p>
+            Dexter<br>
+            <time datetime="2025-11-17T00:00:00">17. november 2025</time><br>
+            Pris: Gratis
+          </p>
+        </article>
+      
+        <article class="concert" data-title="brian mørk “endnu længere over grænsen”">
           <a href="https://dexter.dk/event/brian-moerk-endnu-laengere-over-graensen/">
             <img loading="lazy" src="images/2025-11-18 - Dexter - Brian Mørk “Endnu længere over grænsen”.webp"/>
             <h2>Brian Mørk “Endnu længere over grænsen”</h2>
@@ -2189,7 +2257,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="leif sylvester, jarno varsted &amp; h.p. lange">
           <a href="https://dexter.dk/event/leif-sylvester-jarno-varsted-h-p-lange/">
             <img loading="lazy" src="images/2025-11-19 - Dexter - Leif Sylvester, Jarno Varsted &amp; H.P. Lange.webp"/>
             <h2>Leif Sylvester, Jarno Varsted &amp; H.P. Lange</h2>
@@ -2201,7 +2269,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="aretha performed live by miriam mandipira &amp; odense jazz orchestra">
           <a href="https://postenlive.dk/event/aretha-performed-live-by-miriam-mandipira-odense-jazz-orchestra/">
             <img loading="lazy" src="images/2025-11-19 - Posten - ARETHA performed live by Miriam Mandipira &amp; Odense Jazz Orchestra.webp"/>
             <h2>ARETHA performed live by Miriam Mandipira &amp; Odense Jazz Orchestra</h2>
@@ -2213,7 +2281,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="simone tang (duo) + søren manscher (trio)">
           <a href="https://dexter.dk/event/simone-tang-duo-soeren-manscher-trio/">
             <img loading="lazy" src="images/2025-11-20 - Dexter - Simone Tang (duo) + Søren Manscher (trio).webp"/>
             <h2>Simone Tang (duo) + Søren Manscher (trio)</h2>
@@ -2225,7 +2293,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="dederdrenge">
           <a href="https://postenlive.dk/event/dederdrenge/">
             <img loading="lazy" src="images/2025-11-20 - Posten - DeDerDrenge.webp"/>
             <h2>DeDerDrenge</h2>
@@ -2237,7 +2305,19 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="jonah blacksmith">
+          <a href="https://postenlive.dk/event/jonah-blacksmith/">
+            <img loading="lazy" src="images/2025-11-20 - Posten - Jonah Blacksmith.webp"/>
+            <h2>Jonah Blacksmith</h2>
+          </a>
+          <p>
+            Posten<br>
+            <time datetime="2025-11-20T00:00:00">20. november 2025</time><br>
+            Pris: Forsalg 350 kr.
+          </p>
+        </article>
+      
+        <article class="concert" data-title="anya">
           <a href="https://dexter.dk/event/anya/">
             <img loading="lazy" src="images/2025-11-21 - Dexter - ANYA.webp"/>
             <h2>ANYA</h2>
@@ -2249,7 +2329,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="king king (uk)">
           <a href="https://postenlive.dk/event/king-king/">
             <img loading="lazy" src="images/2025-11-21 - Posten - King King (UK).webp"/>
             <h2>King King (UK)</h2>
@@ -2261,7 +2341,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="bal med fionia folk brotehrs">
           <a href="https://kulturmaskinen.dk/events/bal-med-fionia-folk-brotehrs-1">
             <img loading="lazy" src="images/2025-11-21 - Frølageret - Bal med Fionia Folk Brotehrs.webp"/>
             <h2>Bal med Fionia Folk Brotehrs</h2>
@@ -2273,7 +2353,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="tue west m/band">
           <a href="https://dexter.dk/event/tue-west-m-band/">
             <img loading="lazy" src="images/2025-11-22 - Dexter - Tue West mband.webp"/>
             <h2>Tue West m/band</h2>
@@ -2285,7 +2365,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="fräulein">
           <a href="https://postenlive.dk/event/fraulein-2/">
             <img loading="lazy" src="images/2025-11-22 - Posten - Fräulein.webp"/>
             <h2>Fräulein</h2>
@@ -2297,7 +2377,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="mc hansen">
           <a href="https://kulturmaskinen.dk/events/mc-hansen-1">
             <img loading="lazy" src="images/2025-11-22 - Kulturmaskinen - MC Hansen.webp"/>
             <h2>MC Hansen</h2>
@@ -2309,7 +2389,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="under bøgen – 100 % gnags">
           <a href="https://dexter.dk/event/under-boegen-100-gnags/">
             <img loading="lazy" src="images/2025-11-23 - Dexter - UNDER BØGEN – 100 % GNAGS.webp"/>
             <h2>UNDER BØGEN – 100 % GNAGS</h2>
@@ -2321,7 +2401,19 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="dexter jam">
+          <a href="https://dexter.dk/event/dexter-jam-nov25/">
+            <img loading="lazy" src="images/2025-11-24 - Dexter - Dexter Jam.webp"/>
+            <h2>Dexter Jam</h2>
+          </a>
+          <p>
+            Dexter<br>
+            <time datetime="2025-11-24T00:00:00">24. november 2025</time><br>
+            Pris: Gratis
+          </p>
+        </article>
+      
+        <article class="concert" data-title="spain (us)">
           <a href="https://dexter.dk/event/spain-us/">
             <img loading="lazy" src="images/2025-11-25 - Dexter - SPAIN (US).webp"/>
             <h2>SPAIN (US)</h2>
@@ -2333,7 +2425,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="johanna linnea jakobsson">
           <a href="https://dexter.dk/event/johanna-linnea-jakobsson/">
             <img loading="lazy" src="images/2025-11-26 - Dexter - Johanna Linnea Jakobsson.webp"/>
             <h2>Johanna Linnea Jakobsson</h2>
@@ -2345,7 +2437,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="fynboerne - kom til bal">
           <a href="https://kulturmaskinen.dk/events/fynboerne-kom-til-bal-1">
             <img loading="lazy" src="images/2025-11-26 - Frølageret - Fynboerne - Kom til Bal.webp"/>
             <h2>Fynboerne - Kom til Bal</h2>
@@ -2357,7 +2449,19 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="dexters musikquiz">
+          <a href="https://dexter.dk/event/dexters-musikquiz-november25/">
+            <img loading="lazy" src="images/2025-11-27 - Dexter - Dexters Musikquiz.webp"/>
+            <h2>Dexters Musikquiz</h2>
+          </a>
+          <p>
+            Dexter<br>
+            <time datetime="2025-11-27T00:00:00">27. november 2025</time><br>
+            Pris: Gratis
+          </p>
+        </article>
+      
+        <article class="concert" data-title="one-eyed mule">
           <a href="https://dexter.dk/event/one-eyed-mule/">
             <img loading="lazy" src="images/2025-11-28 - Dexter - One-Eyed Mule.webp"/>
             <h2>One-Eyed Mule</h2>
@@ -2369,7 +2473,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="julefrokost 2025">
           <a href="https://grandodense.dk/event-koncert/julefrokost-2025">
             <img loading="lazy" src="images/2025-11-28 - Grand Hotel - Julefrokost 2025.webp"/>
             <h2>Julefrokost 2025</h2>
@@ -2381,7 +2485,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="queen machine – live aid 40 – jubilæumstour">
           <a href="https://liveculture.dk/event/queen-machine-liveaid/">
             <img loading="lazy" src="images/2025-11-28 - Jyske Bank Arena - Queen Machine – LIVE AID 40 – Jubilæumstour.webp"/>
             <h2>Queen Machine – LIVE AID 40 – Jubilæumstour</h2>
@@ -2393,7 +2497,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="yör">
           <a href="https://postenlive.dk/event/yor/">
             <img loading="lazy" src="images/2025-11-28 - Posten - Yör.webp"/>
             <h2>Yör</h2>
@@ -2405,7 +2509,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="sorte plader på strejf">
           <a href="https://dexter.dk/event/sorte-plader-paa-strejf/">
             <img loading="lazy" src="images/2025-11-29 - Dexter - Sorte Plader På Strejf.webp"/>
             <h2>Sorte Plader På Strejf</h2>
@@ -2417,7 +2521,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="pink floyd project">
           <a href="https://postenlive.dk/event/pink-floyd-project/">
             <img loading="lazy" src="images/2025-11-29 - Posten - Pink Floyd Project.webp"/>
             <h2>Pink Floyd Project</h2>
@@ -2429,7 +2533,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="elsked">
           <a href="https://kulturmaskinen.dk/events/elsked-1">
             <img loading="lazy" src="images/2025-11-29 - Frølageret - Elsked.webp"/>
             <h2>Elsked</h2>
@@ -2441,7 +2545,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="henrik ’elvis’ busborg &amp; the devils">
           <a href="https://dexter.dk/event/henrik-elvis-busborg-the-devils-nov30/">
             <img loading="lazy" src="images/2025-11-30 - Dexter - Henrik ’Elvis’ Busborg &amp; the Devils.webp"/>
             <h2>Henrik ’Elvis’ Busborg &amp; the Devils</h2>
@@ -2453,7 +2557,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="luftens helte – det store juleshow">
           <a href="https://odeonodense.dk/kalender/luftens-helte-det-store-juleshow-2025-11-30">
             <img loading="lazy" src="images/2025-11-30 - ODEON - Luftens Helte – Det Store Juleshow.webp"/>
             <h2>Luftens Helte – Det Store Juleshow</h2>
@@ -2465,7 +2569,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="anders blichfeldts juleshow">
           <a href="https://odeonodense.dk/kalender/anders-blichfeldt-2025-12-01">
             <img loading="lazy" src="images/2025-12-01 - ODEON - Anders Blichfeldts Juleshow.webp"/>
             <h2>Anders Blichfeldts Juleshow</h2>
@@ -2477,7 +2581,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="karsten skovgaard trio">
           <a href="https://dexter.dk/event/karsten-skovgaard-trio/">
             <img loading="lazy" src="images/2025-12-04 - Dexter - Karsten Skovgaard Trio.webp"/>
             <h2>Karsten Skovgaard Trio</h2>
@@ -2489,7 +2593,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="pind">
           <a href="https://postenlive.dk/event/pind-2/">
             <img loading="lazy" src="images/2025-12-04 - Posten - Pind.webp"/>
             <h2>Pind</h2>
@@ -2501,7 +2605,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="nashville nights – a very country christmas!">
           <a href="https://dexter.dk/event/nashville-nights-a-very-country-christmas/">
             <img loading="lazy" src="images/2025-12-05 - Dexter - Nashville Nights – A Very Country Christmas!.webp"/>
             <h2>Nashville Nights – A Very Country Christmas!</h2>
@@ -2513,7 +2617,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="fallulah – julekoncert">
           <a href="https://dexter.dk/event/fallulah-julekoncert-2/">
             <img loading="lazy" src="images/2025-12-06 - Dexter - Fallulah – Julekoncert.webp"/>
             <h2>Fallulah – Julekoncert</h2>
@@ -2525,7 +2629,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="bad medicine (it)">
           <a href="https://postenlive.dk/event/bad-medicine-it/">
             <img loading="lazy" src="images/2025-12-06 - Posten - Bad Medicine (IT).webp"/>
             <h2>Bad Medicine (IT)</h2>
@@ -2537,7 +2641,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="henrik ’elvis’ busborg &amp; the devils">
           <a href="https://dexter.dk/event/henrik-elvis-busborg-the-devils-dec7/">
             <img loading="lazy" src="images/2025-12-07 - Dexter - Henrik ’Elvis’ Busborg &amp; the Devils.webp"/>
             <h2>Henrik ’Elvis’ Busborg &amp; the Devils</h2>
@@ -2549,7 +2653,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="årets julekoncert med stig rossen">
           <a href="https://odeonodense.dk/kalender/stig-rossen-2025-12-07">
             <img loading="lazy" src="images/2025-12-07 - ODEON - Årets Julekoncert med Stig Rossen.webp"/>
             <h2>Årets Julekoncert med Stig Rossen</h2>
@@ -2561,7 +2665,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="amazing end of season festival">
           <a href="https://dexter.dk/event/amazing-end-of-season-festival-dec9/">
             <img loading="lazy" src="images/2025-12-09 - Dexter - Amazing end of Season Festival.webp"/>
             <h2>Amazing end of Season Festival</h2>
@@ -2573,7 +2677,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="amazing end of season festival">
           <a href="https://dexter.dk/event/amazing-end-of-season-festival-dec10/">
             <img loading="lazy" src="images/2025-12-10 - Dexter - Amazing end of Season Festival.webp"/>
             <h2>Amazing end of Season Festival</h2>
@@ -2585,7 +2689,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="hymns from nineveh">
           <a href="https://dexter.dk/event/hymns-from-nineveh/">
             <img loading="lazy" src="images/2025-12-11 - Dexter - Hymns From Nineveh.webp"/>
             <h2>Hymns From Nineveh</h2>
@@ -2597,7 +2701,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="burhan g­ og danmarks underholdnings­orkester">
           <a href="https://odeonodense.dk/kalender/burhan-g-og-danmarks-underholdningsorkester-2025-12-11">
             <img loading="lazy" src="images/2025-12-11 - ODEON - Burhan G­ og Danmarks Underholdnings­orkester.webp"/>
             <h2>Burhan G­ og Danmarks Underholdnings­orkester</h2>
@@ -2609,7 +2713,19 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="fyr og flamme – hjem til jul">
+          <a href="https://postenlive.dk/event/fyr-og-flamme-2/">
+            <img loading="lazy" src="images/2025-12-11 - Posten - Fyr Og Flamme – Hjem Til Jul.webp"/>
+            <h2>Fyr Og Flamme – Hjem Til Jul</h2>
+          </a>
+          <p>
+            Posten<br>
+            <time datetime="2025-12-11T00:00:00">11. december 2025</time><br>
+            Pris: Forsalg 280 kr.
+          </p>
+        </article>
+      
+        <article class="concert" data-title="torben steno trio">
           <a href="https://tcbunderground.ticketbutler.io/e/torben-steno-trio/">
             <img loading="lazy" src="images/2025-12-11 - TCB Underground - TORBEN STENO TRIO.webp"/>
             <h2>TORBEN STENO TRIO</h2>
@@ -2621,7 +2737,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="the blue van">
           <a href="https://postenlive.dk/event/the-blue-van/">
             <img loading="lazy" src="images/2025-12-12 - Posten - The Blue Van.webp"/>
             <h2>The Blue Van</h2>
@@ -2633,7 +2749,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="skullclub – ultras piratus 2025">
           <a href="https://postenlive.dk/event/skullclub-ultras-piratus-2025/">
             <img loading="lazy" src="images/2025-12-13 - Posten - Skullclub – Ultras Piratus 2025.webp"/>
             <h2>Skullclub – Ultras Piratus 2025</h2>
@@ -2645,7 +2761,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="sissel kyrkjebø">
           <a href="https://odeonodense.dk/kalender/sissel-kyrkjeboe-2025-12-15">
             <img loading="lazy" src="images/2025-12-15 - ODEON - Sissel Kyrkjebø.webp"/>
             <h2>Sissel Kyrkjebø</h2>
@@ -2657,7 +2773,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="julekoncert med dreamers&#39; circus &amp; charlotte munck">
           <a href="https://kulturmaskinen.dk/events/julekoncert-med-dreamers-circus-charlotte-munck-1">
             <img loading="lazy" src="images/2025-12-17 - Magasinet - Julekoncert med Dreamers&#39; Circus &amp; Charlotte Munck.webp"/>
             <h2>Julekoncert med Dreamers&#39; Circus &amp; Charlotte Munck</h2>
@@ -2669,7 +2785,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="benny jamz">
           <a href="https://postenlive.dk/event/benny-jamz/">
             <img loading="lazy" src="images/2025-12-18 - Posten - Benny Jamz.webp"/>
             <h2>Benny Jamz</h2>
@@ -2681,7 +2797,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="chris grey &amp; the bluespand">
           <a href="https://dexter.dk/event/chris-grey-the-bluespand-2025/">
             <img loading="lazy" src="images/2025-12-19 - Dexter - Chris Grey &amp; The BlueSpand.webp"/>
             <h2>Chris Grey &amp; The BlueSpand</h2>
@@ -2693,7 +2809,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="von dü">
           <a href="https://postenlive.dk/event/von-du-engangsliv/">
             <img loading="lazy" src="images/2025-12-19 - Posten - Von Dü.webp"/>
             <h2>Von Dü</h2>
@@ -2705,7 +2821,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="the bowie tribute">
           <a href="https://dexter.dk/event/the-bowie-tribute-dec20/">
             <img loading="lazy" src="images/2025-12-20 - Dexter - the BOWIE tribute.webp"/>
             <h2>the BOWIE tribute</h2>
@@ -2717,7 +2833,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="back in black">
           <a href="https://postenlive.dk/event/back-in-black/">
             <img loading="lazy" src="images/2025-12-20 - Posten - Back In Black.webp"/>
             <h2>Back In Black</h2>
@@ -2729,7 +2845,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="the bowie tribute">
           <a href="https://dexter.dk/event/the-bowie-tribute-dec21/">
             <img loading="lazy" src="images/2025-12-21 - Dexter - the BOWIE tribute.webp"/>
             <h2>the BOWIE tribute</h2>
@@ -2741,7 +2857,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="the blues brothers souvenir juleshow">
           <a href="https://postenlive.dk/event/the-blues-brothers-souvenir-show-2025/">
             <img loading="lazy" src="images/2025-12-26 - Posten - The Blues Brothers Souvenir JuleShow.webp"/>
             <h2>The Blues Brothers Souvenir JuleShow</h2>
@@ -2753,7 +2869,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="køs">
           <a href="https://dexter.dk/event/koes/">
             <img loading="lazy" src="images/2026-01-08 - Dexter - Køs.webp"/>
             <h2>Køs</h2>
@@ -2765,7 +2881,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="oyama (is)">
           <a href="https://postenlive.dk/event/oyama-is/">
             <img loading="lazy" src="images/2026-01-08 - Posten - Oyama (IS).webp"/>
             <h2>Oyama (IS)</h2>
@@ -2777,7 +2893,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="solsort">
           <a href="https://dexter.dk/event/solsort/">
             <img loading="lazy" src="images/2026-01-09 - Dexter - Solsort.webp"/>
             <h2>Solsort</h2>
@@ -2789,7 +2905,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="svartsot">
           <a href="https://postenlive.dk/event/svartsot/">
             <img loading="lazy" src="images/2026-01-09 - Posten - Svartsot.webp"/>
             <h2>Svartsot</h2>
@@ -2801,7 +2917,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="baal">
           <a href="https://postenlive.dk/event/baal-baalorama-nytaars-extravaganza/">
             <img loading="lazy" src="images/2026-01-15 - Posten - BAAL.webp"/>
             <h2>BAAL</h2>
@@ -2813,7 +2929,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="michelle birkballe &amp; band">
           <a href="https://dexter.dk/event/michelle-birkballe-band/">
             <img loading="lazy" src="images/2026-01-16 - Dexter - Michelle Birkballe &amp; Band.webp"/>
             <h2>Michelle Birkballe &amp; Band</h2>
@@ -2825,7 +2941,21 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="lars lilholt">
+          <a href="https://liveculture.dk/event/lars-lilholt/">
+            <img loading="lazy" src="images/2026-01-16 - Flere venues - LARS LILHOLT.webp"/>
+            <h2>LARS LILHOLT</h2>
+          </a>
+          <p>
+            Flere venues<br>
+            <time datetime="2026-01-16T00:00:00">16. januar 2026</time><br>
+            Pris: 
+							345,-
+						
+          </p>
+        </article>
+      
+        <article class="concert" data-title="tim christensen">
           <a href="https://grandodense.dk/event-koncert/tim-christensen">
             <img loading="lazy" src="images/2026-01-16 - Grand Hotel - Tim Christensen.webp"/>
             <h2>Tim Christensen</h2>
@@ -2837,7 +2967,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="the michael jackson history show">
           <a href="https://odeonodense.dk/kalender/the-michael-jackson-history-show-2026-01-16">
             <img loading="lazy" src="images/2026-01-16 - ODEON - The Michael Jackson HIStory Show.webp"/>
             <h2>The Michael Jackson HIStory Show</h2>
@@ -2849,7 +2979,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="abba waterloo">
           <a href="https://odeonodense.dk/kalender/abba-waterloo-2026-01-17">
             <img loading="lazy" src="images/2026-01-17 - ODEON - ABBA Waterloo.webp"/>
             <h2>ABBA Waterloo</h2>
@@ -2861,7 +2991,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="frankie moreno – elvis for a day">
           <a href="https://odeonodense.dk/kalender/frankie-moreno-elvis-for-a-day-2026-01-18">
             <img loading="lazy" src="images/2026-01-18 - ODEON - Frankie Moreno – Elvis For A Day.webp"/>
             <h2>Frankie Moreno – Elvis For A Day</h2>
@@ -2873,7 +3003,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="paul banks &amp; hp lange">
           <a href="https://dexter.dk/event/paul-banks-hp-lange-2/">
             <img loading="lazy" src="images/2026-01-22 - Dexter - Paul Banks &amp; HP Lange.webp"/>
             <h2>Paul Banks &amp; HP Lange</h2>
@@ -2885,7 +3015,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="stereo mc’s">
           <a href="https://postenlive.dk/event/stereo-mcs/">
             <img loading="lazy" src="images/2026-01-22 - Posten - Stereo MC’s.webp"/>
             <h2>Stereo MC’s</h2>
@@ -2897,7 +3027,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="kiosk">
           <a href="https://dexter.dk/event/kiosk/">
             <img loading="lazy" src="images/2026-01-23 - Dexter - Kiosk.webp"/>
             <h2>Kiosk</h2>
@@ -2909,7 +3039,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="black voices – a tribute">
           <a href="https://odeonodense.dk/kalender/black-voices-a-tribute-2026-01-23">
             <img loading="lazy" src="images/2026-01-23 - ODEON - Black Voices – A Tribute.webp"/>
             <h2>Black Voices – A Tribute</h2>
@@ -2921,7 +3051,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="roben og knud">
           <a href="https://kulturmaskinen.dk/events/roben-og-knud-1">
             <img loading="lazy" src="images/2026-01-23 - Magasinet - Roben og Knud.webp"/>
             <h2>Roben og Knud</h2>
@@ -2933,7 +3063,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="the bootleg beatles">
           <a href="https://odeonodense.dk/kalender/the-bootleg-beatles-2026-01-24">
             <img loading="lazy" src="images/2026-01-24 - ODEON - The Bootleg Beatles.webp"/>
             <h2>The Bootleg Beatles</h2>
@@ -2945,7 +3075,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="izhav (s)">
           <a href="https://dexter.dk/event/izhav-s/">
             <img loading="lazy" src="images/2026-01-28 - Dexter - IZHAV (S).webp"/>
             <h2>IZHAV (S)</h2>
@@ -2957,7 +3087,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="soleima">
           <a href="https://postenlive.dk/event/soleima/">
             <img loading="lazy" src="images/2026-01-29 - Posten - Soleima.webp"/>
             <h2>Soleima</h2>
@@ -2969,7 +3099,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="østen">
           <a href="https://postenlive.dk/event/oesten-2/">
             <img loading="lazy" src="images/2026-01-30 - Posten - Østen.webp"/>
             <h2>Østen</h2>
@@ -2981,7 +3111,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="daniel hoffe – halvt inde">
           <a href="https://dexter.dk/event/daniel-hoffe-halvt-inde/">
             <img loading="lazy" src="images/2026-01-31 - Dexter - Daniel Hoffe – Halvt Inde.webp"/>
             <h2>Daniel Hoffe – Halvt Inde</h2>
@@ -2993,7 +3123,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="gn’r tribute">
           <a href="https://postenlive.dk/event/gnr-tribute-3/">
             <img loading="lazy" src="images/2026-01-31 - Posten - GN’R TRIBUTE.webp"/>
             <h2>GN’R TRIBUTE</h2>
@@ -3005,7 +3135,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="poul halberg powertrio">
           <a href="https://dexter.dk/event/poul-halberg-powertrio-3/">
             <img loading="lazy" src="images/2026-02-05 - Dexter - Poul Halberg Powertrio.webp"/>
             <h2>Poul Halberg Powertrio</h2>
@@ -3017,7 +3147,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="signe svendsen">
           <a href="https://postenlive.dk/event/signe-svendsen-m-band/">
             <img loading="lazy" src="images/2026-02-05 - Posten - Signe Svendsen.webp"/>
             <h2>Signe Svendsen</h2>
@@ -3029,7 +3159,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="jake vaadeland &amp; the sturgeon river boys (ca)">
           <a href="https://dexter.dk/event/jake-vaadeland-the-sturgeon-river-boys/">
             <img loading="lazy" src="images/2026-02-06 - Dexter - JAKE VAADELAND &amp; THE STURGEON RIVER BOYS (CA).webp"/>
             <h2>JAKE VAADELAND &amp; THE STURGEON RIVER BOYS (CA)</h2>
@@ -3041,7 +3171,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="ginne marker">
           <a href="https://postenlive.dk/event/ginne-marker/">
             <img loading="lazy" src="images/2026-02-07 - Posten - Ginne Marker.webp"/>
             <h2>Ginne Marker</h2>
@@ -3053,7 +3183,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="rumours of fleetwood mac">
           <a href="https://odeonodense.dk/kalender/rumours-of-fleetwood-mac-2026-02-08">
             <img loading="lazy" src="images/2026-02-08 - ODEON - Rumours of Fleetwood Mac.webp"/>
             <h2>Rumours of Fleetwood Mac</h2>
@@ -3065,7 +3195,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="danmarks underholdnings­orkester hylder shu-bi-dua">
           <a href="https://odeonodense.dk/kalender/danmarks-underholdningsorkester-hylder-shu-bi-dua-2026-02-15">
             <img loading="lazy" src="images/2026-02-15 - ODEON - Danmarks Underholdnings­orkester hylder Shu-bi-dua.webp"/>
             <h2>Danmarks Underholdnings­orkester hylder Shu-bi-dua</h2>
@@ -3077,7 +3207,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="back to back">
           <a href="https://postenlive.dk/event/back-to-back/">
             <img loading="lazy" src="images/2026-02-20 - Posten - Back to Back.webp"/>
             <h2>Back to Back</h2>
@@ -3089,7 +3219,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="tone of voice orchestra">
           <a href="https://dexter.dk/event/tone-of-voice-orchestra-2/">
             <img loading="lazy" src="images/2026-02-21 - Dexter - Tone Of Voice Orchestra.webp"/>
             <h2>Tone Of Voice Orchestra</h2>
@@ -3101,7 +3231,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="mumle">
           <a href="https://postenlive.dk/event/mumle/">
             <img loading="lazy" src="images/2026-02-21 - Posten - Mumle.webp"/>
             <h2>Mumle</h2>
@@ -3113,7 +3243,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="en fejring af bob marley">
           <a href="https://odeonodense.dk/kalender/en-fejring-af-bob-marley-2026-02-22">
             <img loading="lazy" src="images/2026-02-22 - ODEON - En Fejring af Bob Marley.webp"/>
             <h2>En Fejring af Bob Marley</h2>
@@ -3125,7 +3255,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="baskery (se)">
           <a href="https://dexter.dk/event/baskery-se-feb26/">
             <img loading="lazy" src="images/2026-02-26 - Dexter - Baskery (SE).webp"/>
             <h2>Baskery (SE)</h2>
@@ -3137,7 +3267,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="sorten muld">
           <a href="https://postenlive.dk/event/sorten-muld-3/">
             <img loading="lazy" src="images/2026-02-26 - Posten - Sorten Muld.webp"/>
             <h2>Sorten Muld</h2>
@@ -3149,7 +3279,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="alberte winding">
           <a href="https://odeonodense.dk/kalender/alberte-winding-2026-02-27">
             <img loading="lazy" src="images/2026-02-27 - ODEON - Alberte Winding.webp"/>
             <h2>Alberte Winding</h2>
@@ -3161,7 +3291,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="steffen brandt">
           <a href="https://grandodense.dk/event-koncert/tim-christensen">
             <img loading="lazy" src="images/2026-02-28 - Grand Hotel - Steffen Brandt.webp"/>
             <h2>Steffen Brandt</h2>
@@ -3173,7 +3303,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="night of famous musical 2.0">
           <a href="https://odeonodense.dk/kalender/night-of-famous-musical-2026-03-01">
             <img loading="lazy" src="images/2026-03-01 - ODEON - Night of Famous Musical 2.0.webp"/>
             <h2>Night of Famous Musical 2.0</h2>
@@ -3185,7 +3315,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="søn">
           <a href="https://postenlive.dk/event/soen-2/">
             <img loading="lazy" src="images/2026-03-04 - Posten - Søn.webp"/>
             <h2>Søn</h2>
@@ -3197,7 +3327,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="malte ebert – ekstrakoncert">
           <a href="https://postenlive.dk/event/malte-ebert-ekstrakoncert/">
             <img loading="lazy" src="images/2026-03-05 - Posten - Malte Ebert – Ekstrakoncert.webp"/>
             <h2>Malte Ebert – Ekstrakoncert</h2>
@@ -3209,7 +3339,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="billie and the bell">
           <a href="https://dexter.dk/event/billie-and-the-bell/">
             <img loading="lazy" src="images/2026-03-06 - Dexter - Billie And The Bell.webp"/>
             <h2>Billie And The Bell</h2>
@@ -3221,7 +3351,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="blæst">
           <a href="https://grandodense.dk/event-koncert/bl-st">
             <img loading="lazy" src="images/2026-03-06 - Grand Hotel - BLÆST.webp"/>
             <h2>BLÆST</h2>
@@ -3233,7 +3363,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="malte ebert – live 2026">
           <a href="https://postenlive.dk/event/malte-ebert-live-2026/">
             <img loading="lazy" src="images/2026-03-06 - Posten - Malte Ebert – Live 2026.webp"/>
             <h2>Malte Ebert – Live 2026</h2>
@@ -3245,7 +3375,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="the boyband">
           <a href="https://postenlive.dk/event/the-boyband/">
             <img loading="lazy" src="images/2026-03-07 - Posten - The Boyband.webp"/>
             <h2>The Boyband</h2>
@@ -3257,7 +3387,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="clara schøn">
           <a href="https://dexter.dk/event/clara-schoen/">
             <img loading="lazy" src="images/2026-03-11 - Dexter - Clara Schøn.webp"/>
             <h2>Clara Schøn</h2>
@@ -3269,7 +3399,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="hecchi – feat. the unholy trinity">
           <a href="https://dexter.dk/event/hecchi-feat-the-unholy-trinity/">
             <img loading="lazy" src="images/2026-03-14 - Dexter - Hecchi – feat. The Unholy Trinity.webp"/>
             <h2>Hecchi – feat. The Unholy Trinity</h2>
@@ -3281,7 +3411,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="olesen-olesen">
           <a href="https://dexter.dk/event/olesen-olesen/">
             <img loading="lazy" src="images/2026-03-20 - Dexter - Olesen-Olesen.webp"/>
             <h2>Olesen-Olesen</h2>
@@ -3293,7 +3423,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="skinz">
           <a href="https://postenlive.dk/event/skinz/">
             <img loading="lazy" src="images/2026-03-20 - Posten - SKINZ.webp"/>
             <h2>SKINZ</h2>
@@ -3305,7 +3435,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="nikolaj nørlund">
           <a href="https://dexter.dk/event/nikolaj-noerlund-2/">
             <img loading="lazy" src="images/2026-03-21 - Dexter - Nikolaj Nørlund.webp"/>
             <h2>Nikolaj Nørlund</h2>
@@ -3317,7 +3447,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="dissing, las &amp; cross – spiller bob dylan">
           <a href="https://dexter.dk/event/dissing-las-cross-spiller-bob-dylan/">
             <img loading="lazy" src="images/2026-03-25 - Dexter - Dissing, Las &amp; Cross – spiller Bob Dylan.webp"/>
             <h2>Dissing, Las &amp; Cross – spiller Bob Dylan</h2>
@@ -3329,7 +3459,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="platt-form – koncert tour 2026">
           <a href="https://postenlive.dk/event/platt-form-koncert-tour-2026/">
             <img loading="lazy" src="images/2026-03-25 - Posten - Platt-Form – Koncert tour 2026.webp"/>
             <h2>Platt-Form – Koncert tour 2026</h2>
@@ -3341,7 +3471,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="bogfinkevej">
           <a href="https://postenlive.dk/event/bogfinkevej-2/">
             <img loading="lazy" src="images/2026-03-26 - Posten - Bogfinkevej.webp"/>
             <h2>Bogfinkevej</h2>
@@ -3353,7 +3483,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="søren huss">
           <a href="https://grandodense.dk/event-koncert/s-ren-huss">
             <img loading="lazy" src="images/2026-03-27 - Grand Hotel - Søren Huss.webp"/>
             <h2>Søren Huss</h2>
@@ -3365,7 +3495,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="magtens korridorer">
           <a href="https://odeonodense.dk/kalender/magtens-korridorer-2026-03-27">
             <img loading="lazy" src="images/2026-03-27 - ODEON - Magtens Korridorer.webp"/>
             <h2>Magtens Korridorer</h2>
@@ -3377,7 +3507,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="lauren ruth ward (duo)">
           <a href="https://dexter.dk/event/lauren-ruth-ward-duo/">
             <img loading="lazy" src="images/2026-03-28 - Dexter - Lauren Ruth Ward (duo).webp"/>
             <h2>Lauren Ruth Ward (duo)</h2>
@@ -3389,7 +3519,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="the show – a tribute to abba">
           <a href="https://odeonodense.dk/kalender/the-show-a-tribute-to-abba-2026-03-28">
             <img loading="lazy" src="images/2026-03-28 - ODEON - The Show – A Tribute To ABBA.webp"/>
             <h2>The Show – A Tribute To ABBA</h2>
@@ -3401,7 +3531,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="iris gold">
           <a href="https://postenlive.dk/event/iris-gold/">
             <img loading="lazy" src="images/2026-04-02 - Posten - Iris Gold.webp"/>
             <h2>Iris Gold</h2>
@@ -3413,7 +3543,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="martin kanstrup – ”en bette show”">
           <a href="https://postenlive.dk/event/martin-kanstrup-en-bette-show-2/">
             <img loading="lazy" src="images/2026-04-11 - Posten - Martin Kanstrup – ”EN BETTE SHOW”.webp"/>
             <h2>Martin Kanstrup – ”EN BETTE SHOW”</h2>
@@ -3425,7 +3555,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="moi caprice">
           <a href="https://postenlive.dk/event/moi-caprice/">
             <img loading="lazy" src="images/2026-04-18 - Posten - moi Caprice.webp"/>
             <h2>moi Caprice</h2>
@@ -3437,7 +3567,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="rasmus nøhr">
           <a href="https://dexter.dk/event/rasmus-noehr/">
             <img loading="lazy" src="images/2026-04-23 - Dexter - Rasmus Nøhr.webp"/>
             <h2>Rasmus Nøhr</h2>
@@ -3449,7 +3579,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="metalized tour 2026">
           <a href="https://postenlive.dk/event/metalized-tour-2026/">
             <img loading="lazy" src="images/2026-04-24 - Posten - METALIZED TOUR 2026.webp"/>
             <h2>METALIZED TOUR 2026</h2>
@@ -3461,7 +3591,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="12 tenors">
           <a href="https://odeonodense.dk/kalender/12-tenors-2026-04-25">
             <img loading="lazy" src="images/2026-04-25 - ODEON - 12 Tenors.webp"/>
             <h2>12 Tenors</h2>
@@ -3473,7 +3603,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="southern avenue (us)">
           <a href="https://dexter.dk/event/southern-avenue-us/">
             <img loading="lazy" src="images/2026-04-28 - Dexter - Southern Avenue (US).webp"/>
             <h2>Southern Avenue (US)</h2>
@@ -3485,7 +3615,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="spjustfrost">
           <a href="https://dexter.dk/event/spjustfrost-2/">
             <img loading="lazy" src="images/2026-05-06 - Dexter - SPJustFrost.webp"/>
             <h2>SPJustFrost</h2>
@@ -3497,7 +3627,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="michel belli">
           <a href="https://kulturmaskinen.dk/events/michel-belli-1-1">
             <img loading="lazy" src="images/2026-05-13 - Magasinet - Michel Belli.webp"/>
             <h2>Michel Belli</h2>
@@ -3509,7 +3639,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="simon &amp; garfunkel tribute">
           <a href="https://kulturmaskinen.dk/events/simon-garfunkel-tribute-1">
             <img loading="lazy" src="images/2026-05-20 - Magasinet - Simon &amp; Garfunkel Tribute.webp"/>
             <h2>Simon &amp; Garfunkel Tribute</h2>
@@ -3521,7 +3651,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="the bluesbones (be)">
           <a href="https://dexter.dk/event/the-bluesbones-be/">
             <img loading="lazy" src="images/2026-05-22 - Dexter - The BluesBones (BE).webp"/>
             <h2>The BluesBones (BE)</h2>
@@ -3533,7 +3663,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="olympen live ’26">
           <a href="https://liveculture.dk/olympen/olympen-live-26">
             <img loading="lazy" src="images/2026-08-22 - Olympen - Olympen Live ’26.webp"/>
             <h2>Olympen Live ’26</h2>
@@ -3545,7 +3675,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="høj sol over århus">
           <a href="https://kulturmaskinen.dk/events/hoj-sol-over-arhus-1">
             <img loading="lazy" src="images/2026-09-17 - Magasinet - Høj sol over Århus.webp"/>
             <h2>Høj sol over Århus</h2>
@@ -3557,7 +3687,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="høj sol over århus">
           <a href="https://kulturmaskinen.dk/events/hoj-sol-over-arhus-1-1">
             <img loading="lazy" src="images/2026-09-18 - Magasinet - Høj sol over Århus.webp"/>
             <h2>Høj sol over Århus</h2>
@@ -3569,7 +3699,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="høj sol over århus">
           <a href="https://kulturmaskinen.dk/events/hoj-sol-over-arhus-1-2">
             <img loading="lazy" src="images/2026-09-19 - Magasinet - Høj sol over Århus.webp"/>
             <h2>Høj sol over Århus</h2>
@@ -3581,7 +3711,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="høj sol over århus">
           <a href="https://kulturmaskinen.dk/events/hoj-sol-over-arhus-1-3">
             <img loading="lazy" src="images/2026-09-19 - Magasinet - Høj sol over Århus.webp"/>
             <h2>Høj sol over Århus</h2>
@@ -3593,7 +3723,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="trine therkelsen">
           <a href="https://grandodense.dk/event-koncert/trine-therkelsen">
             <img loading="lazy" src="images/2026-10-02 - Grand Hotel - Trine Therkelsen.webp"/>
             <h2>Trine Therkelsen</h2>
@@ -3605,7 +3735,7 @@
           </p>
         </article>
       
-        <article class="concert">
+        <article class="concert" data-title="alex vargas">
           <a href="https://postenlive.dk/event/alex-vargas/">
             <img loading="lazy" src="images/2026-10-31 - Posten - Alex Vargas.webp"/>
             <h2>Alex Vargas</h2>
