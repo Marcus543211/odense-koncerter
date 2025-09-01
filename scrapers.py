@@ -6,7 +6,7 @@ from datetime import datetime
 import requests
 from bs4 import BeautifulSoup
 
-from concert import Concert
+from concert import Concert, load_concerts
 
 
 locale.setlocale(locale.LC_ALL, "da_DK.utf8")
@@ -185,7 +185,11 @@ def liveculture() -> list[Concert]:
         # Koncerter fra Odeon hentes seperat.
         if venue == "ODEON":
             continue
-        price = event.select(".ticketButton__time")[0].string
+        try:
+            price = event.select(".ticketButton__time")[0].string
+        except IndexError:
+            # Af en eller anden grund manglede en koncert en pris...
+            price = "???"
         # Nogle koncerter skal man vælge tidspunkt. For dem findes prisen andensteds.
         if ":" in price:
             price = event.select_one(".boxtitle__pricing__amount").string
