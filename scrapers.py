@@ -1,70 +1,15 @@
-import io
-import json
 import locale
 import re
 import urllib.parse
-from dataclasses import dataclass, asdict
 from datetime import datetime
-from pathlib import Path
-from pprint import pprint
 
 import requests
 from bs4 import BeautifulSoup
-from jinja2 import Environment, PackageLoader, select_autoescape
-from PIL import Image
 
-
-# MUST BE RUN IN SAME DIRECTORY AS THIS FILE
-
-
-# TODO
-# - Genrer ville være fedt
-# - Black-list til alt som ikke er koncerter (som systemet ikke fanger selv)
-# - Gør så man kan køre programmet fra andre mapper end den filen er i
-# - Brug tråde til at lave miniaturer (thumbnails)
-# - En attribut der fortæller om koncerter er udsolgte?
-# - Nogle steder er der ikke år med i datoen, her antager jeg at det er i år
-#   men det kunne også være at det var næste år...
-# - En side der lister festivaler i Odense?
-# - Links til/En side til de forskellige spillesteder?
-# - Nashville nights??
+from concert import Concert
 
 
 locale.setlocale(locale.LC_ALL, "da_DK.utf8")
-
-
-@dataclass
-class Concert:
-    title: str
-    venue: str  # Måske en enum
-    date: datetime
-    price: str  # Eller int?
-    desc: str  # Beskrivelse hvis den eksisterer
-    img_url: str
-    url: str
-
-    @classmethod
-    def from_json(cls, json: dict):
-        # Behold alt men parse datoen til en datetime
-        concert = json | {"date": datetime.fromisoformat(json["date"])}
-        return cls(**concert)
-
-    def as_json(self) -> dict:
-        # JSONen kan ikke indeholde en datetime så erstat med streng
-        return asdict(self) | {"date": self.date.isoformat()}
-
-
-def load_concerts(file):
-    """Læs koncerter fra JSON fil."""
-    concerts_json = json.load(file)
-    concerts = [Concert.from_json(c) for c in concerts_json]
-    return concerts
-
-
-def dump_concerts(concerts: list[Concert], file):
-    """Skriv koncerter til JSON fil."""
-    concerts_json = [concert.as_json() for concert in concerts]
-    json.dump(concerts_json, file)
 
 
 re_srcset = re.compile(r"([^ ,]+)(?: (\d+)[wx])?")
@@ -417,74 +362,4 @@ def all_concerts() -> list[Concert]:
         if c.date.date() < today:
             print(f"WARN: {c.title} is an outdated concert")
     return concerts
-
-
-def get_image(url) -> Image:
-    """Hent billede fra URL."""
-    r = requests.get(url, stream=True)
-    f = io.BytesIO(r.content)
-    return Image.open(f)
-
-
-def make_thumbnail(concert: Concert) -> str:
-    """Hent koncertens billede og gem optimeret miniature. Returner ny URL."""
-    name = f"{concert.date.date()} - {concert.venue} - {concert.title}.webp"
-    # Fjern alle tegn der ikke må være i filnavne
-    escaped_name = name.translate(str.maketrans("", "", "<>:\"/\\|?*"))
-    path = Path("images") / escaped_name
-    if not path.exists():
-        img = get_image(concert.img_url)
-        if img.width < 768:
-            print(f"WARN: Image < 768px, {name}")
-        if img.width < img.height:
-            print(f"WARN: Portrait image, {name}")
-        img.thumbnail((768, 768))
-        img.save(path, "WebP", lossless=False, quality=80)
-    return str(path)
-
-
-def make_thumbnails(concerts: list[Concert]):
-    """Lav miniature til koncerterne og opdater billede-URL'erne."""
-    print("Laver thumbnails...")
-    for concert in concerts:
-        img_url = make_thumbnail(concert)
-        concert.img_url = img_url
-    print("Færdig med thumbnails!")
-
-
-def make_html(out_path, concerts: list[Concert]):
-    """Lav en side med de givne koncerter og gem ved stien."""
-    print("Udskriver siden...")
-    env = Environment(
-        loader=PackageLoader("odense-koncerter"),
-        autoescape=select_autoescape()
-    )
-    template = env.get_template("index.html")
-    now = datetime.now()
-    with open(out_path, "w") as file:
-        file.write(template.render(now=now, concerts=concerts))
-    print("Færdig! Siden er udskrevet til", out_path)
-
-
-def save_concerts(out_path, concerts: list[Concert]):
-    """Gem koncerterne som JSON ved stien."""
-    print("Gemmer som JSON...")
-    with open(out_path, "w") as file:
-        dump_concerts(concerts, file)
-    print("Færdig! Koncerterne er gemt")
-
-
-def main():
-    concerts = all_concerts()
-    print()
-    # Gemmer før thumbnails for at gemme de oprindelige URL'er til billederne.
-    save_concerts("concerts.json", concerts)
-    print()
-    make_thumbnails(concerts)
-    print()
-    make_html("index.html", concerts)
-
-
-if __name__ == "__main__":
-    main()
 
