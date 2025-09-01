@@ -322,6 +322,31 @@ def vearket() -> list[Concert]:
     return concerts
 
 
+def studenterhuset() -> list[Concert]:
+    """Hent alle koncerter fra Studenterhus Odense."""
+    # Vælg rigtig arrangør og kun musik
+    data = {"pagenum":0, "ytfiltercategories": "2", "ytfiltercity": "",
+            "ytfilterdate": "", "ytfiltersearch": "", "ytfilterarrid": "671"}
+    # Man SKAL have de rigtige headers eller vil den ikke gøre noget...
+    headers = {"origin": "https://www.yourticket.dk", "referer": "https://www.yourtickets.dk",
+               "key": "3-9D8DC9C1-576A-4727-890C-5F140E4D03F5"}
+    r = requests.post("https://publicapi.yourticket.dk/Events/GetEventsForOverview",
+                      headers=headers, json=data)
+    concerts = []
+    for event in r.json():
+        title = event["Name"].removesuffix(" // Studenterhus Odense")
+        date_str = event["StartDate"]
+        date = datetime.strptime(date_str, "%d. %B %Y kl. %H:%M")
+        venue = "Studenterhus Odense"
+        desc = event["ShortDescription"]
+        img_url = event["Image"]
+        url = "https://www.yourticket.dk" + event["YTRoute"]
+        price = event["FromPrice"]
+        concert = Concert(title, venue, date, price, desc, img_url, url)
+        concerts.append(concert)
+    return concerts
+
+
 def extra() -> list[Concert]:
     """Indlæser de ekstra manuelt indstastede koncerter."""
     try:
@@ -357,6 +382,8 @@ def all_concerts() -> list[Concert]:
     concerts.extend(tcbunderground())
     print("... fra Odense Værket")
     concerts.extend(vearket())
+    print("... fra Studenterhus Odense")
+    concerts.extend(studenterhuset())
     print("... fra ekstralisten")
     concerts.extend(extra())
     print(f"Alle koncerter er hentet ({len(concerts)})")
