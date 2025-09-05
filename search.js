@@ -1,14 +1,13 @@
-const searchForm = document.getElementById("search");
-searchForm.addEventListener("submit", search);
+const searchField = document.getElementById("search");
+searchField.addEventListener("input", search);
 
 const concerts2 = document.getElementsByClassName("concert");
 
 function search(event) {
-  event.preventDefault();
-  const text = event.target[0].value.toLowerCase();
+  const text = searchField.value.toLowerCase();
   for (const concert of concerts2) {
     const title = concert.getAttribute("data-title");
-    const hasText = title.includes(text);
-    concert.hidden = !hasText;
+    const isMatch = title.includes(text);
+    concert.hidden = !isMatch;
   }
 }
