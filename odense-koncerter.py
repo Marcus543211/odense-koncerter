@@ -64,6 +64,11 @@ def make_thumbnails(concerts: list[Concert]):
     print("Færdig med thumbnails!")
 
 
+def format_price(f: float) -> str:
+    format_str = "%i" if f.is_integer() else "%.2f"
+    return locale.format_string(format_str, f, grouping=True) + " kr."
+
+
 def make_html(out_path, concerts: list[Concert]):
     """Lav en side med de givne koncerter og gem ved stien."""
     print("Udskriver siden...")
@@ -71,6 +76,7 @@ def make_html(out_path, concerts: list[Concert]):
         loader=PackageLoader("odense-koncerter"),
         autoescape=select_autoescape()
     )
+    env.globals["format_price"] = format_price
     template = env.get_template("index.html")
     now = datetime.now()
     with open(out_path, "w") as file:

@@ -1,12 +1,12 @@
 <!doctype html>
 <html lang="da">
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="color-scheme" content="light dark">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark" />
 
     <title>Koncerter i Odense!</title>
-    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
 
     <style>
       .concertList {
@@ -23,12 +23,12 @@
         width: 100%;
         height: 220px;
         object-fit: cover;
-	object-position: center top;
+        object-position: center top;
         margin-bottom: 12px;
       }
     </style>
     <!-- Måske normalize.css og selvlavet CSS i stedet for pico -->
-    <link rel="stylesheet" href="pico.indigo.min.css">
+    <link rel="stylesheet" href="pico.indigo.min.css" />
 
     <script src="hideOldConcerts.js" defer></script>
     <script src="search.js" defer></script>
@@ -50,13 +50,21 @@
       {% for concert in concerts %}
         <article class="concert" data-title="{{ concert.title.lower() }}">
           <a href="{{ concert.url }}">
-            <img loading="lazy" src="{{ concert.img_url }}"/>
+            <img loading="lazy" src="{{ concert.img_url }}" />
             <h2>{{ concert.title }}</h2>
           </a>
           <p>
-            {{ concert.venue }}<br>
-            <time datetime="{{ concert.date.isoformat() }}">{{ concert.date.strftime("%d. %B %Y") }}</time><br>
-            Pris: {{ concert.price }}
+            <time datetime="{{ concert.date.isoformat() }}">{{ concert.date.strftime("%d. %B %Y") }}</time>
+            <br />
+            {{ concert.venue }}
+            <br />
+            {% if concert.price is none %}
+            Prisen mangler
+            {% elif concert.price == 0 %}
+            Gratis
+            {% else %}
+            {{ format_price(concert.price) }}
+            {% endif %}
           </p>
         </article>
       {% endfor %}

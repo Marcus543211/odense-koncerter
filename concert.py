@@ -8,7 +8,7 @@ class Concert:
     title: str
     venue: str  # Måske en enum
     date: datetime
-    price: str  # Eller int?
+    price: int | None
     desc: str  # Beskrivelse hvis den eksisterer
     img_url: str
     url: str

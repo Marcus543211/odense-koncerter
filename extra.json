@@ -3,7 +3,7 @@
         "title": "Caper Clowns + Spygenius + Slow Motion Film",
         "venue": "Storms",
         "date": "2025-08-15T19:00:00",
-        "price": "Gratis",
+        "price": 0,
         "desc": "",
         "img_url": "https://stormspakhus.dk/wp-content/uploads/2025/07/77786_image_528221670_1153770083452099_7085043642824150628_n.jpg",
         "url": "https://stormspakhus.dk/event/caper-clowns-spygenius-slow-motion-film/"
@@ -12,7 +12,7 @@
         "title": "Ord & Lyd: Laura Ziani + Poetisk Support",
         "venue": "Studenterhus Odense",
         "date": "2025-08-15T21:00:00",
-        "price": "150 kr.",
+        "price": 150,
         "desc": "",
         "img_url": "https://www.hcafestivals.dk/media/pvgpmtir/ord-lyd-laura-ziani.png",
         "url": "https://www.hcafestivals.dk/program/ord-lyd-laura-ziani-plus-poetisk-support-4063/"
@@ -21,7 +21,7 @@
         "title": "Ord & Lyd: Asbjørn Solo + Poetisk Support",
         "venue": "Studenterhus Odense",
         "date": "2025-08-16T20:00:00",
-        "price": "150 kr.",
+        "price": 150,
         "desc": "",
         "img_url": "https://www.hcafestivals.dk/media/z5dl5wnz/ord-lyd-asbjoern-credit-sebastian-thorsted-2.jpg",
         "url": "https://www.hcafestivals.dk/program/ord-lyd-asbjoern-solo-plus-poetisk-support-4071/"
@@ -30,7 +30,7 @@
         "title": "Renay",
         "venue": "Munke Mose",
         "date": "2025-08-20T17:00:00",
-        "price": "Gratis",
+        "price": 0,
         "desc": "",
         "img_url": "https://www.hcafestivals.dk/media/iwyjnfeq/image0.jpeg",
         "url": "https://www.hcafestivals.dk/program/renay-3892/"
@@ -39,7 +39,7 @@
         "title": "Sofie1998",
         "venue": "Amfiscenen",
         "date": "2025-08-20T19:00:00",
-        "price": "Gratis",
+        "price": 0,
         "desc": "",
         "img_url": "https://www.hcafestivals.dk/media/iszpwpc4/sofie1998_september2024_dsc8505.jpg",
         "url": "https://www.hcafestivals.dk/program/sofie1998-3622/"
@@ -48,7 +48,7 @@
         "title": "Freja Kirk",
         "venue": "Amfiscenen",
         "date": "2025-08-20T21:00:00",
-        "price": "Gratis",
+        "price": 0,
         "desc": "",
         "img_url": "https://www.hcafestivals.dk/media/xu4hg5sc/frejakirk_booking.jpg",
         "url": "https://www.hcafestivals.dk/program/freja-kirk-3625/"
@@ -57,7 +57,7 @@
         "title": "Anette Bojsen",
         "venue": "Munke Mose",
         "date": "2025-08-21T17:30:00",
-        "price": "Gratis",
+        "price": 0,
         "desc": "",
         "img_url": "https://www.hcafestivals.dk/media/5jhfedv2/anette_bojsen_2025-1.png",
         "url": "https://www.hcafestivals.dk/program/anette-bojsen-3898/"
@@ -66,7 +66,7 @@
         "title": "Peter Sommer & Palle Hjorth",
         "venue": "Amfiscenen",
         "date": "2025-08-21T21:00:00",
-        "price": "Gratis",
+        "price": 0,
         "desc": "",
         "img_url": "https://www.hcafestivals.dk/media/lakkousm/petersommer_pressefoto_cred-soeren-lynggaard.jpg",
         "url": "https://www.hcafestivals.dk/program/peter-sommer-palle-hjorth-3675/"
@@ -75,7 +75,7 @@
         "title": "Jumpin' Jacks",
         "venue": "Munke Mose",
         "date": "2025-08-22T17:00:00",
-        "price": "Gratis",
+        "price": 0,
         "desc": "",
         "img_url": "https://www.hcafestivals.dk/media/r2pmdlwu/jumpin-jacks-pressebillede-01.png",
         "url": "https://www.hcafestivals.dk/program/jumpin-jacks-3901/"
@@ -84,7 +84,7 @@
         "title": "ABSURD",
         "venue": "Amfiscenen",
         "date": "2025-08-22T22:15:00",
-        "price": "Gratis",
+        "price": 0,
         "desc": "",
         "img_url": "https://www.hcafestivals.dk/media/kewcbmsv/absurd_a3_pr_hori.jpg",
         "url": "https://www.hcafestivals.dk/program/absurd-3631/"
@@ -93,7 +93,7 @@
         "title": "Bastian da Cruz",
         "venue": "Munke Mose",
         "date": "2025-08-23T17:00:00",
-        "price": "Gratis",
+        "price": 0,
         "desc": "",
         "img_url": "https://www.hcafestivals.dk/media/yusmo1xr/photographer-francesca-ludikar-band-godsmack-nashville-tn-vibez-tour-02-27-24-39-1.jpg",
         "url": "https://www.hcafestivals.dk/program/bastian-da-cruz-3910/"
@@ -102,7 +102,7 @@
         "title": "Ord & Lyd: Kryd + Uden Ord + Poetisk Support",
         "venue": "Studenterhus Odense",
         "date": "2025-08-23T21:00:00",
-        "price": "160 kr.",
+        "price": 160,
         "desc": "",
         "img_url": "https://www.hcafestivals.dk/media/od0hk2js/kryd_ep_pressebilleder.jpg",
         "url": "https://www.hcafestivals.dk/program/ord-lyd-kryd-plus-uden-ord-plus-poetisk-support-4100/"
@@ -111,7 +111,7 @@
         "title": "Odense Jazz Orchestra & Signe Juhl fortolker Beach Boys’ ikoniske album",
         "venue": "Amfiscenen",
         "date": "2025-08-28T19:00:00",
-        "price": "Gratis",
+        "price": 0,
         "desc": "",
         "img_url": "https://tickets.filmfestival.dk/storage/files/TT0Cj2Md8a6Qm3TpqVGCiAAwC3iqWJQ5VO3e57yJ.jpg",
         "url": "https://filmfestival.dk/events/odense-jazz-orchestra-signe-juhl-fortolker-beach-boys-ikoniske-album/"

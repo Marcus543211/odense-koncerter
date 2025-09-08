@@ -14,6 +14,8 @@ locale.setlocale(locale.LC_ALL, "da_DK.utf8")
 
 re_srcset = re.compile(r"([^ ,]+)(?: (\d+)[wx])?")
 
+re_num = re.compile(r"\d+")
+
 
 def best_from_srcset(srcset: str) -> str:
     """Returner URL til det bedste billede i srcset."""
@@ -29,6 +31,18 @@ def best_from_img(img) -> str:
     if not img.has_attr("srcset"):
         return img["src"]
     return best_from_srcset(img["srcset"])
+
+
+def get_price(s: str) -> int:
+    """Udvinder prisen fra prisskilt fx "1.295,00 kr"."""
+    s = s.lower()
+    if "gratis" in s:
+        return 0.0
+    if "udsolgt" in s:
+        return None
+    c_s = locale.delocalize(s)
+    price = re_num.search(c_s).group()
+    return int(price)
 
 
 def storms() -> list[Concert]:
@@ -48,8 +62,8 @@ def storms() -> list[Concert]:
         # Året tilføjes til datoen så den kan parses korrekt.
         date = datetime.strptime(f"{current_year};{date_str}",
                                  "%Y;%B %d @ %H:%M")
-        venue = "Storms"
-        price = "Gratis"
+        venue = "Storms Pakhus"
+        price = 0
         desc = event.find(class_="fl-post-feed-content").p.string
         img_url = best_from_img(event.find(class_="fl-post-feed-image").a.img)
         url = event.find(class_="fl-post-feed-title").a["href"]
@@ -96,7 +110,7 @@ def posten() -> list[Concert]:
         date_str = goop.select_one("div div:nth-of-type(3) div").string.strip()
         date = datetime.strptime(date_str, "%d. %B %Y")
         venue = "Posten"
-        price = goop.select_one("div div:nth-of-type(4) span").string.strip()
+        price = get_price(goop.select_one("div div:nth-of-type(4) span").string)
         desc = goop.select_one("div div:nth-of-type(2)").string.strip()
         img_url = best_from_img(event.find(class_="breakdance-image-object"))
         url = event.div.a["href"]
@@ -121,7 +135,7 @@ def dexter() -> list[Concert]:
         date_str = goop.select_one("div div:nth-of-type(2) div").string.strip()
         date = datetime.strptime(date_str, "%d. %B %Y")
         venue = "Dexter"
-        price = goop.select_one("div div:nth-of-type(3) span").string.strip()
+        price = get_price(goop.select_one("div div:nth-of-type(3) span").string)
         desc = goop.select_one("div div:nth-of-type(1)").string.strip()
         img_url = best_from_img(event.find(class_="breakdance-image-object"))
         url = event.div.a["href"]
@@ -186,13 +200,15 @@ def liveculture() -> list[Concert]:
         if venue == "ODEON":
             continue
         try:
-            price = event.select(".ticketButton__time")[0].string
+            price_tag = event.select(".ticketButton__time")[0].string
         except IndexError:
             # Af en eller anden grund manglede en koncert en pris...
-            price = "???"
-        # Nogle koncerter skal man vælge tidspunkt. For dem findes prisen andensteds.
-        if ":" in price:
-            price = event.select_one(".boxtitle__pricing__amount").string
+            price = None
+        finally:
+            # Nogle koncerter skal man vælge tidspunkt. Der er prisen et andet sted.
+            if ":" in price_tag:
+                price_tag = event.select_one(".boxtitle__pricing__amount").string
+            price = get_price(price_tag)
         desc = event.select_one(".singleBoxCity").string
         img_url = best_from_srcset(event.select_one("a > .cover")["data-srcset"])
         url = event.a["href"]
@@ -225,7 +241,7 @@ def odeon() -> list[Concert]:
         # Hent koncertsiden for at finde prisen
         pr = requests.get(url)
         psoup = BeautifulSoup(pr.text, features="lxml")
-        price = next(psoup.select_one(".mt-8").strings).strip()
+        price = get_price(next(psoup.select_one(".mt-8").strings))
         concert = Concert(title, venue, date, price, desc, img_url, url)
         concerts.append(concert)
     return concerts
@@ -259,7 +275,7 @@ def grandhotel() -> list[Concert]:
         img_url = best_from_img(event.img)
         url = "https://grandodense.dk" + event.a["href"]
         # Hent koncertsiden for at finde prisen
-        price = event.find(string=re_price)
+        price = get_price(event.find(string=re_price))
         concert = Concert(title, venue, date, price, desc, img_url, url)
         concerts.append(concert)
     return concerts
@@ -313,10 +329,9 @@ def vearket() -> list[Concert]:
         desc = ""
         img_url = best_from_img(event.img)
         url = event.select_one(".woocommerce-LoopProduct-link")["href"]
-        if event.select_one(".berocket_better_labels") is not None:
-            price = "Udsolgt"
-        else:
-            price = event.select_one(".price").text
+        # Her kan jeg se om koncerten er udsolgt.
+        #if event.select_one(".berocket_better_labels") is not None:
+        price = get_price(event.select_one(".price").text)
         concert = Concert(title, venue, date, price, desc, img_url, url)
         concerts.append(concert)
     return concerts
