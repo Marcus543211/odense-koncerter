@@ -9,6 +9,7 @@ class Concert:
     venue: str  # Måske en enum
     date: datetime
     price: int | None
+    sold_out: bool
     desc: str  # Beskrivelse hvis den eksisterer
     img_url: str
     url: str

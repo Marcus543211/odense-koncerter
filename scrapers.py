@@ -64,10 +64,11 @@ def storms() -> list[Concert]:
                                  "%Y;%B %d @ %H:%M")
         venue = "Storms Pakhus"
         price = 0
+        sold_out = False
         desc = event.find(class_="fl-post-feed-content").p.string
         img_url = best_from_img(event.find(class_="fl-post-feed-image").a.img)
         url = event.find(class_="fl-post-feed-title").a["href"]
-        concert = Concert(title, venue, date, price, desc, img_url, url)
+        concert = Concert(title, venue, date, price, sold_out, desc, img_url, url)
         concerts.append(concert)
     return concerts
 
@@ -110,11 +111,13 @@ def posten() -> list[Concert]:
         date_str = goop.select_one("div div:nth-of-type(3) div").string.strip()
         date = datetime.strptime(date_str, "%d. %B %Y")
         venue = "Posten"
-        price = get_price(goop.select_one("div div:nth-of-type(4) span").string)
+        price_tag = goop.select_one("div div:nth-of-type(4) span").string
+        price = get_price(price_tag)
+        sold_out = "udsolgt" in price_tag.lower()
         desc = goop.select_one("div div:nth-of-type(2)").string.strip()
         img_url = best_from_img(event.find(class_="breakdance-image-object"))
         url = event.div.a["href"]
-        concert = Concert(title, venue, date, price, desc, img_url, url)
+        concert = Concert(title, venue, date, price, sold_out, desc, img_url, url)
         concerts.append(concert)
     return concerts
 
@@ -135,11 +138,13 @@ def dexter() -> list[Concert]:
         date_str = goop.select_one("div div:nth-of-type(2) div").string.strip()
         date = datetime.strptime(date_str, "%d. %B %Y")
         venue = "Dexter"
-        price = get_price(goop.select_one("div div:nth-of-type(3) span").string)
+        price_tag = goop.select_one("div div:nth-of-type(3) span").string
+        price = get_price(price_tag)
+        sold_out = "udsolgt" in price_tag.lower()
         desc = goop.select_one("div div:nth-of-type(1)").string.strip()
         img_url = best_from_img(event.find(class_="breakdance-image-object"))
         url = event.div.a["href"]
-        concert = Concert(title, venue, date, price, desc, img_url, url)
+        concert = Concert(title, venue, date, price, sold_out, desc, img_url, url)
         concerts.append(concert)
     return concerts
 
@@ -169,10 +174,12 @@ def kulturmaskinen() -> list[Concert]:
         date = datetime.fromisoformat(date_str)
         venue = event["properties"]["promoter"]["nodeName"]
         price = event["properties"]["billetten_data"]["shows"][0]["prices"][0]["min_price"]
+        # Availability, 1 = udsolgt, 2 = få billetter, 3 = masser af billetter
+        sold_out = event["properties"]["billetten_data"]["shows"][0]["availability"] == 1
         desc = event["properties"]["billetten_data"]["event_notes"]
         img_url = event["properties"]["billetten_data"]["event_images"]["large"]
         url = "https://kulturmaskinen.dk/events/" + event["urlSegment"]
-        concert = Concert(title, venue, date, price, desc, img_url, url)
+        concert = Concert(title, venue, date, price, sold_out, desc, img_url, url)
         concerts.append(concert)
     return concerts
 
@@ -181,7 +188,7 @@ def liveculture() -> list[Concert]:
     """Hent koncerter fra Live Culture (undtaget Magasinet og Odeon)."""
     r = requests.get("https://liveculture.dk/")
     soup = BeautifulSoup(r.text, features="lxml")
-    sis = soup.select(".searchItem")
+    search_items = soup.select(".searchItem")
     events = soup.select(".card")
     concerts = []
     for event in events:
@@ -209,16 +216,17 @@ def liveculture() -> list[Concert]:
             if ":" in price_tag:
                 price_tag = event.select_one(".boxtitle__pricing__amount").string
             price = get_price(price_tag)
+        status = event.select_one(".heroLabels__single--status")
+        sold_out = "udsolgt" in status.text.lower() if status else False
         desc = event.select_one(".singleBoxCity").string
         img_url = best_from_srcset(event.select_one("a > .cover")["data-srcset"])
         url = event.a["href"]
-        concert = Concert(title, venue, date, price, desc, img_url, url)
-        for si in sis:
-            if si.div.div.string.strip() == title:
-                # Frasorter alt der er comedy
-                if not any("Comedy" == tag.string for tag in si.select(".searchTag")):
-                    concerts.append(concert)
-                    break
+        concert = Concert(title, venue, date, price, sold_out, desc, img_url, url)
+        # Undersøg om det er comedy (alt andet er koncerter)
+        si = next(si for si in search_items if si.div.div.string.strip() == title)
+        comedy = any("Comedy" == tag.string for tag in si.select(".searchTag"))
+        if not comedy:
+            concerts.append(concert)
     return concerts
 
 
@@ -234,6 +242,7 @@ def odeon() -> list[Concert]:
         last_date_str = event.select(".text-link")[-1].string.split(" - ")[-1]
         date = datetime.strptime(last_date_str, "%A %d. %b %Y")
         venue = "ODEON"
+        sold_out = "udsolgt" in event.select(".text-link")[0].string.lower()
         # Lidt ligegyldig info om hvilken sal i Odeon.
         desc = event.select_one(".mt-6 > span").string
         img_url = "https://odeonodense.dk" + best_from_srcset(event.source["data-srcset"])
@@ -242,7 +251,7 @@ def odeon() -> list[Concert]:
         pr = requests.get(url)
         psoup = BeautifulSoup(pr.text, features="lxml")
         price = get_price(next(psoup.select_one(".mt-8").strings))
-        concert = Concert(title, venue, date, price, desc, img_url, url)
+        concert = Concert(title, venue, date, price, sold_out, desc, img_url, url)
         concerts.append(concert)
     return concerts
 
@@ -256,6 +265,7 @@ def grandhotel() -> list[Concert]:
     concerts = []
     re_date = re.compile(r"(\d+. \w+ \d+)")
     re_price = re.compile(r"\d+,-")
+    re_sold_out = re.compile(r"udsolgt", re.IGNORECASE)
     for event in events:
         # Fjern begivenheder fra resturanten
         if not event.a["href"].startswith("/event-koncert/"):
@@ -266,6 +276,8 @@ def grandhotel() -> list[Concert]:
         date_str = re_date.search(date_str)[0]
         date = datetime.strptime(date_str, "%d. %B %Y")
         venue = "Grand Hotel"
+        price = get_price(event.find(string=re_price))
+        sold_out = event.find(string=re_sold_out) is not None
         desc = ""
         # En enkelt event havde en video i stedet for et billede...
         # Meeeen det var ikke en koncert
@@ -274,9 +286,7 @@ def grandhotel() -> list[Concert]:
             continue
         img_url = best_from_img(event.img)
         url = "https://grandodense.dk" + event.a["href"]
-        # Hent koncertsiden for at finde prisen
-        price = get_price(event.find(string=re_price))
-        concert = Concert(title, venue, date, price, desc, img_url, url)
+        concert = Concert(title, venue, date, price, sold_out, desc, img_url, url)
         concerts.append(concert)
     return concerts
 
@@ -302,12 +312,12 @@ def tcbunderground() -> list[Concert]:
         venue = "TCB Underground"
         date_str = info["start_date"]
         date = datetime.fromisoformat(date_str).replace(tzinfo=None)
+        price = int(float(info["ticket_types"][0]["price"]))
+        sold_out = info["is_sold_out"]
         # Jeg kunne godt gemme beskrivelsen men jeg bruger det ikke...
         desc = ""
         img_url = info["images"][0]["image"]
-        # Hent koncertsiden for at finde prisen
-        price = info["ticket_types"][0]["price"]
-        concert = Concert(title, venue, date, price, desc, img_url, url)
+        concert = Concert(title, venue, date, price, sold_out, desc, img_url, url)
         concerts.append(concert)
     return concerts
 
@@ -326,13 +336,12 @@ def vearket() -> list[Concert]:
         date_str = re.sub(r"-\d+", ".", date_str)
         date = datetime.strptime(f"{date_str};{current_year}", "%d. %B;%Y")
         venue = "Odense Værket"
+        price = get_price(event.select_one(".price").text)
+        sold_out = event.select_one(".berocket_better_labels") is not None
         desc = ""
         img_url = best_from_img(event.img)
         url = event.select_one(".woocommerce-LoopProduct-link")["href"]
-        # Her kan jeg se om koncerten er udsolgt.
-        #if event.select_one(".berocket_better_labels") is not None:
-        price = get_price(event.select_one(".price").text)
-        concert = Concert(title, venue, date, price, desc, img_url, url)
+        concert = Concert(title, venue, date, price, sold_out, desc, img_url, url)
         concerts.append(concert)
     return concerts
 
@@ -353,11 +362,13 @@ def studenterhuset() -> list[Concert]:
         date_str = event["StartDate"]
         date = datetime.strptime(date_str, "%d. %B %Y kl. %H:%M")
         venue = "Studenterhus Odense"
+        price = event["FromPrice"]
+        # Den har også en "Soldout" attribut men den er altid(?) false
+        sold_out = "udsolgt" == event["ButtonText"].lower()
         desc = event["ShortDescription"]
         img_url = event["Image"]
         url = "https://www.yourticket.dk" + event["YTRoute"]
-        price = event["FromPrice"]
-        concert = Concert(title, venue, date, price, desc, img_url, url)
+        concert = Concert(title, venue, date, price, sold_out, desc, img_url, url)
         concerts.append(concert)
     return concerts
 

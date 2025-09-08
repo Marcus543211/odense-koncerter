@@ -58,7 +58,9 @@
             <br />
             {{ concert.venue }}
             <br />
-            {% if concert.price is none %}
+            {% if concert.sold_out %}
+            <strong>Udsolgt</strong>
+            {% elif concert.price is none %}
             Prisen mangler
             {% elif concert.price == 0 %}
             Gratis
