@@ -1,12 +1,12 @@
 <!doctype html>
 <html lang="da">
   <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="color-scheme" content="light dark" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="light dark">
 
     <title>Koncerter i Odense!</title>
-    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
 
     <style>
       .concertList {
@@ -28,7 +28,7 @@
       }
     </style>
     <!-- Måske normalize.css og selvlavet CSS i stedet for pico -->
-    <link rel="stylesheet" href="pico.indigo.min.css" />
+    <link rel="stylesheet" href="pico.indigo.min.css">
 
     <script src="hideOldConcerts.js" defer></script>
     <script src="search.js" defer></script>
@@ -40,24 +40,24 @@
       <p>Denne hjemmeside prøver at samle de koncerter der afholdes i Odense.</p>
       <p>Den samler koncerter fra Posten, Dexter, Kulturmaskinen, Live Culture, Storms Pakhus, Odeon og andre.</p>
       <p>OBS! De viste priser er oftest for forsalg. De egentlige priser kan være anderledes og medlemsrabatter m.m. kan måske bruges.</p>
-      <p>Sidst opdateret: <time datetime="{{ now.isoformat() }}">{{ now.strftime("%d. %B %Y") }}</time>
+      <p>Sidst opdateret: <time datetime="{{ now.isoformat(timespec='seconds') }}">{{ now.strftime("%d. %B %Y") }}</time>
 
       <div>
-        <input id="search" name="search" type="search" placeholder="Søg" />
+        <input id="search" name="search" type="search" placeholder="Søg">
       </div>
 
       <div class="concertList">
       {% for concert in concerts %}
         <article class="concert" data-title="{{ concert.title.lower() }}">
           <a href="{{ concert.url }}">
-            <img loading="lazy" src="{{ concert.img_url }}" />
+            <img src="{{ concert.img_url | urlencode }}" alt="" loading="lazy">
             <h2>{{ concert.title }}</h2>
           </a>
           <p>
             <time datetime="{{ concert.date.isoformat() }}">{{ concert.date.strftime("%d. %B %Y") }}</time>
-            <br />
+            <br>
             {{ concert.venue }}
-            <br />
+            <br>
             {% if concert.sold_out %}
             <strong>Udsolgt</strong>
             {% elif concert.price is none %}
