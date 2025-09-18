@@ -276,13 +276,17 @@ def grandhotel() -> list[Concert]:
         date_str = re_date.search(date_str)[0]
         date = datetime.strptime(date_str, "%d. %B %Y")
         venue = "Grand Hotel"
-        price = get_price(event.find(string=re_price))
+        price_html = event.find(string=re_price)
+        if price_html is None:
+            print("WARN: No price for", title, "it will be skipped")
+            continue
+        price = get_price(price_html)
         sold_out = event.find(string=re_sold_out) is not None
         desc = ""
         # En enkelt event havde en video i stedet for et billede...
         # Meeeen det var ikke en koncert
         if event.img is None:
-            print("WARN: No image for", title, "it will not be added")
+            print("WARN: No image for", title, "it will be skipped")
             continue
         img_url = best_from_img(event.img)
         url = "https://grandodense.dk" + event.a["href"]
