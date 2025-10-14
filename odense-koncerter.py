@@ -1,3 +1,4 @@
+import concurrent.futures
 import io
 import locale
 from datetime import datetime
@@ -52,15 +53,15 @@ def make_thumbnail(concert: Concert) -> str:
             print(f"WARN: Portrait image, {name}")
         img.thumbnail((768, 768))
         img.save(path, "WebP", lossless=False, quality=80)
+    concert.img_url = str(path)
     return str(path)
 
 
 def make_thumbnails(concerts: list[Concert]):
     """Lav miniature til koncerterne og opdater billede-URL'erne."""
     print("Laver thumbnails...")
-    for concert in concerts:
-        img_url = make_thumbnail(concert)
-        concert.img_url = img_url
+    with concurrent.futures.ThreadPoolExecutor() as executor:
+        executor.map(make_thumbnail, concerts)
     print("Færdig med thumbnails!")
 
 

@@ -1,3 +1,4 @@
+import concurrent.futures
 import locale
 import re
 import urllib.parse
@@ -326,7 +327,7 @@ def tcbunderground() -> list[Concert]:
     return concerts
 
 
-def vearket() -> list[Concert]:
+def vaerket() -> list[Concert]:
     """Hent alle koncerter fra Odense Værket."""
     r = requests.get("https://odensevaerket.dk/kultur-musikhus/")
     r.encoding = "utf-8"
@@ -392,30 +393,36 @@ def extra() -> list[Concert]:
 
 def all_concerts() -> list[Concert]:
     """Hent alle koncerterne og returner i kronologisk rækkefølge."""
+    scrapers = [
+        ("Storms", storms),
+        ("Posten", posten),
+        ("Dexter", dexter),
+        ("Kulturmaskinen", kulturmaskinen),
+        ("Live Culture", liveculture),
+        ("Odeon", odeon),
+        ("Grand Hotel", grandhotel),
+        ("TCB Underground", tcbunderground),
+        ("Odense Værket", vaerket),
+        ("Studenterhuset", studenterhuset),
+        ("Ekstralisten", extra),
+    ]
     print("Henter koncerter")
     concerts = []
-    print("... fra Storms")
-    concerts.extend(storms())
-    print("... fra Posten")
-    concerts.extend(posten())
-    print("... fra Dexter")
-    concerts.extend(dexter())
-    print("... fra Kulturmaskinen")
-    concerts.extend(kulturmaskinen())
-    print("... fra Live Culture")
-    concerts.extend(liveculture())
-    print("... fra Odeon")
-    concerts.extend(odeon())
-    print("... fra Grand Hotel")
-    concerts.extend(grandhotel())
-    print("... fra TCB Underground")
-    concerts.extend(tcbunderground())
-    print("... fra Odense Værket")
-    concerts.extend(vearket())
-    print("... fra Studenterhus Odense")
-    concerts.extend(studenterhuset())
-    print("... fra ekstralisten")
-    concerts.extend(extra())
+    exceptions = []
+    with concurrent.futures.ThreadPoolExecutor() as executor:
+        future_to_site = {executor.submit(scraper): name
+                          for (name, scraper) in scrapers}
+        for future in concurrent.futures.as_completed(future_to_site):
+            name = future_to_site[future]
+            try:
+                concerts.extend(future.result())
+                print("...", name, "hentet")
+            except Exception as e:
+                e.add_note(f"Error in {name}")
+                exceptions.append(e)
+                print("...", name, "fejlede")
+    if exceptions:
+        raise ExceptionGroup("Errors while getting concerts", exceptions)
     print(f"Alle koncerter er hentet ({len(concerts)})")
     concerts.sort(key=lambda c: (c.date, c.venue, c.title))
     today = datetime.now().date()
