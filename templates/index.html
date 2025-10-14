@@ -5,10 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="color-scheme" content="light dark">
 
-    <title>Koncerter i Odense!</title>
+    <title>Koncerter i Odense</title>
     <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
 
     <style>
+      main {
+        padding: 48px 16px;
+        margin: 16px auto;
+        max-width: 72rem;
+      }
+
       .concertList {
         display: flex;
         flex-wrap: wrap;
@@ -16,15 +22,21 @@
       }
 
       .concert {
-        flex: 1 1 320px;
+        flex: 1 1 370px;
+        padding: 0;
+        overflow-wrap: anywhere;
       }
 
       .concert img {
         width: 100%;
-        height: 220px;
+        height: 265px;
+        border-radius: var(--pico-border-radius) var(--pico-border-radius) 0 0;
         object-fit: cover;
         object-position: center top;
-        margin-bottom: 12px;
+      }
+
+      .concert h2, .concert p {
+        margin: 0.5rem 1rem;
       }
     </style>
     <!-- Måske normalize.css og selvlavet CSS i stedet for pico -->
@@ -36,10 +48,17 @@
   <body>
     <main class="container">
 
-      <h1>Koncerter i Odense!</h1>
-      <p>Denne hjemmeside prøver at samle de koncerter der afholdes i Odense.</p>
-      <p>Den samler koncerter fra Posten, Dexter, Kulturmaskinen, Live Culture, Storms Pakhus, Odeon og andre.</p>
-      <p>OBS! De viste priser er oftest for forsalg. De egentlige priser kan være anderledes og medlemsrabatter m.m. kan måske bruges.</p>
+      <h1>Koncerter i Odense</h1>
+      <p>
+        Denne hjemmeside prøver at samle de koncerter der afholdes i Odense.
+        Den samler koncerter fra Posten, Dexter, Kulturmaskinen, Live Culture,
+        Storms Pakhus, Odeon og andre.
+      </p>
+      <p>
+        OBS! De viste priser er oftest for forsalg.
+        De egentlige priser kan være anderledes og medlemsrabatter
+        m.m. kan måske bruges.
+      </p>
       <p>Sidst opdateret: <time datetime="{{ now.isoformat(timespec='seconds') }}">{{ now.strftime("%d. %B %Y") }}</time>
 
       <div>
