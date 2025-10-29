@@ -42,8 +42,10 @@ def get_price(s: str) -> int:
     if "udsolgt" in s:
         return None
     c_s = locale.delocalize(s)
-    price = re_num.search(c_s).group()
-    return int(price)
+    price_match = re_num.search(c_s)
+    if price_match is None:
+        return None
+    return int(price_match.group())
 
 
 def storms() -> list[Concert]:
