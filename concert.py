@@ -1,6 +1,8 @@
 import json
 from dataclasses import dataclass, asdict
 from datetime import datetime
+from io import TextIOBase
+from typing import Any
 
 
 @dataclass
@@ -10,29 +12,28 @@ class Concert:
     date: datetime
     price: int | None
     sold_out: bool
-    desc: str  # Beskrivelse hvis den eksisterer
     img_url: str
     url: str
 
     @classmethod
-    def from_json(cls, json: dict):
+    def from_json(cls, json: dict[str, Any]) -> "Concert":
         # Behold alt men parse datoen til en datetime
         concert = json | {"date": datetime.fromisoformat(json["date"])}
         return cls(**concert)
 
-    def as_json(self) -> dict:
+    def as_json(self) -> dict[str, Any]:
         # JSONen kan ikke indeholde en datetime så erstat med streng
         return asdict(self) | {"date": self.date.isoformat()}
 
 
-def load_concerts(file):
+def load_concerts(file: TextIOBase) -> list[Concert]:
     """Læs koncerter fra JSON fil."""
     concerts_json = json.load(file)
     concerts = [Concert.from_json(c) for c in concerts_json]
     return concerts
 
 
-def dump_concerts(concerts: list[Concert], file):
+def dump_concerts(concerts: list[Concert], file: TextIOBase):
     """Skriv koncerter til JSON fil."""
     concerts_json = [concert.as_json() for concert in concerts]
     json.dump(concerts_json, file)

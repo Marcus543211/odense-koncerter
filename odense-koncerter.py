@@ -21,18 +21,16 @@ from concert import Concert, load_concerts, dump_concerts
 # - Black-list til alt som ikke er koncerter (som systemet ikke fanger selv)
 # - Gør så man kan køre programmet fra andre mapper end den filen er i
 # - Brug tråde til at lave miniaturer (thumbnails)
-# - En attribut der fortæller om koncerter er udsolgte?
 # - Nogle steder er der ikke år med i datoen, her antager jeg at det er i år
 #   men det kunne også være at det var næste år...
 # - En side der lister festivaler i Odense?
 # - Links til/En side til de forskellige spillesteder?
-# - Nashville nights??
 
 
 locale.setlocale(locale.LC_ALL, "da_DK.utf8")
 
 
-def get_image(url) -> Image:
+def get_image(url: str) -> Image.Image:
     """Hent billede fra URL."""
     r = requests.get(url, stream=True)
     f = io.BytesIO(r.content)
