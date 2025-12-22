@@ -77,15 +77,15 @@
             <br>
             {{ concert.venue }}
             <br>
-            {% if concert.sold_out %}
+            {%- if concert.sold_out %}
             <strong>Udsolgt</strong>
-            {% elif concert.price is none %}
+            {%- elif concert.price is none %}
             Prisen mangler
-            {% elif concert.price == 0 %}
+            {%- elif concert.price == 0 %}
             Gratis
-            {% else %}
+            {%- else %}
             {{ format_price(concert.price) }}
-            {% endif %}
+            {%- endif %}
           </p>
         </article>
       {% endfor %}
