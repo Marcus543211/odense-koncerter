@@ -328,10 +328,10 @@ def vaerket() -> list[Concert]:
     concerts = []
     current_year = datetime.today().year
     for event in events:
-        title = event.h2.string.removesuffix(" – Entrébillet").split(" – ", 1)[1]
+        title = event.h2.string.split(" – ", 1)[1]
         date_str = event.h2.string.split(" – ")[0]
         date_str = re.sub(r"-\d+", ".", date_str)
-        date = datetime.strptime(f"{date_str};{current_year}", "%d. %B;%Y")
+        date = datetime.strptime(f"{date_str};{current_year}", "%d/%m;%Y")
         venue = "Odense Værket"
         price = get_price(event.select_one(".price").text)
         sold_out = event.select_one(".berocket_better_labels") is not None
