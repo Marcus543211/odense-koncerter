@@ -331,7 +331,7 @@ def vaerket() -> list[Concert]:
         title = event.h2.string.split(" – ", 1)[1]
         date_str = event.h2.string.split(" – ")[0]
         date_str = re.sub(r"-\d+", ".", date_str)
-        date = datetime.strptime(f"{date_str};{current_year}", "%d/%m;%Y")
+        date = datetime.strptime(f"{date_str};{current_year}", "%d. %B;%Y")
         venue = "Odense Værket"
         price = get_price(event.select_one(".price").text)
         sold_out = event.select_one(".berocket_better_labels") is not None
