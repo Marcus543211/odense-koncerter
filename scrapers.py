@@ -266,7 +266,7 @@ def grandhotel() -> list[Concert]:
         # Fjern begivenheder fra resturanten
         if not event.a["href"].startswith("/event-koncert/"):
             continue
-        title = event.h1.string
+        title = event.h2.string
         date_str = event.find(string=re_date).string
         # Tag kun (første) datoen ignorer alt andet
         date_str = re_date.search(date_str)[0]
