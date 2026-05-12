@@ -264,29 +264,34 @@ def grandhotel() -> list[Concert]:
     re_sold_out = re.compile(r"udsolgt", re.IGNORECASE)
     for event in events:
         # Fjern begivenheder fra resturanten
-        if not event.a["href"].startswith("/event-koncert/"):
+        link = event.select_one("a[href]")["href"]
+        if not link.startswith("/event-koncert/"):
             continue
-        title = event.h2.string
-        date_str = event.find(string=re_date).string
-        # Tag kun (første) datoen ignorer alt andet
-        date_str = re_date.search(date_str)[0]
-        date = datetime.strptime(date_str, "%d. %B %Y")
-        venue = "Grand Hotel"
-        price_html = event.find(string=re_price)
-        if price_html is None:
-            print("WARN: No price for", title, "it will be skipped")
-            continue
-        price = get_price(price_html)
-        sold_out = event.find(string=re_sold_out) is not None
-        # En enkelt event havde en video i stedet for et billede...
-        # Meeeen det var ikke en koncert
-        if event.img is None:
-            print("WARN: No image for", title, "it will be skipped")
-            continue
-        img_url = best_from_img(event.img)
-        url = "https://grandodense.dk" + event.a["href"]
-        concert = Concert(title, venue, date, price, sold_out, img_url, url)
-        concerts.append(concert)
+        try:
+            title = event.h2.string
+            date_str = event.find(string=re_date).string
+            # Tag kun (første) datoen ignorer alt andet
+            date_str = re_date.search(date_str)[0]
+            date = datetime.strptime(date_str, "%d. %B %Y")
+            venue = "Grand Hotel"
+            price_html = event.find(string=re_price)
+            if price_html is None:
+                print("WARN: No price for", title, "it will be skipped")
+                continue
+            price = get_price(price_html)
+            sold_out = event.find(string=re_sold_out) is not None
+            # En enkelt event havde en video i stedet for et billede...
+            # Meeeen det var ikke en koncert
+            if event.img is None:
+                print("WARN: No image for", title, "it will be skipped")
+                continue
+            img_url = best_from_img(event.img)
+            url = "https://grandodense.dk" + link
+            concert = Concert(title, venue, date, price, sold_out, img_url, url)
+            concerts.append(concert)
+        except Exception as e:
+            print(f"Fejl fra Grand Odense ved event med link: {link}")
+            print("   ", e)
     return concerts
 
 
