@@ -1,2 +1,83 @@
 [
+    {
+        "title": "KIOSK",
+        "venue": "Studenterhus Odense",
+        "date": "2026-08-15T20:00:00",
+        "price": 95,
+        "sold_out": false,
+        "img_url": "https://www.hcafestivals.dk/media/onvhrlw5/kiosk-tor-birk-trads.jpg",
+        "url": "https://www.hcafestivals.dk/program/ord-og-lyd-koncert-med-kiosk-5095/"
+    },
+    {
+        "title": "Kongens Have Live '26",
+        "venue": "Kongens Have",
+        "date": "2026-08-14",
+        "price": 595,
+        "sold_out": false,
+        "img_url": "https://www.hcafestivals.dk/media/yhuo5m2j/251805-khl_26-event_1200x628px.jpg",
+        "url": "https://www.hcafestivals.dk/program/kongens-have-live-5258/"
+    },
+    {
+        "title": "D-A-D & Dizzy Mizz Lizzy & Sort Sol & The Raveonettes",
+        "venue": "Kongens Have",
+        "date": "2026-08-20",
+        "price": 525,
+        "sold_out": false,
+        "img_url": "https://brandmlive.dk/wp-content/uploads/2026/03/4iKongensHave26_OdenseWeb_1920x1080.png",
+        "url": "https://brandmlive.dk/event/d-a-d-dizzy-sortsol-theraveonettes/"
+    },
+    {
+        "title": "Røverdatter",
+        "venue": "Amfiscenen",
+        "date": "2026-08-19T20:30:00",
+        "price": 0,
+        "sold_out": false,
+        "img_url": "https://www.hcafestivals.dk/media/2tfdf0nk/roeverdatter.jpg",
+        "url": "https://www.hcafestivals.dk/program/roeverdatter-5814/"
+    },
+    {
+        "title": "Anne Linnet",
+        "venue": "Amfiscenen",
+        "date": "2026-08-19T21:30:00",
+        "price": 0,
+        "sold_out": false,
+        "img_url": "https://www.hcafestivals.dk/media/hv3bmhiv/image001.jpg",
+        "url": "https://www.hcafestivals.dk/program/anne-linnet-5743/"
+    },
+    {
+        "title": "Mathias Ranch",
+        "venue": "Amfiscenen",
+        "date": "2026-08-20T20:30:00",
+        "price": 0,
+        "sold_out": false,
+        "img_url": "https://www.hcafestivals.dk/media/jh3dpxci/ranch_press4-low.jpg",
+        "url": "https://www.hcafestivals.dk/program/mathias-ranch-5754/"
+    },
+    {
+        "title": "Dahlin",
+        "venue": "Amfiscenen",
+        "date": "2026-08-20T22:15:00",
+        "price": 0,
+        "sold_out": false,
+        "img_url": "https://www.hcafestivals.dk/media/w4ugy2bi/dahlin-presse-50_ny_compressed.jpg",
+        "url": "https://www.hcafestivals.dk/program/dahlin-5755/"
+    },
+    {
+        "title": "hun_sagde",
+        "venue": "Amfiscenen",
+        "date": "2026-08-21T21:00:00",
+        "price": 0,
+        "sold_out": false,
+        "img_url": "https://www.hcafestivals.dk/media/2vvnksnd/hun_sagde_0250-fotograf-emil-h-jakobsen.jpg",
+        "url": "https://www.hcafestivals.dk/program/hun_sagde-5748/"
+    },
+    {
+        "title": "KOPS",
+        "venue": "Amfiscenen",
+        "date": "2026-08-21T22:45:00",
+        "price": 0,
+        "sold_out": false,
+        "img_url": "https://www.hcafestivals.dk/media/nnvnu45u/kops.jpeg",
+        "url": "https://www.hcafestivals.dk/program/kops-5751/"
+    }
 ]
