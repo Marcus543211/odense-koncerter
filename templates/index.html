@@ -43,27 +43,48 @@
     <link rel="stylesheet" href="pico.indigo.min.css">
 
     <script src="hideOldConcerts.js" defer></script>
-    <script src="search.js" defer></script>
+    <script src="filters.js" defer></script>
   </head>
   <body>
     <main class="container">
 
       <h1>Koncerter i Odense</h1>
       <p>
-        Denne hjemmeside prøver at samle de koncerter der afholdes i Odense.
-        Den samler koncerter fra Posten, Dexter, Kulturmaskinen, Live Culture,
+        Denne hjemmeside prøver at samle de koncerter, som afholdes i Odense.
+        Der samles koncerter fra Posten, Dexter, Kulturmaskinen, Live Culture,
         Storms Pakhus, Odeon og andre.
       </p>
       <p>
         OBS! De viste priser er oftest for forsalg.
-        De egentlige priser kan være anderledes og medlemsrabatter
-        m.m. kan måske bruges.
+        De egentlige priser kan være anderledes,
+        og medlemsrabatter m.m. kan måske bruges.
       </p>
       <p>Sidst opdateret: <time datetime="{{ now.isoformat(timespec='seconds') }}">{{ now.strftime("%d. %B %Y") }}</time>
 
-      <div>
+      <details>
+        <summary role="button">Filtre</summary>
+
+        <fieldset>
+          <label>
+            <input type="checkbox" id="hide-quizzes">
+            Skjul quizzer
+          </label>
+          <label>
+            <input type="checkbox" id="hide-jams">
+            Skjul jamsessions
+          </label>
+          <label>
+            <input type="checkbox" id="hide-jazz-fest">
+            Skjul Odense Jazz Festival
+          </label>
+          <label>
+            <input type="checkbox" id="hide-nashville">
+            Skjul Nashville Nights
+          </label>
+        </fieldset>
+
         <input id="search" name="search" type="search" placeholder="Søg">
-      </div>
+      </details>
 
       <div class="concertList">
       {% for concert in concerts %}
