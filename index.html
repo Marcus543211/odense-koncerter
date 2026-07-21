@@ -43,27 +43,48 @@
     <link rel="stylesheet" href="pico.indigo.min.css">
 
     <script src="hideOldConcerts.js" defer></script>
-    <script src="search.js" defer></script>
+    <script src="filters.js" defer></script>
   </head>
   <body>
     <main class="container">
 
       <h1>Koncerter i Odense</h1>
       <p>
-        Denne hjemmeside prøver at samle de koncerter der afholdes i Odense.
-        Den samler koncerter fra Posten, Dexter, Kulturmaskinen, Live Culture,
+        Denne hjemmeside prøver at samle de koncerter, som afholdes i Odense.
+        Der samles koncerter fra Posten, Dexter, Kulturmaskinen, Live Culture,
         Storms Pakhus, Odeon og andre.
       </p>
       <p>
         OBS! De viste priser er oftest for forsalg.
-        De egentlige priser kan være anderledes og medlemsrabatter
-        m.m. kan måske bruges.
+        De egentlige priser kan være anderledes,
+        og medlemsrabatter m.m. kan måske bruges.
       </p>
-      <p>Sidst opdateret: <time datetime="2026-07-20T16:23:46">20. juli 2026</time>
+      <p>Sidst opdateret: <time datetime="2026-07-21T13:24:58">21. juli 2026</time>
 
-      <div>
+      <details>
+        <summary role="button">Filtre</summary>
+
+        <fieldset>
+          <label>
+            <input type="checkbox" id="hide-quizzes">
+            Skjul quizzer
+          </label>
+          <label>
+            <input type="checkbox" id="hide-jams">
+            Skjul jamsessions
+          </label>
+          <label>
+            <input type="checkbox" id="hide-jazz-fest">
+            Skjul Odense Jazz Festival
+          </label>
+          <label>
+            <input type="checkbox" id="hide-nashville">
+            Skjul Nashville Nights
+          </label>
+        </fieldset>
+
         <input id="search" name="search" type="search" placeholder="Søg">
-      </div>
+      </details>
 
       <div class="concertList">
       
@@ -279,7 +300,7 @@
       
         <article class="concert" data-title="buki yamaz // odense jazz festival">
           <a href="https://dexter.dk/event/buki-yamaz-odense-jazz-festival/">
-            <img src="https%3A//dexter.dk/wp-content/uploads/sites/2/2026/05/OJF-loerdag.avif" alt="" loading="lazy">
+            <img src="images/2026-08-01%20-%20Dexter%20-%20Buki%20Yamaz%20%20Odense%20Jazz%20Festival.webp" alt="" loading="lazy">
             <h2>Buki Yamaz // Odense Jazz Festival</h2>
           </a>
           <p>
@@ -384,6 +405,20 @@
             <time datetime="2026-08-07T00:00:00">07. august 2026</time>
             <br>
             Posten
+            <br>
+            Gratis
+          </p>
+        </article>
+      
+        <article class="concert" data-title="loui henderson x wynd x efteraar">
+          <a href="https://stormspakhus.dk/event/loui-henderson-x-wynd-x-efteraar-gratis-koncert/">
+            <img src="images/2026-08-07%20-%20Storms%20Pakhus%20-%20Loui%20Henderson%20x%20Wynd%20x%20efteraar.webp" alt="" loading="lazy">
+            <h2>Loui Henderson x Wynd x efteraar</h2>
+          </a>
+          <p>
+            <time datetime="2026-08-07T19:00:00">07. august 2026</time>
+            <br>
+            Storms Pakhus
             <br>
             Gratis
           </p>
