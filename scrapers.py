@@ -263,10 +263,14 @@ def grandhotel() -> list[Concert]:
     re_price = re.compile(r"\d+,-")
     re_sold_out = re.compile(r"udsolgt", re.IGNORECASE)
     for event in events:
-        # Fjern begivenheder fra resturanten
-        link = event.select_one("a[href]")["href"]
-        if not link.startswith("/event-koncert/"):
-            continue
+        try:
+            # Fjern begivenheder fra resturanten
+            link = event.select_one("a[href]")["href"]
+            if not link.startswith("/event-koncert/"):
+                continue
+        except Exception as e:
+            print(f"Fejl fra Grand Odense ved event før link")
+            print("   ", e)
         try:
             title = event.h2.string
             date_str = event.find(string=re_date).string
