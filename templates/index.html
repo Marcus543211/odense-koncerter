@@ -100,8 +100,6 @@
             <br>
             {%- if concert.sold_out %}
             <strong>Udsolgt</strong>
-            {%- elif concert.price is none %}
-            Prisen mangler
             {%- elif concert.price == 0 %}
             Gratis
             {%- else %}

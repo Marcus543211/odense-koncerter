@@ -34,13 +34,11 @@ def best_from_img(img: Tag) -> str:
     return best_from_srcset(img["srcset"])
 
 
-def get_price(s: str) -> int | None:
+def get_price(s: str) -> int:
     """Udvinder prisen fra prisskilt fx fra "1.295,00 kr"."""
     s = s.lower()
     if "gratis" in s:
         return 0
-    if "udsolgt" in s:
-        return None
     c_s = locale.delocalize(s)
     price_match = re_num.search(c_s)
     if price_match is None:
@@ -205,16 +203,11 @@ def liveculture() -> list[Concert]:
         # Koncerter fra Odeon hentes seperat.
         if venue == "ODEON":
             continue
-        try:
-            price_tag = event.select(".ticketButton__time")[0].string
-        except IndexError:
-            # Af en eller anden grund manglede en koncert en pris...
-            price = None
-        else:
-            # Nogle koncerter skal man vælge tidspunkt. Der er prisen et andet sted.
-            if ":" in price_tag:
-                price_tag = event.select_one(".boxtitle__pricing__amount").string
-            price = get_price(price_tag)
+        price_tag = event.select(".ticketButton__time")[0].string
+        # Nogle koncerter skal man vælge tidspunkt. Der er prisen et andet sted.
+        if ":" in price_tag:
+            price_tag = event.select_one(".boxtitle__pricing__amount").string
+        price = get_price(price_tag)
         status = event.select_one(".heroLabels__single--status")
         sold_out = "udsolgt" in status.text.lower() if status else False
         img_url = best_from_srcset(event.select_one("a > .cover")["data-srcset"])
@@ -278,17 +271,8 @@ def grandhotel() -> list[Concert]:
             date_str = re_date.search(date_str)[0]
             date = datetime.strptime(date_str, "%d. %B %Y")
             venue = "Grand Hotel"
-            price_html = event.find(string=re_price)
-            if price_html is None:
-                print("WARN: No price for", title, "it will be skipped")
-                continue
-            price = get_price(price_html)
+            price = get_price(event.find(string=re_price))
             sold_out = event.find(string=re_sold_out) is not None
-            # En enkelt event havde en video i stedet for et billede...
-            # Meeeen det var ikke en koncert
-            if event.img is None:
-                print("WARN: No image for", title, "it will be skipped")
-                continue
             img_url = best_from_img(event.img)
             url = "https://grandodense.dk" + link
             concert = Concert(title, venue, date, price, sold_out, img_url, url)
