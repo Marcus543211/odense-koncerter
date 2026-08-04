@@ -60,6 +60,8 @@
       </p>
       <p>Sidst opdateret: <time datetime="{{ now.isoformat(timespec='seconds') }}">{{ now.strftime("%d. %B %Y") }}</time></p>
 
+      <input id="search" name="search" type="search" placeholder="Søg">
+
       <details>
         <summary role="button">Filtre</summary>
 
@@ -73,17 +75,11 @@
             Skjul jamsessions
           </label>
           <label>
-            <input type="checkbox" id="hide-jazz-fest">
-            Skjul Odense Jazz Festival
-          </label>
-          <label>
             <input type="checkbox" id="hide-nashville">
             Skjul Nashville Nights
           </label>
         </fieldset>
       </details>
-
-      <input id="search" name="search" type="search" placeholder="Søg">
 
       <div class="concertList">
       {% for concert in concerts %}
