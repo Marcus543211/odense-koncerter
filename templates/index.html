@@ -89,7 +89,7 @@
       <div class="concertList">
       {% for concert in concerts %}
         <article class="concert" data-title="{{ concert.title.lower() }}">
-          <a href="{{ concert.url }}">
+          <a href="{{ concert.url }}" target="_blank">
             <img src="{{ concert.img_url | urlencode }}" alt="" loading="lazy">
             <h2>{{ concert.title }}</h2>
           </a>
