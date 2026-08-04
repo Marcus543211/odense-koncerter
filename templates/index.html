@@ -59,7 +59,7 @@
         De egentlige priser kan være anderledes,
         og medlemsrabatter m.m. kan måske bruges.
       </p>
-      <p>Sidst opdateret: <time datetime="{{ now.isoformat(timespec='seconds') }}">{{ now.strftime("%d. %B %Y") }}</time>
+      <p>Sidst opdateret: <time datetime="{{ now.isoformat(timespec='seconds') }}">{{ now.strftime("%d. %B %Y") }}</time></p>
 
       <details>
         <summary role="button">Filtre</summary>
@@ -82,9 +82,9 @@
             Skjul Nashville Nights
           </label>
         </fieldset>
-
-        <input id="search" name="search" type="search" placeholder="Søg">
       </details>
+
+      <input id="search" name="search" type="search" placeholder="Søg">
 
       <div class="concertList">
       {% for concert in concerts %}
