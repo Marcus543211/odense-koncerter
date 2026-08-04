@@ -17,8 +17,12 @@
   const searchField = document.getElementById("search");
   searchField.addEventListener("input", filterAll);
 
+  // Run the filters to hide old concerts.
+  filterAll(null);
+
   function filterAll(event) {
     showAll();
+    hideOldConcerts();
     hideByQuizFilter();
     hideByJamFilter();
     hideByJazzFestFilter();
@@ -29,6 +33,20 @@
   function showAll() {
     for (const concert of concerts) {
       concert.hidden = false;
+    }
+  }
+
+  function hideOldConcerts() {
+    const now = new Date();
+    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+
+    const concerts = document.querySelectorAll(".concert");
+    for (const concert of concerts) {
+      const time = concert.querySelector("time");
+      const concertDate = new Date(time.dateTime);
+      if (concertDate < today) {
+        concert.hidden = true;
+      }
     }
   }
 
