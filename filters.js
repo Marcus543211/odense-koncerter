@@ -9,26 +9,52 @@
   quizFilter.addEventListener("input", filterAll);
   const jamFilter = document.getElementById("hide-jams");
   jamFilter.addEventListener("input", filterAll);
-  const jazzFestFilter = document.getElementById("hide-jazz-fest");
-  jazzFestFilter.addEventListener("input", filterAll);
+  //const jazzFestFilter = document.getElementById("hide-jazz-fest");
+  //jazzFestFilter.addEventListener("input", filterAll);
   const nashvilleFilter = document.getElementById("hide-nashville");
   nashvilleFilter.addEventListener("input", filterAll);
 
   const searchField = document.getElementById("search");
   searchField.addEventListener("input", filterAll);
 
-  // Run the filters to hide old concerts.
-  filterAll(null);
-
   function filterAll(event) {
     showAll();
     hideOldConcerts();
     hideByQuizFilter();
     hideByJamFilter();
-    hideByJazzFestFilter();
+    //hideByJazzFestFilter();
     hideByNashvilleFilter();
     hideBySearch();
   }
+
+  const jamRegexes = [
+    /jazz jam.*/,
+    /dexter jam.*/,
+    /blue monday blues jam/,
+    /jamsession v\..* \/\/ odense jazz festival/,
+    /jam night.*nashville nights 2026/,
+  ];
+
+  const jazzFestConcerts = new Set([
+    "m. o. n. g. // odense jazz festival",
+    "fini sings with strings",
+    "britta virves trio // odense jazz festival",
+    "carl winther trio feat. randy brecker",
+    "anna pauline group feat. randy brecker, janis siegel, john di martino // odense jazz festival",
+    "masterclass v. janis siegel // odense jazz festival",
+    "viktoria søndergaard music of secrets",
+    "jakob dinesen – slow flow // odense jazz festival",
+    "jamsession v. simon krebs // odense jazz festival",
+    "elements  of  refusal",
+    "jamsession v. chano olskær // odense jazz festival",
+    "kresten osgood quintet 100 år med dansk jazz // odense jazz festival",
+    "tribute to thilo",
+    "buki yamaz // odense jazz festival",
+    "jamsession v. søren høst // odense jazz festival",
+    "øjne & ører: ki!",
+    "giacomo smith ? joe webb ? snorre kirk ? anders fjelds",
+    "odense jazz orchestra plays dąbrowski // odense jazz festival",
+  ]);
 
   function showAll() {
     for (const concert of concerts) {
@@ -90,7 +116,7 @@
 
     for (const concert of concerts) {
       const title = concert.getAttribute("data-title");
-      const isNashville = title.includes("nashville nights 2026");
+      const isNashville = title.includes("nashville nights");
       concert.hidden = concert.hidden || isNashville;
     }
   }
@@ -105,33 +131,7 @@
     }
   }
 
-  const jamRegexes = [
-    /jazz jam.*/,
-    /dexter jam.*/,
-    /blue monday blues jam/,
-    /jamsession v\..* \/\/ odense jazz festival/,
-    /jam night.*nashville nights 2026/,
-  ];
-
-  const jazzFestConcerts = new Set([
-    "m. o. n. g. // odense jazz festival",
-    "fini sings with strings",
-    "britta virves trio // odense jazz festival",
-    "carl winther trio feat. randy brecker",
-    "anna pauline group feat. randy brecker, janis siegel, john di martino // odense jazz festival",
-    "masterclass v. janis siegel // odense jazz festival",
-    "viktoria søndergaard music of secrets",
-    "jakob dinesen – slow flow // odense jazz festival",
-    "jamsession v. simon krebs // odense jazz festival",
-    "elements  of  refusal",
-    "jamsession v. chano olskær // odense jazz festival",
-    "kresten osgood quintet 100 år med dansk jazz // odense jazz festival",
-    "tribute to thilo",
-    "buki yamaz // odense jazz festival",
-    "jamsession v. søren høst // odense jazz festival",
-    "øjne & ører: ki!",
-    "giacomo smith ? joe webb ? snorre kirk ? anders fjelds",
-    "odense jazz orchestra plays dąbrowski // odense jazz festival",
-  ]);
+  // Run the filters to hide old concerts.
+  filterAll(null);
 })();
 
