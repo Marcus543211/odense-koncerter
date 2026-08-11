@@ -193,31 +193,35 @@ def liveculture() -> list[Concert]:
         # Fjern "gavekort" eventen
         if title == "Gavekort":
             continue
-        date_str = event.select_one(".heroLabels__single--date").string
-        first_date = date_str.split(" - ")[0]
-        date = datetime.strptime(first_date, "%d.%m.%y")
-        venue = event.select_one(".heroLabels__single--venue").string
-        # Fjern koncerter fra magasinet; de bliver også hentet fra kulturmaskinen.
-        if venue == "Magasinet":
-            continue
-        # Koncerter fra Odeon hentes seperat.
-        if venue == "ODEON":
-            continue
-        price_tag = event.select(".ticketButton__time")[0].string
-        # Nogle koncerter skal man vælge tidspunkt. Der er prisen et andet sted.
-        if ":" in price_tag:
-            price_tag = event.select_one(".boxtitle__pricing__amount").string
-        price = get_price(price_tag)
-        status = event.select_one(".heroLabels__single--status")
-        sold_out = "udsolgt" in status.text.lower() if status else False
-        img_url = best_from_srcset(event.select_one("a > .cover")["data-srcset"])
-        url = event.a["href"]
-        concert = Concert(title, venue, date, price, sold_out, img_url, url)
-        # Undersøg om det er comedy (alt andet er koncerter)
-        si = next(si for si in search_items if si.div.div.string.strip() == title)
-        comedy = any("Comedy" == tag.string for tag in si.select(".searchTag"))
-        if not comedy:
-            concerts.append(concert)
+        try:
+            date_str = event.select_one(".heroLabels__single--date").string
+            first_date = date_str.split(" - ")[0]
+            date = datetime.strptime(first_date, "%d.%m.%y")
+            venue = event.select_one(".heroLabels__single--venue").string
+            # Fjern koncerter fra magasinet; de bliver også hentet fra kulturmaskinen.
+            if venue == "Magasinet":
+                continue
+            # Koncerter fra Odeon hentes seperat.
+            if venue == "ODEON":
+                continue
+            price_tag = event.select(".ticketButton__time")[0].string
+            # Nogle koncerter skal man vælge tidspunkt. Der er prisen et andet sted.
+            if ":" in price_tag:
+                price_tag = event.select_one(".boxtitle__pricing__amount").string
+            price = get_price(price_tag)
+            status = event.select_one(".heroLabels__single--status")
+            sold_out = "udsolgt" in status.text.lower() if status else False
+            img_url = best_from_srcset(event.select_one("a > .cover")["data-srcset"])
+            url = event.a["href"]
+            concert = Concert(title, venue, date, price, sold_out, img_url, url)
+            # Undersøg om det er comedy (alt andet er koncerter)
+            si = next(si for si in search_items if si.div.div.string.strip() == title)
+            comedy = any("Comedy" == tag.string for tag in si.select(".searchTag"))
+            if not comedy:
+                concerts.append(concert)
+        except Exception as e:
+            print(f"Fejl fra Live Culture ved event med navn: {title}")
+            print("   ", e)
     return concerts
 
 
