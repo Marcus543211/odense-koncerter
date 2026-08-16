@@ -1,0 +1,41 @@
+name: Scraper
+
+on:
+  schedule:
+    # Every day at 10:00.
+    - cron: '0 10 * * *'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@7
+
+      - name: Setup Python
+        uses: actions/setup-python@7
+        with:
+          python-version: '3.12'
+
+      - name: Install Python Packages
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Scrape Concerts
+        run: python odense-koncerter.py
+
+      - name: Commit files
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add images/ concerts.json index.html
+          git commit -m "Opdateret $(date +"%d-%m-%Y")
+
+      - name: Push Changes
+        uses: ad-m/github-push-action@v1.3.0
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: main
+
