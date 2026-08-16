@@ -26,6 +26,9 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
+      - name: Install Danish Locale
+        run: sudo apt-get install language-pack-da
+
       - name: Scrape Concerts
         run: python odense-koncerter.py
 
