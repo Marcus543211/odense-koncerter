@@ -14,10 +14,10 @@ jobs:
 
     steps:
       - name: Checkout Repo
-        uses: actions/checkout@7
+        uses: actions/checkout@v7
 
       - name: Setup Python
-        uses: actions/setup-python@7
+        uses: actions/setup-python@v7
         with:
           python-version: '3.12'
 
