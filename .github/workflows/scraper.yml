@@ -37,7 +37,7 @@ jobs:
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
           git add images/ concerts.json index.html
-          git commit -m "Opdateret $(date +"%d-%m-%Y")
+          git commit -m "Opdateret $(date +"%d-%m-%Y")"
 
       - name: Push Changes
         uses: ad-m/github-push-action@v1.3.0
