@@ -1,9 +1,12 @@
 name: Scraper
 
 on:
+  # Run automatically at 10:00 every day.
   schedule:
-    # Every day at 10:00.
     - cron: '0 10 * * *'
+
+  # Allow it to be run manually.
+  workflow_dispatch:
 
 jobs:
   build:
