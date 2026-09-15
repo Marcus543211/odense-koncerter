@@ -75,15 +75,16 @@
             Skjul jamsessions
           </label>
           <label>
-            <input type="checkbox" id="hide-nashville">
-            Skjul Nashville Nights
+            <input type="checkbox" id="hide-sold-out">
+            Skjul udsolgte koncerter
           </label>
         </fieldset>
       </details>
 
       <div class="concertList">
       {% for concert in concerts %}
-        <article class="concert" data-title="{{ concert.title.lower() }}">
+      <article class="concert" data-title="{{ concert.title.lower() }}"
+               {%- if concert.sold_out %} data-is-sold-out {% endif %}>
           <a href="{{ concert.url }}" target="_blank">
             <img src="{{ concert.img_url | urlencode }}" alt="" loading="lazy">
             <h2>{{ concert.title }}</h2>
